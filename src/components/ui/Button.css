@@ -1,0 +1,97 @@
+/* Button Component Styles */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem; /* Smaller padding */
+  font-family: 'Montserrat', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  font-size: 0.75rem; /* 12px - smaller button size */
+  font-weight: var(--font-weight-bold);
+  border-radius: var(--radius-md);
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  white-space: nowrap;
+  line-height: 1.5;
+}
+
+.btn:disabled {
+  opacity: var(--opacity-50);
+  cursor: not-allowed;
+}
+
+/* Primary Button: Blue background, Teal text */
+.btn--primary {
+  background-color: #2F339B;
+  color: #96EFFF;
+  font-size: 0.75rem; /* 12px */
+  font-weight: var(--font-weight-bold);
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+.btn--primary:hover:not(:disabled) {
+  background-color: var(--navy);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn--primary:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Secondary Button: Light teal background, Teal text */
+.btn--secondary {
+  background-color: var(--accent-light);
+  color: var(--accent);
+  font-size: 0.75rem; /* 12px */
+  font-weight: var(--font-weight-bold);
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+.btn--secondary:hover:not(:disabled) {
+  background-color: var(--accent);
+  color: var(--white);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: var(--shadow-md);
+}
+
+.btn--secondary:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Dark Mode Adjustments */
+[data-theme="dark"] .btn--primary {
+  background-color: var(--accent);
+  color: var(--white);
+}
+
+[data-theme="dark"] .btn--secondary {
+  background-color: var(--medium-blue);
+  color: var(--accent-light);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .btn {
+    padding: 0.5rem 0.875rem;
+    font-size: 0.6875rem; /* 11px - smaller on mobile */
+    width: auto; /* Auto width for nav buttons */
+  }
+  
+  .btn--primary,
+  .btn--secondary {
+    font-size: 0.6875rem; /* 11px */
+  }
+}
+
+/* Mobile menu buttons - take full space */
+.mobile-menu-actions .btn {
+  flex: 1 1 0;
+  padding: 0.5rem 0.875rem;
+  font-size: 0.6875rem; /* 11px for mobile menu */
+  min-width: 0;
+}
+
