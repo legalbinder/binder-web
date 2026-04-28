@@ -20,7 +20,7 @@ export const Contact = () => {
   const { formData, errors, isSubmitting, handleChange, handleSubmit } = useLeadCaptureForm({
     blockedDomains,
     countries,
-    resolveWebhookUrl: () => getBubbleWebhookUrl('homeContact'),
+    resolveWebhookUrl: () => getBubbleWebhookUrl('homeContactForm'),
     source: 'contact-form',
     emptyChallengeValue: '-',
     onSuccess: () => navigate('/gracias'),

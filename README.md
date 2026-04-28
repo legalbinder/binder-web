@@ -1,6 +1,6 @@
 # Binder Web
 
-Sitio web comercial de Binder construido con React 18, TypeScript y Vite.
+Sitio web comercial de Binder construido con React, TypeScript y Vite. La app funciona como SPA en Vercel y cubre landing principal, paginas comerciales, casos de uso, eventos, diagnostico Legal Ops, formularios de captacion y paginas legales.
 
 ## Stack
 
@@ -8,8 +8,9 @@ Sitio web comercial de Binder construido con React 18, TypeScript y Vite.
 - TypeScript
 - Vite 5
 - React Router DOM 7
-- react-helmet-async
 - Framer Motion
+- react-helmet-async
+- ESLint
 
 ## Comandos
 
@@ -21,106 +22,111 @@ npm run build
 npm run preview
 ```
 
-## Estado tecnico
-
-- `npm run lint`: debe pasar
-- `npm run build`: debe pasar
-- analytics y LinkedIn tracking estan controlados por consentimiento
-- no existen defaults silenciosos a endpoints Bubble legacy
-
 ## Variables de entorno
 
-Ver [.env.example](F:\Desktop\Jobs\CodexApp\Binder\Binder-web\.env.example).
-
-Principales:
+Las variables se configuran en Vercel como Environment Variables. Los webhooks estan documentados en [WEBHOOKS.md](WEBHOOKS.md).
 
 ```env
-VITE_HOME_CONTACT_WEBHOOK_URL=
-VITE_EVENTS_WEBHOOK_URL=
-VITE_WEBHOOK_URL=
+VITE_BUBBLE_HOME_CONTACT_WEBHOOK_URL=
+VITE_BUBBLE_EVENT_REGISTRATION_WEBHOOK_URL=
+VITE_BUBBLE_USE_CASES_AND_DIAGNOSIS_WEBHOOK_URL=
+VITE_BUBBLE_COMPLAINT_BOOK_WEBHOOK_URL=
+
 VITE_GA_MEASUREMENT_ID=
 VITE_GOOGLE_ADS_ID=
 VITE_LINKEDIN_PARTNER_ID=
 ```
 
-## Arquitectura resumida
+## Vistas y rutas
 
-### App shell
+| Ruta | Vista | Descripcion resumida |
+| --- | --- | --- |
+| `/` | Landing principal | Home comercial con propuesta de valor, razones para usar Binder, soluciones, apps y formulario de contacto. |
+| `/porquebinder` | Por que Binder | Pagina interna sobre beneficios, centralizacion, automatizacion y visibilidad para equipos legales. |
+| `/sobrebinder` | Sobre Binder | Presentacion de la empresa, enfoque, mision y vision de producto. |
+| `/funcionalidades` | Funcionalidades | Resumen de capacidades de la plataforma: contratos, procesos, expediente digital, IA y gestion legal. |
+| `/soluciones` | Soluciones | Vista general de soluciones Binder por necesidad operativa legal. |
+| `/testimonios` | Testimonios | Casos y referencias de clientes. |
+| `/contacto` | Contacto | Pagina interna de contacto y solicitud de informacion/demo. |
+| `/gracias` | Gracias | Confirmacion posterior a formularios que usa datos guardados en `sessionStorage`. |
+| `/diagnostico-legal-ops-formulario-inicio` | Diagnostico Legal Ops | Gate de lead, quiz de madurez, resultado por nivel y envio a Bubble. |
+| `/diagnostico-legal-ops` | Redirect | Redirige a `/diagnostico-legal-ops-formulario-inicio`. |
+| `/casos-uso/clm` | CLM con IA | Landing de gestion de contratos: ciclo de vida contractual, automatizacion, trazabilidad e IA. |
+| `/casos-uso/gestion-procesos` | Gestion de procesos legales | Landing para procesos judiciales/administrativos, expedientes, oficios y control operativo. |
+| `/casos-uso/expediente-digital` | Expediente digital | Landing para mesa de partes online, expediente digital y trazabilidad documental. |
+| `/cases` | Redirect | Redirige a `/casos-uso/gestion-procesos`. |
+| `/eventos/:slug` | Landing de evento | Landing independiente para eventos/webinars. El contenido sale de `src/content/eventos.ts`. |
+| `/legal/privacidad` | Politica de privacidad | Pagina legal de privacidad. |
+| `/legal/cookies` | Politica de cookies | Pagina legal de cookies alineada con consentimiento de tracking. |
+| `/legal/terminos` | Terminos y condiciones | Pagina legal de terminos de uso. |
+| `/legal/aviso` | Aviso legal | Pagina de aviso legal. |
+| `/legal/seguridad` | Seguridad de datos | Pagina de seguridad y cumplimiento. |
+| `/legal/reclamaciones` | Libro de reclamaciones | Formulario de reclamos/quejas con validacion local y envio dedicado a Bubble. |
+| `/docs/prep-reunion-oka-ciberseguridad` | Documento interno | Vista HTML interna para preparacion de reunion/ciberseguridad. |
+| `/hito2/anexos` | Anexos Hito 2 | Hub de anexos internos. |
+| `/hito2/anexos/onboarding/anexo-1` | Anexo onboarding 1 | Estructura estandar de carpeta de onboarding. |
+| `/hito2/anexos/onboarding/anexo-2` | Anexo onboarding 2 | Documento escaneado y texto OCR. |
+| `/hito2/anexos/onboarding/anexo-3` | Anexo onboarding 3 | Output estructurado por IA en JSON. |
+| `/hito2/anexos/onboarding/anexo-4` | Anexo onboarding 4 | Pantalla de revision documental con QA y flags. |
+| `/hito2/anexos/onboarding/anexo-5` | Anexo onboarding 5 | Pipeline completo de onboarding. |
+| `/gentle-waves` | Vista visual interna | Playground visual/fondo. |
+| `/canyon-flows` | Vista visual interna | Playground visual/fondo. |
+| `/flow-pattern` | Vista visual interna | Playground visual/fondo. |
+| `/test/antigravity` | Test visual | Pantalla de prueba de animacion/hero. |
 
-- [src/App.tsx](F:\Desktop\Jobs\CodexApp\Binder\Binder-web\src\App.tsx)
+## Formularios
 
-Responsable de:
+| Formulario | Ubicacion | Webhook |
+| --- | --- | --- |
+| Contacto home | `src/components/sections/Contact.tsx` | `VITE_BUBBLE_HOME_CONTACT_WEBHOOK_URL` |
+| Casos de uso | `CasesContact`, `DealsContact`, `ExpedienteContact` | `VITE_BUBBLE_USE_CASES_AND_DIAGNOSIS_WEBHOOK_URL` |
+| Diagnostico Legal Ops | `src/pages/DiagnosticoLegalOpsPageGateStart.tsx` | `VITE_BUBBLE_USE_CASES_AND_DIAGNOSIS_WEBHOOK_URL` |
+| Registro de eventos | `src/pages/eventos/EventPage.tsx` | `VITE_BUBBLE_EVENT_REGISTRATION_WEBHOOK_URL` |
+| Libro de reclamaciones | `src/pages/legal/ReclamacionesPage.tsx` | `VITE_BUBBLE_COMPLAINT_BOOK_WEBHOOK_URL` |
 
-- providers
-- rutas
-- tracking
-- banner de cookies
-- navegacion global
+## Estructura principal
 
-### Contenido
+```text
+src/
+  App.tsx                         # Shell, providers y rutas
+  components/
+    layout/                       # Navegacion, SEO global, tracking, paginas internas
+    sections/                     # Secciones de landing y landings de casos de uso
+    ui/                           # UI transversal: botones, cookies, backgrounds
+    seo/                          # PageHead y SchemaMarkup
+  content/                        # Contenido editable de home, soluciones, eventos, footer, etc.
+  context/                        # Theme, background y consentimiento de cookies
+  data/                           # Paises y dominios bloqueados
+  hooks/                          # Hooks compartidos de formularios, animacion y scroll
+  pages/                          # Paginas por ruta
+  tracking/                       # Configuracion de IDs de tracking
+  utils/                          # Webhooks, validacion, tracking, sessionStorage
+```
 
-- `src/content/*`
+## Tracking y cookies
 
-El sitio usa archivos de contenido para textos y metadata de landings, incluyendo eventos.
+- Google Analytics y Google Ads se cargan solo si el usuario acepta cookies analiticas.
+- LinkedIn Insight Tag se activa solo en paginas de eventos y solo con consentimiento analitico.
+- `index.html` no debe inyectar scripts de tracking directamente.
+- La configuracion vive en `src/tracking/config.ts` y la carga se controla desde `GoogleAnalytics.tsx` y `LinkedInInsightTag.tsx`.
 
-### Formularios
+## Contenido editable
 
-Lead forms compartidos:
+- Eventos: `src/content/eventos.ts`.
+- Home y secciones comerciales: `src/content/home.ts`, `src/content/porquebinder.ts`, `src/content/soluciones.ts`, `src/content/apps.ts`, `src/content/contacto.ts`.
+- Casos de uso: `src/content/cases.ts`, `src/content/deals.ts`, `src/content/expedienteDigital.ts`, `src/content/archive.ts`.
+- Footer: `src/content/footer.ts`.
 
-- [src/hooks/useLeadCaptureForm.ts](F:\Desktop\Jobs\CodexApp\Binder\Binder-web\src\hooks\useLeadCaptureForm.ts)
-- [src/utils/leadCapture.ts](F:\Desktop\Jobs\CodexApp\Binder\Binder-web\src\utils\leadCapture.ts)
-- [src/utils/eventoCierreBubble.ts](F:\Desktop\Jobs\CodexApp\Binder\Binder-web\src\utils\eventoCierreBubble.ts)
-- [src/utils/bubbleWorkflowRequest.ts](F:\Desktop\Jobs\CodexApp\Binder\Binder-web\src\utils\bubbleWorkflowRequest.ts)
+## Checklist antes de publicar
 
-Rutas/formularios relevantes:
+```bash
+npm run lint
+npm run build
+```
 
-- home: [src/components/sections/Contact.tsx](F:\Desktop\Jobs\CodexApp\Binder\Binder-web\src\components\sections\Contact.tsx)
-- casos: [src/components/sections/CasesContact.tsx](F:\Desktop\Jobs\CodexApp\Binder\Binder-web\src\components\sections\CasesContact.tsx)
-- deals: [src/components/sections/DealsContact.tsx](F:\Desktop\Jobs\CodexApp\Binder\Binder-web\src\components\sections\DealsContact.tsx)
-- expediente: [src/components/sections/ExpedienteContact.tsx](F:\Desktop\Jobs\CodexApp\Binder\Binder-web\src\components\sections\ExpedienteContact.tsx)
-- diagnostico: [src/pages/DiagnosticoLegalOpsPageGateStart.tsx](F:\Desktop\Jobs\CodexApp\Binder\Binder-web\src\pages\DiagnosticoLegalOpsPageGateStart.tsx)
-- eventos: [src/pages/eventos/EventPage.tsx](F:\Desktop\Jobs\CodexApp\Binder\Binder-web\src\pages\eventos\EventPage.tsx)
+Revisar tambien:
 
-### Tracking y consentimiento
-
-- [src/components/layout/GoogleAnalytics.tsx](F:\Desktop\Jobs\CodexApp\Binder\Binder-web\src\components\layout\GoogleAnalytics.tsx)
-- [src/components/layout/LinkedInInsightTag.tsx](F:\Desktop\Jobs\CodexApp\Binder\Binder-web\src\components\layout\LinkedInInsightTag.tsx)
-- [src/utils/tracking.ts](F:\Desktop\Jobs\CodexApp\Binder\Binder-web\src\utils\tracking.ts)
-- [src/context/CookieContext.tsx](F:\Desktop\Jobs\CodexApp\Binder\Binder-web\src\context\CookieContext.tsx)
-
-Notas:
-
-- GA se carga solo despues del consentimiento analitico
-- LinkedIn Insight Tag solo se activa en paginas de eventos y con consentimiento
-- `index.html` no debe volver a inyectar `gtag.js` manualmente
-
-## Estructura funcional
-
-Rutas principales:
-
-- `/`
-- `/casos-uso/*`
-- `/eventos/:slug`
-- `/diagnostico-legal-ops-formulario-inicio`
-- `/gracias`
-- `/legal/*`
-
-La landing de eventos toma su metadata desde:
-
-- [src/content/eventos.ts](F:\Desktop\Jobs\CodexApp\Binder\Binder-web\src\content\eventos.ts)
-
-## Deployment
-
-- Vercel SPA con rewrite definido en [vercel.json](F:\Desktop\Jobs\CodexApp\Binder\Binder-web\vercel.json)
-- DNS puede seguir administrado fuera de Vercel; no es requisito mover nameservers
-
-## Documentacion relacionada
-
-- [DOCUMENTACION_FORMULARIO_BUBBLE.md](F:\Desktop\Jobs\CodexApp\Binder\Binder-web\DOCUMENTACION_FORMULARIO_BUBBLE.md)
-- [AWS_WEBHOOK_BRIEF.md](F:\Desktop\Jobs\CodexApp\Binder\Binder-web\AWS_WEBHOOK_BRIEF.md)
-- [TESTING.md](F:\Desktop\Jobs\CodexApp\Binder\Binder-web\TESTING.md)
-
-## Notas
-
-- `swiper` ya no forma parte de las dependencias directas del proyecto.
-- Si se introduce un nuevo evento, actualizar `src/content/eventos.ts`, no hardcodear fecha/hora en la pagina.
+- Variables `VITE_BUBBLE_*_WEBHOOK_URL` configuradas en Vercel.
+- Formularios probados contra workflows reales de Bubble.
+- Consentimiento de cookies validado antes de activar tracking.
+- `/legal/reclamaciones` probado en desktop y mobile.

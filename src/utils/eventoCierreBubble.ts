@@ -1,11 +1,16 @@
 import { normalizeBubbleWorkflowPostUrl } from './bubbleWorkflowUrl';
 
-export type BubbleWebhookKind = 'homeContact' | 'eventRegistration' | 'generalLead';
+export type BubbleWebhookKind =
+  | 'homeContactForm'
+  | 'eventRegistrationForm'
+  | 'useCasesAndDiagnosisForm'
+  | 'complaintBookForm';
 
 const bubbleWebhookEnvByKind = {
-  homeContact: 'VITE_HOME_CONTACT_WEBHOOK_URL',
-  eventRegistration: 'VITE_EVENTS_WEBHOOK_URL',
-  generalLead: 'VITE_WEBHOOK_URL',
+  homeContactForm: 'VITE_BUBBLE_HOME_CONTACT_WEBHOOK_URL',
+  eventRegistrationForm: 'VITE_BUBBLE_EVENT_REGISTRATION_WEBHOOK_URL',
+  useCasesAndDiagnosisForm: 'VITE_BUBBLE_USE_CASES_AND_DIAGNOSIS_WEBHOOK_URL',
+  complaintBookForm: 'VITE_BUBBLE_COMPLAINT_BOOK_WEBHOOK_URL',
 } as const;
 
 function readBubbleWebhookEnvValue(kind: BubbleWebhookKind): string | undefined {

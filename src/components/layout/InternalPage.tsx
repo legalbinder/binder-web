@@ -8,9 +8,15 @@ interface InternalPageProps {
   title: string;
   children: ReactNode;
   breadcrumbs?: Array<{ label: string; path: string }>;
+  contentClassName?: string;
 }
 
-export const InternalPage = ({ title, children, breadcrumbs }: InternalPageProps) => {
+export const InternalPage = ({
+  title,
+  children,
+  breadcrumbs,
+  contentClassName = '',
+}: InternalPageProps) => {
   const location = useLocation();
   const { elementRef, isVisible } = useScrollAnimation({
     threshold: 0.1,
@@ -31,7 +37,7 @@ export const InternalPage = ({ title, children, breadcrumbs }: InternalPageProps
         {breadcrumbs && <Breadcrumbs items={defaultBreadcrumbs} />}
         <div 
           ref={elementRef as React.RefObject<HTMLDivElement>}
-          className={`frosted-glass scroll-animate ${isVisible ? 'visible' : ''}`}
+          className={`frosted-glass scroll-animate ${isVisible ? 'visible' : ''} ${contentClassName}`}
         >
           <h1 className="internal-page-title">{title}</h1>
           <div className="internal-page-content">

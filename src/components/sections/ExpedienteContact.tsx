@@ -20,7 +20,7 @@ export const ExpedienteContact = () => {
   const { formData, errors, isSubmitting, handleChange, handleSubmit } = useLeadCaptureForm({
     blockedDomains,
     countries,
-    resolveWebhookUrl: () => getBubbleWebhookUrl('generalLead'),
+    resolveWebhookUrl: () => getBubbleWebhookUrl('useCasesAndDiagnosisForm'),
     source: 'expediente-contact-form',
     emptyChallengeValue: null,
     onSuccess: () => navigate('/gracias'),

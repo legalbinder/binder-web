@@ -153,7 +153,7 @@ export function EventPage() {
     };
 
     try {
-      await postBubbleWorkflow(getBubbleWebhookUrl('eventRegistration'), requestBody);
+      await postBubbleWorkflow(getBubbleWebhookUrl('eventRegistrationForm'), requestBody);
       setSuccess(true);
       trackGoogleEvent('generate_lead', {
         event_category: 'evento',

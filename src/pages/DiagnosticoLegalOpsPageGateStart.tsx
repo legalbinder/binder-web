@@ -303,7 +303,7 @@ export const DiagnosticoLegalOpsPageGateStart = () => {
     setGateErrors({});
 
     try {
-      await postBubbleWorkflow(getBubbleWebhookUrl('generalLead'), {
+      await postBubbleWorkflow(getBubbleWebhookUrl('useCasesAndDiagnosisForm'), {
         name: gateFormData.name.trim(),
         company: gateFormData.company.trim(),
         email: gateFormData.email.trim(),
