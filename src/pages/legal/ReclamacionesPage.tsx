@@ -1,8 +1,8 @@
 import { FormEvent, useState } from 'react';
 import { InternalPage } from '../../components/layout/InternalPage';
 import { PageHead } from '../../components/seo/PageHead';
-import { postBubbleWorkflow } from '../../utils/bubbleWorkflowRequest';
-import { getBubbleWebhookUrl } from '../../utils/eventoCierreBubble';
+import { getBubbleWebhookUrl } from '../../shared/integrations/bubble/bubbleWebhooks';
+import { postBubbleWorkflow } from '../../shared/integrations/bubble/postBubbleWorkflow';
 import './ReclamacionesPage.css';
 
 type DocumentType = '' | 'DNI' | 'Pasaporte' | 'RUC' | 'Carnet de extranjería';

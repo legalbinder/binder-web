@@ -2,7 +2,7 @@ import { createContext } from 'react';
 
 export type BackgroundType = 'none' | 'video';
 
-export interface BackgroundContextType {
+interface BackgroundContextType {
   background: BackgroundType;
   setBackground: (background: BackgroundType) => void;
 }

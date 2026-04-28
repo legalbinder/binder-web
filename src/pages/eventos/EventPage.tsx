@@ -8,18 +8,18 @@ import {
   CORPORATE_EMAIL_REQUIRED_MESSAGE,
   getEmailDomain,
   isBlockedPersonalEmailDomain,
-} from '../../utils/corporateEmailValidation';
+} from '../../shared/utils/corporateEmailValidation';
 import {
-  type EventoCierreBubblePayload,
+  type EventRegistrationPayload,
   getBubbleWebhookUrl,
-} from '../../utils/eventoCierreBubble';
-import { postBubbleWorkflow } from '../../utils/bubbleWorkflowRequest';
+} from '../../shared/integrations/bubble/bubbleWebhooks';
+import { postBubbleWorkflow } from '../../shared/integrations/bubble/postBubbleWorkflow';
 import {
   formatLeadCapturePhone,
   normalizeLeadCaptureEmail,
   type Country,
-} from '../../utils/leadCapture';
-import { trackGoogleEvent } from '../../utils/tracking';
+} from '../../shared/forms/lead-capture/leadCapture';
+import { trackGoogleEvent } from '../../tracking/tracking';
 import './EventPage.css';
 
 const SITE_URL = 'https://binder.la';
@@ -137,7 +137,7 @@ export function EventPage() {
     setErrors((previous) => ({ ...previous, submit: undefined }));
 
     const phone = formatLeadCapturePhone(countries, form.phoneCountry, form.phone) ?? '';
-    const requestBody: EventoCierreBubblePayload = {
+    const requestBody: EventRegistrationPayload = {
       Nombres: `${form.firstName.trim()} ${form.lastName.trim()}`.trim(),
       firstName: form.firstName.trim(),
       lastName: form.lastName.trim(),

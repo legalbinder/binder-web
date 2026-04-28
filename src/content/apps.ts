@@ -1,4 +1,4 @@
-export interface App {
+interface App {
   id: string;
   name: string;
   subtitle: string;

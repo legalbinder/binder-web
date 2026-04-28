@@ -1,4 +1,4 @@
-export interface ExpedienteTab {
+interface ExpedienteTab {
   id: string;
   tabName: string;
   title: string;
@@ -8,13 +8,13 @@ export interface ExpedienteTab {
   imagePlaceholder: string;
 }
 
-export interface FAQItem {
+interface FAQItem {
   id: string;
   question: string;
   answer: string;
 }
 
-export interface ComparisonRow {
+interface ComparisonRow {
   feature: string;
   tradicional: string | boolean;
   expedienteDigital: string | boolean;
@@ -82,29 +82,6 @@ export const expedienteDigitalContent = {
         imagePlaceholder: "Imagen de Predictibilidad",
       },
     ] as ExpedienteTab[],
-  },
-  testimonials: {
-    mainTitle: "¿Qué pasa cuando los procesos legales fluyen con claridad y seguimiento real?",
-    testimonials: [
-      {
-        id: "testimonial-1",
-        name: "Coordinadora Legal, Multinacional de Servicios",
-        role: "",
-        company: "",
-        logoPlaceholder: "",
-        logoPath: null,
-        message: "Pasamos de 200 correos semanales a 20. Todo está en un tablero con trazabilidad completa.",
-      },
-      {
-        id: "testimonial-2",
-        name: "Jefe de Asuntos Legales, Empresa Industrial",
-        role: "",
-        company: "",
-        logoPlaceholder: "",
-        logoPath: null,
-        message: "Binder nos permitió controlar plazos, tareas y riesgos sin depender de hojas de cálculo.",
-      },
-    ],
   },
   comparison: {
     title: "Por qué Binder y no los flujos de siempre",

@@ -1,4 +1,4 @@
-export interface DealsTab {
+interface DealsTab {
   id: string;
   tabName: string;
   title: string;
@@ -8,14 +8,14 @@ export interface DealsTab {
   imagePlaceholder: string;
 }
 
-export interface FAQItem {
+interface FAQItem {
   id: string;
   question: string;
   answer: string;
   boldParts?: string[];
 }
 
-export interface ComparisonRow {
+interface ComparisonRow {
   feature: string;
   tradicional: string | boolean;
   deals: string | boolean;
@@ -99,29 +99,6 @@ export const dealsContent = {
         imagePlaceholder: "Imagen de Trazabilidad",
       },
     ] as DealsTab[],
-  },
-  testimonials: {
-    mainTitle: "¿Cómo se siente tener visibilidad total sobre cada contrato?",
-    testimonials: [
-      {
-        id: "testimonial-deals-1",
-        name: "Gerente Legal, Empresa",
-        role: "",
-        company: "",
-        logoPlaceholder: "",
-        logoPath: null,
-        message: "Antes, encontrar un contrato tomaba horas. Ahora, en segundos sé quién lo pidió, quién lo revisó y cuándo se firmó.",
-      },
-      {
-        id: "testimonial-deals-2",
-        name: "Head of Legal, Empresa",
-        role: "",
-        company: "",
-        logoPlaceholder: "",
-        logoPath: null,
-        message: "Con Binder reducimos nuestros tiempos de aprobación contractual de 2 semanas a 2 días.",
-      },
-    ],
   },
   comparison: {
     title: "Por qué Binder y no el caos legal",

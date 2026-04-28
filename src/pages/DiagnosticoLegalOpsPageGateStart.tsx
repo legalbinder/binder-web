@@ -6,10 +6,10 @@ import blockedEmailDomains from '../data/blockedEmailDomains.json';
 import {
   CORPORATE_EMAIL_REQUIRED_MESSAGE,
   isBlockedPersonalEmailDomain,
-} from '../utils/corporateEmailValidation';
-import { getBubbleWebhookUrl } from '../utils/eventoCierreBubble';
-import { storeFormSubmission } from '../utils/formSubmission';
-import { postBubbleWorkflow } from '../utils/bubbleWorkflowRequest';
+} from '../shared/utils/corporateEmailValidation';
+import { getBubbleWebhookUrl } from '../shared/integrations/bubble/bubbleWebhooks';
+import { postBubbleWorkflow } from '../shared/integrations/bubble/postBubbleWorkflow';
+import { storeFormSubmission } from '../shared/utils/formSubmission';
 import './DiagnosticoLegalOpsPage.css';
 
 type Stage = 'gate' | 'quiz' | 'result';

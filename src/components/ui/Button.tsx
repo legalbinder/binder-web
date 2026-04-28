@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import './Button.css';
 
-export type ButtonVariant = 'primary' | 'secondary';
+type ButtonVariant = 'primary' | 'secondary';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;

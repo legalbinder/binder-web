@@ -78,8 +78,8 @@ VITE_LINKEDIN_PARTNER_ID=
 
 | Formulario | Ubicacion | Webhook |
 | --- | --- | --- |
-| Contacto home | `src/components/sections/Contact.tsx` | `VITE_BUBBLE_HOME_CONTACT_WEBHOOK_URL` |
-| Casos de uso | `CasesContact`, `DealsContact`, `ExpedienteContact` | `VITE_BUBBLE_USE_CASES_AND_DIAGNOSIS_WEBHOOK_URL` |
+| Contacto home | `src/components/sections/Contact.tsx` + `src/shared/forms/lead-capture/LeadCaptureSection.tsx` | `VITE_BUBBLE_HOME_CONTACT_WEBHOOK_URL` |
+| Casos de uso | `CasesContact`, `DealsContact`, `ExpedienteContact` + `LeadCaptureSection` | `VITE_BUBBLE_USE_CASES_AND_DIAGNOSIS_WEBHOOK_URL` |
 | Diagnostico Legal Ops | `src/pages/DiagnosticoLegalOpsPageGateStart.tsx` | `VITE_BUBBLE_USE_CASES_AND_DIAGNOSIS_WEBHOOK_URL` |
 | Registro de eventos | `src/pages/eventos/EventPage.tsx` | `VITE_BUBBLE_EVENT_REGISTRATION_WEBHOOK_URL` |
 | Libro de reclamaciones | `src/pages/legal/ReclamacionesPage.tsx` | `VITE_BUBBLE_COMPLAINT_BOOK_WEBHOOK_URL` |
@@ -88,19 +88,26 @@ VITE_LINKEDIN_PARTNER_ID=
 
 ```text
 src/
-  App.tsx                         # Shell, providers y rutas
+  app/
+    App.tsx                       # Entrada de app
+    AppLayout.tsx                 # Layout global: nav, footer, tracking, cookies
+    providers.tsx                 # Providers globales
+    routes.tsx                    # Mapa de rutas
   components/
     layout/                       # Navegacion, SEO global, tracking, paginas internas
-    sections/                     # Secciones de landing y landings de casos de uso
+    sections/                     # Secciones visuales y wrappers por landing
     ui/                           # UI transversal: botones, cookies, backgrounds
     seo/                          # PageHead y SchemaMarkup
   content/                        # Contenido editable de home, soluciones, eventos, footer, etc.
   context/                        # Theme, background y consentimiento de cookies
   data/                           # Paises y dominios bloqueados
-  hooks/                          # Hooks compartidos de formularios, animacion y scroll
+  hooks/                          # Hooks visuales/transversales
   pages/                          # Paginas por ruta
-  tracking/                       # Configuracion de IDs de tracking
-  utils/                          # Webhooks, validacion, tracking, sessionStorage
+  shared/
+    forms/lead-capture/           # Formulario reusable de leads y payloads
+    integrations/bubble/          # Resolucion de webhooks, POST y errores Bubble
+    utils/                        # Utilidades compartidas de email y sessionStorage
+  tracking/                       # Configuracion y carga runtime de tracking
 ```
 
 ## Tracking y cookies
@@ -108,7 +115,7 @@ src/
 - Google Analytics y Google Ads se cargan solo si el usuario acepta cookies analiticas.
 - LinkedIn Insight Tag se activa solo en paginas de eventos y solo con consentimiento analitico.
 - `index.html` no debe inyectar scripts de tracking directamente.
-- La configuracion vive en `src/tracking/config.ts` y la carga se controla desde `GoogleAnalytics.tsx` y `LinkedInInsightTag.tsx`.
+- La configuracion vive en `src/tracking/config.ts` y la carga runtime en `src/tracking/tracking.ts`.
 
 ## Contenido editable
 

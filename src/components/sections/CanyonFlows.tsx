@@ -9,7 +9,7 @@ interface CanyonMultiLayerFlowsProps {
 
 // Particles flow naturally downward with teal accents, adapting to theme
 // Can use custom accent color for specific pages
-export const CanyonMultiLayerFlows = ({ accentColor }: CanyonMultiLayerFlowsProps) => {
+const CanyonMultiLayerFlows = ({ accentColor }: CanyonMultiLayerFlowsProps) => {
   const { theme } = useTheme();
   
   // Default teal colors if no accent color provided

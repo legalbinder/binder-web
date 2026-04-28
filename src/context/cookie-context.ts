@@ -1,13 +1,11 @@
 import { createContext } from 'react';
 
-export type CookieCategory = 'essential' | 'analytics';
-
 export interface CookiePreferences {
   essential: boolean;
   analytics: boolean;
 }
 
-export interface CookieContextType {
+interface CookieContextType {
   hasConsent: boolean;
   hasAnalyticsConsent: boolean;
   preferences: CookiePreferences;

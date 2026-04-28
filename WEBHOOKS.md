@@ -2,7 +2,7 @@
 
 Los links de Bubble se configuran en Vercel como variables de entorno. No deben hardcodearse en el codigo.
 
-El frontend acepta URLs de Bubble con o sin `/initialize`; antes de hacer `POST`, normaliza la URL desde `src/utils/bubbleWorkflowUrl.ts`.
+El frontend acepta URLs de Bubble con o sin `/initialize`; antes de hacer `POST`, normaliza la URL desde `src/shared/integrations/bubble/normalizeBubbleWorkflowUrl.ts`.
 
 ## Variables
 
@@ -25,6 +25,7 @@ Usado por:
 
 - `/`
 - `src/components/sections/Contact.tsx`
+- `src/shared/forms/lead-capture/LeadCaptureSection.tsx`
 
 Payload:
 
@@ -65,6 +66,7 @@ Usado por:
 - `src/components/sections/CasesContact.tsx`
 - `src/components/sections/DealsContact.tsx`
 - `src/components/sections/ExpedienteContact.tsx`
+- `src/shared/forms/lead-capture/LeadCaptureSection.tsx`
 - `src/pages/DiagnosticoLegalOpsPageGateStart.tsx`
 
 Payload para formularios de casos de uso:

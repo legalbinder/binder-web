@@ -9,7 +9,7 @@ interface GentleWavesProps {
 // Adapted GentleWaves animation with Binder color scheme
 // Colors adapt to theme: clear background (white/black) with teal accents
 // Can use custom accent color for specific pages
-export const GentleWaves = ({ accentColor }: GentleWavesProps) => {
+const GentleWaves = ({ accentColor }: GentleWavesProps) => {
   const { theme } = useTheme();
   
   // Default teal colors if no accent color provided

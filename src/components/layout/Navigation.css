@@ -328,10 +328,6 @@
   min-width: 0;
 }
 
-.mobile-menu-actions .theme-toggle {
-  flex: 0 0 auto;
-}
-
 [data-theme="dark"] .mobile-menu-actions {
   border-top-color: rgba(255, 255, 255, 0.1);
 }
@@ -355,10 +351,6 @@
     display: flex;
     gap: 0.5rem;
     align-items: center;
-  }
-
-  .nav-actions .theme-toggle {
-    display: none; /* Ocultar ThemeToggle en nav principal en mobile */
   }
 
   .nav-actions .btn--secondary {

@@ -5,7 +5,7 @@ import {
   clearFormSubmission,
   readFormSubmission,
   type FormSubmissionData,
-} from '../utils/formSubmission';
+} from '../shared/utils/formSubmission';
 import './GraciasPage.css';
 
 export const GraciasPage = () => {

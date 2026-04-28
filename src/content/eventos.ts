@@ -2,7 +2,7 @@
  * Event landing pages keyed by URL slug (`/eventos/:slug`).
  */
 
-export interface EventSpeaker {
+interface EventSpeaker {
   name: string;
   initials: string;
   role: string;
@@ -11,12 +11,12 @@ export interface EventSpeaker {
   avatarUrl?: string;
 }
 
-export interface EventMetaBadge {
+interface EventMetaBadge {
   text: string;
   background?: string;
 }
 
-export interface EventMeta {
+interface EventMeta {
   icon: string;
   label: string;
   value: string;
@@ -24,7 +24,7 @@ export interface EventMeta {
   badge?: EventMetaBadge;
 }
 
-export interface EventData {
+interface EventData {
   slug: string;
   coHostPill?: string;
   seoTitle: string;
@@ -54,7 +54,7 @@ export interface EventData {
   infoLocationSub: string;
 }
 
-export const eventsBySlug: Record<string, EventData> = {
+const eventsBySlug: Record<string, EventData> = {
   'webinar-legalops-binder-niubox': {
     slug: 'webinar-legalops-binder-niubox',
     coHostPill: 'NIUBOX',
@@ -132,5 +132,3 @@ export function getEventBySlug(slug: string | undefined): EventData | undefined 
   if (!slug) return undefined;
   return eventsBySlug[slug];
 }
-
-export const eventSlugs = Object.keys(eventsBySlug);

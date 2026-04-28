@@ -1,4 +1,4 @@
-export interface WhyBinderSlide {
+interface WhyBinderSlide {
   question: string;
   headline: string;
   support: string;

@@ -1,155 +1,28 @@
-import { useNavigate } from 'react-router-dom';
-import { contactoContent } from '../../content/contacto';
-import blockedEmailDomains from '../../data/blockedEmailDomains.json';
-import countriesData from '../../data/countries.json';
-import { useLeadCaptureForm } from '../../hooks/useLeadCaptureForm';
-import { useScrollAnimation } from '../../hooks/useScrollAnimation';
-import { getBubbleWebhookUrl } from '../../utils/eventoCierreBubble';
-import type { Country } from '../../utils/leadCapture';
+import { LeadCaptureSection } from '../../shared/forms/lead-capture/LeadCaptureSection';
 import './CasesContact.css';
 
-export const CasesContact = () => {
-  const navigate = useNavigate();
-  const countries = countriesData.countries as Country[];
-  const blockedDomains = blockedEmailDomains.blockedDomains as string[];
-  const { elementRef, isVisible } = useScrollAnimation({
-    threshold: 0.1,
-    rootMargin: '0px',
-    triggerOnce: true,
-  });
-  const { formData, errors, isSubmitting, handleChange, handleSubmit } = useLeadCaptureForm({
-    blockedDomains,
-    countries,
-    resolveWebhookUrl: () => getBubbleWebhookUrl('useCasesAndDiagnosisForm'),
-    source: 'cases-contact-form',
-    emptyChallengeValue: null,
-    onSuccess: () => navigate('/gracias'),
-  });
-
-  return (
-    <section
-      id="cases-contact"
-      ref={elementRef as React.RefObject<HTMLElement>}
-      className={`cases-contact-section scroll-animate ${isVisible ? 'visible' : ''}`}
-    >
-      <div className="container-wide">
-        <div className="cases-contact-grid">
-          <div className="cases-contact-text">
-            <h2 className="cases-contact-title">{contactoContent.title}</h2>
-            <p className="cases-contact-description">{contactoContent.description}</p>
-            <p className="cases-contact-cta">{contactoContent.callToAction}</p>
-          </div>
-
-          <div className="cases-contact-form-container">
-            <div className="cases-contact-decoration">
-              <img
-                src="/Clerk-2.png"
-                alt=""
-                className="cases-clerk-decoration-image"
-                role="presentation"
-              />
-            </div>
-            <form onSubmit={handleSubmit} className="cases-contact-form">
-              <h3 className="cases-form-title">{contactoContent.form.title}</h3>
-
-              <div className="cases-form-group">
-                <input
-                  type="text"
-                  placeholder={contactoContent.form.fields.name.placeholder}
-                  value={formData.name}
-                  onChange={(e) => handleChange('name', e.target.value)}
-                  className={errors.name ? 'error' : ''}
-                />
-                {errors.name && <span className="cases-error-message">{errors.name}</span>}
-              </div>
-
-              <div className="cases-form-group">
-                <input
-                  type="text"
-                  placeholder={contactoContent.form.fields.company.placeholder}
-                  value={formData.company}
-                  onChange={(e) => handleChange('company', e.target.value)}
-                  className={errors.company ? 'error' : ''}
-                />
-                {errors.company && <span className="cases-error-message">{errors.company}</span>}
-              </div>
-
-              <div className="cases-form-group">
-                <input
-                  type="email"
-                  placeholder={contactoContent.form.fields.email.placeholder}
-                  value={formData.email}
-                  onChange={(e) => handleChange('email', e.target.value)}
-                  className={errors.email ? 'error' : ''}
-                />
-                {errors.email && <span className="cases-error-message">{errors.email}</span>}
-              </div>
-
-              <div className="cases-form-group">
-                <div className="phone-input-wrapper">
-                  <select
-                    className="phone-country-select"
-                    value={formData.phoneCountry}
-                    onChange={(e) => handleChange('phoneCountry', e.target.value)}
-                  >
-                    {countries.map((country) => (
-                      <option key={country.code} value={country.code}>
-                        {country.flag} {country.dialCode}
-                      </option>
-                    ))}
-                  </select>
-                  <input
-                    type="tel"
-                    placeholder={contactoContent.form.fields.phone.placeholder}
-                    value={formData.phone}
-                    onChange={(e) => handleChange('phone', e.target.value)}
-                    className="phone-number-input"
-                  />
-                </div>
-              </div>
-
-              <div className="cases-form-group">
-                <select
-                  value={formData.message}
-                  onChange={(e) => handleChange('message', e.target.value)}
-                  className={formData.message ? '' : 'placeholder-selected'}
-                >
-                  <option value="" disabled>
-                    {contactoContent.form.fields.message.placeholder}
-                  </option>
-                  {contactoContent.form.fields.message.options?.map((option, index) => (
-                    <option key={index} value={option}>
-                      {option}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="cases-form-group cases-checkbox-group">
-                <label>
-                  <input
-                    type="checkbox"
-                    checked={formData.consent}
-                    onChange={(e) => handleChange('consent', e.target.checked)}
-                  />
-                  <span>{contactoContent.form.consent.text}</span>
-                </label>
-                {errors.consent && <span className="cases-error-message">{errors.consent}</span>}
-              </div>
-
-              {errors.submit && (
-                <div className="cases-form-group">
-                  <span className="cases-error-message">{errors.submit}</span>
-                </div>
-              )}
-
-              <button type="submit" className="cases-submit-button" disabled={isSubmitting}>
-                {isSubmitting ? 'Enviando...' : contactoContent.form.submitText}
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
+export const CasesContact = () => (
+  <LeadCaptureSection
+    id="cases-contact"
+    source="cases-contact-form"
+    webhookKind="useCasesAndDiagnosisForm"
+    emptyChallengeValue={null}
+    classes={{
+      section: 'cases-contact-section',
+      grid: 'cases-contact-grid',
+      text: 'cases-contact-text',
+      title: 'cases-contact-title',
+      description: 'cases-contact-description',
+      cta: 'cases-contact-cta',
+      formContainer: 'cases-contact-form-container',
+      decoration: 'cases-contact-decoration',
+      image: 'cases-clerk-decoration-image',
+      form: 'cases-contact-form',
+      formTitle: 'cases-form-title',
+      formGroup: 'cases-form-group',
+      checkboxGroup: 'cases-checkbox-group',
+      errorMessage: 'cases-error-message',
+      submitButton: 'cases-submit-button',
+    }}
+  />
+);

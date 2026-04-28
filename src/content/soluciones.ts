@@ -1,4 +1,4 @@
-export interface SolutionTab {
+interface SolutionTab {
   id: string;
   tabName: string;
   title: string;

@@ -5,7 +5,7 @@ import {
   ensureLinkedInInsightTag,
   getTrackingConfig,
   removeLinkedInInsightTag,
-} from '../../utils/tracking';
+} from '../../tracking/tracking';
 
 export const LinkedInInsightTag = () => {
   const { pathname } = useLocation();

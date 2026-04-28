@@ -9,7 +9,7 @@ interface FlowingPatternProps {
 
 // Points flow together in unity with teal accents, adapting to theme
 // Can use custom accent color for specific pages
-export const FlowingPattern = ({ accentColor }: FlowingPatternProps) => {
+const FlowingPattern = ({ accentColor }: FlowingPatternProps) => {
   const { theme } = useTheme();
   
   // Default teal colors if no accent color provided

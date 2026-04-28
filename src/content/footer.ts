@@ -1,4 +1,4 @@
-export interface FooterColumn {
+interface FooterColumn {
   title: string;
   links: Array<{
     label: string;

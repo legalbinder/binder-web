@@ -6,7 +6,7 @@ import {
   getTrackingConfig,
   removeGoogleAnalytics,
   trackPageView,
-} from '../../utils/tracking';
+} from '../../tracking/tracking';
 
 export const GoogleAnalytics = () => {
   const { pathname } = useLocation();

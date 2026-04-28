@@ -1,4 +1,4 @@
-export interface CasesTab {
+interface CasesTab {
   id: string;
   tabName: string;
   title: string;
@@ -8,13 +8,13 @@ export interface CasesTab {
   imagePlaceholder: string;
 }
 
-export interface FAQItem {
+interface FAQItem {
   id: string;
   question: string;
   answer: string;
 }
 
-export interface ComparisonRow {
+interface ComparisonRow {
   feature: string;
   sinBinder: string | boolean;
   conBinder: string | boolean;
@@ -87,29 +87,6 @@ export const casesContent = {
         imagePlaceholder: "Imagen de Trazabilidad",
       },
     ] as CasesTab[],
-  },
-  testimonials: {
-    mainTitle: "¿Cómo cambia el trabajo legal cuando todo está organizado y disponible?",
-    testimonials: [
-      {
-        id: "testimonial-cases-1",
-        name: "Head of Legal Compliance, Empresa Industrial",
-        role: "",
-        company: "",
-        logoPlaceholder: "",
-        logoPath: null,
-        message: "Binder nos permite seguir cada proceso en tiempo real y evitar pérdidas por errores o retrasos.",
-      },
-      {
-        id: "testimonial-cases-2",
-        name: "Coordinador de Litigios, Estudio Jurídico Corporativo",
-        role: "",
-        company: "",
-        logoPlaceholder: "",
-        logoPath: null,
-        message: "El control documental que ahora tenemos es incomparable. Todo está trazado y seguro.",
-      },
-    ],
   },
   comparison: {
     title: "Por qué Binder y no los flujos de siempre",
