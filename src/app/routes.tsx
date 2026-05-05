@@ -28,6 +28,8 @@ import { PrivacidadPage } from '../pages/legal/PrivacidadPage';
 import { ReclamacionesPage } from '../pages/legal/ReclamacionesPage';
 import { SeguridadPage } from '../pages/legal/SeguridadPage';
 import { TerminosPage } from '../pages/legal/TerminosPage';
+import { PressPage } from '../pages/prensa/PressPage';
+import { PressStoryPage } from '../pages/prensa/PressStoryPage';
 import { PorQueBinderPage } from '../pages/PorQueBinderPage';
 import { SobreBinderPage } from '../pages/SobreBinderPage';
 import { SolucionesPage } from '../pages/SolucionesPage';
@@ -70,6 +72,8 @@ export const AppRoutes = () => (
     <Route path="/legal/aviso" element={<AvisoLegalPage />} />
     <Route path="/legal/seguridad" element={<SeguridadPage />} />
     <Route path="/legal/reclamaciones" element={<ReclamacionesPage />} />
+    <Route path="/prensa" element={<PressPage />} />
+    <Route path="/prensa/:slug" element={<PressStoryPage />} />
     <Route path="/casos-uso/clm" element={<CLMPage />} />
     <Route path="/casos-uso/gestion-procesos" element={<CasesPage />} />
     <Route path="/casos-uso/expediente-digital" element={<ExpedienteDigitalPage />} />

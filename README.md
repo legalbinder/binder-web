@@ -62,7 +62,7 @@ VITE_LINKEDIN_PARTNER_ID=
 | `/legal/aviso` | Aviso legal | Pagina de aviso legal. |
 | `/legal/seguridad` | Seguridad de datos | Pagina de seguridad y cumplimiento. |
 | `/legal/reclamaciones` | Libro de reclamaciones | Formulario de reclamos/quejas con validacion local y envio dedicado a Bubble. |
-| `/docs/prep-reunion-oka-ciberseguridad` | Documento interno | Vista HTML interna para preparacion de reunion/ciberseguridad. |
+| `/docs/prep-reunion-oka-ciberseguridad` | Documento interno | Vista interna para preparacion de reunion/ciberseguridad. |
 | `/hito2/anexos` | Anexos Hito 2 | Hub de anexos internos. |
 | `/hito2/anexos/onboarding/anexo-1` | Anexo onboarding 1 | Estructura estandar de carpeta de onboarding. |
 | `/hito2/anexos/onboarding/anexo-2` | Anexo onboarding 2 | Documento escaneado y texto OCR. |
@@ -121,7 +121,7 @@ src/
 
 - Eventos: `src/content/eventos.ts`.
 - Home y secciones comerciales: `src/content/home.ts`, `src/content/porquebinder.ts`, `src/content/soluciones.ts`, `src/content/apps.ts`, `src/content/contacto.ts`.
-- Casos de uso: `src/content/cases.ts`, `src/content/deals.ts`, `src/content/expedienteDigital.ts`, `src/content/archive.ts`.
+- Casos de uso: `src/content/cases.ts`, `src/content/deals.ts`, `src/content/expedienteDigital.ts`.
 - Footer: `src/content/footer.ts`.
 
 ## Checklist antes de publicar

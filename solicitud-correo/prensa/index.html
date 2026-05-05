@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Binder en los medios — Sala de Prensa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Organization","name":"Binder","url":"https://www.usebinder.com","description":"Plataforma peruana de inteligencia artificial para la gestión legal en Latinoamérica.","foundingLocation":{"@type":"Place","addressCountry":"PE","addressLocality":"Lima"},"founder":{"@type":"Person","name":"Carlos Arana","jobTitle":"Fundador y CEO"},"knowsAbout":["Legal Tech","Legal Ops","Inteligencia Artificial","Gestión contractual"]}
+  </script>
+
+  <style>
+    /* Hub hero */
+    .press-hero {
+      padding: clamp(56px, 8vw, 88px) 48px 48px;
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .press-hero > * { position: relative; z-index: 1; }
+    .press-hero h1 { font-size: clamp(2.15rem, 4.2vw, 3.15rem); font-weight: 900; line-height: 1.07; margin-bottom: 18px; letter-spacing: -.03em; }
+    .press-hero h1 em { font-style: normal; color: var(--primary); }
+    .press-hero > p { font-size: .95rem; color: var(--muted); max-width: 560px; line-height: 1.78; }
+
+    .media-bar {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 48px;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      overflow-x: auto;
+      background: #fff;
+    }
+    .media-bar-label {
+      font-size: .61rem;
+      font-weight: 800;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .media-bar-logos { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .mbl {
+      text-decoration: none;
+      opacity: .78;
+      transition: opacity .2s;
+      padding: 4px 6px;
+      border-radius: 999px;
+      border: none;
+      background: transparent;
+      box-shadow: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .mbl img {
+      height: 24px;
+      width: auto;
+      max-width: 150px;
+      display: block;
+      object-fit: contain;
+      filter: grayscale(1);
+    }
+    .mbl:hover { opacity: 1; }
+
+    .stories-wrap { max-width: 1200px; margin: 0 auto; padding: 56px 48px 92px; }
+    .stories-label {
+      font-size: .64rem;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .stories-label::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, var(--border) 0%, transparent 100%); }
+
+
+    .stories-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 72px;
+    }
+
+    .story-card-wide {
+      display: grid;
+      grid-template-columns: minmax(420px, 0.95fr) minmax(420px, 1fr);
+      gap: 64px;
+      align-items: stretch;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .story-media,
+    .story-content {
+      min-width: 0;
+    }
+
+    .story-media {
+      width: 100%;
+      position: relative;
+      border-radius: 40px;
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      background: var(--dark);
+      border: 1px solid rgba(18, 25, 64, 0.12);
+    }
+
+    .story-media img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center;
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .story-visual-scrim {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .ci-1 { background: linear-gradient(142deg, rgba(48, 51, 156, 0.82) 0%, rgba(48, 51, 156, 0.52) 52%, rgba(0, 152, 177, 0.36) 100%); }
+    .ci-2 { background: linear-gradient(142deg, rgba(48, 51, 156, 0.85) 0%, rgba(109, 60, 255, 0.42) 52%, rgba(242, 81, 255, 0.28) 100%); }
+    .ci-3 { background: linear-gradient(142deg, rgba(0, 27, 32, 0.88) 0%, rgba(57, 135, 190, 0.55) 53%, rgba(0, 152, 177, 0.38) 100%); }
+    .ci-4 { background: linear-gradient(142deg, rgba(27, 27, 27, 0.82) 0%, rgba(0, 212, 78, 0.18) 53%, rgba(0, 152, 177, 0.34) 100%); }
+
+    .story-visual-dots {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      width: 80px;
+      height: 80px;
+      background-image: radial-gradient(circle, rgba(255,255,255,.22) 1.5px, transparent 1.5px);
+      background-size: 10px 10px;
+      opacity: .45;
+      z-index: 2;
+    }
+
+    .story-visual-stat {
+      position: absolute;
+      left: 26px;
+      bottom: 24px;
+      color: #fff;
+      z-index: 2;
+    }
+    .story-visual-stat-num { font-size: clamp(2.6rem, 4.8vw, 4.2rem); font-weight: 900; line-height: 1; letter-spacing: -.04em; }
+    .story-visual-stat-desc {
+      font-size: .69rem;
+      font-weight: 600;
+      color: rgba(255,255,255,.58);
+      margin-top: 6px;
+      max-width: 190px;
+      line-height: 1.42;
+    }
+
+    .story-visual-badges {
+      position: absolute;
+      right: 24px;
+      bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+      z-index: 2;
+    }
+    .story-visual-badges span {
+      font-size: .56rem;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.6);
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: 999px;
+      padding: 4px 11px;
+      background: rgba(255,255,255,.1);
+      backdrop-filter: blur(8px);
+    }
+
+    .story-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .story-content-card {
+      width: 100%;
+      border: 1px solid transparent;
+      border-radius: 32px;
+      padding: 24px 28px;
+      background: #fff;
+      text-decoration: none;
+      color: inherit;
+      transition: background .2s ease;
+    }
+    .story-content-card:hover,
+    .story-content-card:focus-visible {
+      text-decoration: none;
+      background: rgba(174, 222, 230, 0.12);
+      outline: none;
+    }
+
+    .story-meta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+    .story-content-card h2 {
+      font-size: clamp(1.16rem, 1.2vw, 1.46rem);
+      line-height: 1.28;
+      font-weight: 800;
+      margin: 0 0 12px;
+      color: #0f1532;
+      letter-spacing: -0.015em;
+    }
+    .story-content-card p {
+      margin: 0;
+      font-size: .93rem;
+      line-height: 1.62;
+      color: #4f5978;
+    }
+
+    .story-sources {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .story-sources-label {
+      font-size: .62rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .07em;
+    }
+    .story-source-pill {
+      font-size: .62rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      background: rgba(0, 152, 177, 0.1);
+      padding: 4px 11px;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: background .2s, color .2s;
+      border: 1px solid rgba(0, 152, 177, 0.18);
+    }
+    .story-source-pill:hover { background: var(--primary); color: #fff; border-color: transparent; }
+
+    .story-read {
+      margin-top: 2px;
+      font-size: .74rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .story-card-wide:nth-child(even) .story-media { order: 2; }
+    .story-card-wide:nth-child(even) .story-content { order: 1; }
+
+    .press-contact {
+      background: linear-gradient(180deg, var(--surface) 0%, var(--white) 100%);
+      border-top: 1px solid var(--border);
+      padding: 56px 48px 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .press-contact::before {
+      content: '';
+      position: absolute;
+      inset-inline: 0;
+      bottom: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0, 152, 177, 0.35), transparent);
+    }
+    .press-contact h2 { font-size: clamp(1.45rem, 2.4vw, 1.75rem); font-weight: 900; margin-bottom: 12px; letter-spacing: -.02em; }
+    .press-contact p { font-size: .93rem; color: var(--muted); max-width: 520px; margin: 0 auto 22px; line-height: 1.74; }
+    .mail-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: .84rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 152, 177, 0.42);
+      background: rgba(255,255,255,.85);
+      transition: border-color .2s, background .2s;
+    }
+    .mail-link:hover { border-color: rgba(0, 152, 177, 0.55); background: rgba(174, 222, 230, 0.28); }
+
+    @media (max-width: 900px) {
+      .press-hero, .media-bar, .stories-wrap, .press-contact { padding-left: 20px; padding-right: 20px; }
+      .stories-grid { gap: 32px; }
+      .story-card-wide {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .story-card-wide .story-media,
+      .story-card-wide .story-content,
+      .story-card-wide:nth-child(even) .story-media,
+      .story-card-wide:nth-child(even) .story-content {
+        order: initial;
+      }
+      .story-content-card {
+        border-radius: 28px;
+        padding: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="https://www.usebinder.com" class="logo">
+    <div class="logo-icon">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <rect x="1" y="1" width="5" height="14" rx="2.5" fill="white"/>
+        <rect x="9" y="1" width="5" height="9" rx="2.5" fill="white" opacity=".65"/>
+      </svg>
+    </div>
+    Binder
+  </a>
+  <ul class="nav-links">
+    <li><a href="#">¿Por qué Binder?</a></li>
+    <li><span class="nav-sep">|</span></li>
+    <li><a href="#">Funcionalidades</a></li>
+    <li><span class="nav-sep">|</span></li>
+    <li><a href="#">Soluciones</a></li>
+    <li><span class="nav-sep">|</span></li>
+    <li><a href="#" class="active">Contacto</a></li>
+  </ul>
+  <div class="nav-ctas">
+    <a href="#" class="btn btn-cta">Agendar demo</a>
+    <a href="#" class="btn btn-ghost">Iniciar sesión</a>
+  </div>
+</nav>
+
+<div class="press-hero au">
+  <div class="eyebrow"><span class="eyebrow-dot"></span>Prensa</div>
+  <h1>Binder en los <em>medios</em></h1>
+  <p>Todo lo que medios, prensa especializada y líderes del sector están diciendo sobre Binder y la transformación del trabajo legal en Latinoamérica.</p>
+</div>
+
+<div class="media-bar">
+  <span class="media-bar-label">Destacado en</span>
+  <div class="media-bar-logos">
+    <a href="https://elcomercio.pe/economia/dia-1/equipos-legales-pierden-hasta-300-horas-al-mes-en-coordinaciones-contractuales-juzina-noticia/" target="_blank" rel="noopener" class="mbl" aria-label="El Comercio" title="El Comercio"><img src="images/media-logos/el-comercio.png" alt="El Comercio" loading="lazy" decoding="async"></a>
+    <a href="https://gestion.pe/tecnologia/el-nuevo-rol-de-la-ia-en-empresas-no-basta-automatizar-para-producir-mas-noticia/" target="_blank" rel="noopener" class="mbl" aria-label="Gestión" title="Gestión"><img src="images/media-logos/gestion.png" alt="Gestión" loading="lazy" decoding="async"></a>
+    <a href="https://www.elperuano.pe/noticia/290282-ia-transforma-la-gestion-de-departamentos-legales" target="_blank" rel="noopener" class="mbl" aria-label="El Peruano" title="El Peruano"><img src="images/media-logos/el-peruano.png" alt="El Peruano" loading="lazy" decoding="async"></a>
+    <a href="https://www.infobae.com/peru/2026/01/26/adios-a-la-montana-de-expedientes-como-la-ia-esta-reduciendo-costos-y-acelerando-la-resolucion-de-controversias-en-peru/" target="_blank" rel="noopener" class="mbl" aria-label="Infobae" title="Infobae"><img src="images/media-logos/infobae.png" alt="Infobae" loading="lazy" decoding="async"></a>
+    <a href="https://www.exitosanoticias.pe/actualidad/menos-carga-operativa-mas-estrategia-como-ia-esta-cambiando-trabajo-legal-n167673" target="_blank" rel="noopener" class="mbl" aria-label="Exitosa" title="Exitosa"><img src="images/media-logos/exitosa.png" alt="Exitosa" loading="lazy" decoding="async"></a>
+    <a href="https://caretas.pe/tecnologia/areas-legales-en-alerta-95-trabaja-sin-bases-de-datos-estructuradas/" target="_blank" rel="noopener" class="mbl" aria-label="Caretas" title="Caretas"><img src="images/media-logos/caretas.png" alt="Caretas" loading="lazy" decoding="async"></a>
+    <a href="https://www.revistaeconomia.com/peru-95-de-equipos-legales-opera-sin-base-de-datos-estructurada/" target="_blank" rel="noopener" class="mbl" aria-label="Revista Economía" title="Revista Economía"><img src="images/media-logos/revista-economia.png" alt="Revista Economía" loading="lazy" decoding="async"></a>
+    <a href="https://www.expreso.com.pe/actualidad/menos-carga-operativa-mas-estrategia-la-inteligencia-artificial-revoluciona-el-trabajo-legal-en-empresas-peruanas-noticia/1256431/" target="_blank" rel="noopener" class="mbl" aria-label="Expreso" title="Expreso"><img src="images/media-logos/expreso.png" alt="Expreso" loading="lazy" decoding="async"></a>
+  </div>
+</div>
+
+<div class="stories-wrap">
+  <div class="stories-label">Últimas historias</div>
+  <div class="stories-grid">
+
+    <article class="story-card-wide au au1">
+      <a href="/prensa/ia-gestion-legal/" class="story-media">
+        <img src="images/story-ia-gestion-legal.png" alt="Portátil con visualizaciones de datos e inteligencia artificial" width="960" height="540" loading="lazy" decoding="async">
+        <div class="story-visual-scrim ci-1"></div>
+        <div class="story-visual-dots"></div>
+        <div class="story-visual-stat">
+          <div class="story-visual-stat-num">79%</div>
+          <div class="story-visual-stat-desc">de abogados ya trabaja con IA. ¿Tu equipo también?</div>
+        </div>
+        <div class="story-visual-badges">
+          <span>El Peruano</span>
+          <span>Infobae</span>
+          <span>+2 medios</span>
+        </div>
+      </a>
+
+      <div class="story-content">
+        <a href="/prensa/ia-gestion-legal/" class="story-content-card">
+          <div class="story-meta">
+            <span class="card-tag">Cobertura</span>
+            <span class="card-date">Enero 2026</span>
+          </div>
+          <h2>Menos carga operativa, más estrategia: cómo la IA está cambiando el trabajo legal</h2>
+          <p>En un año, la adopción de IA entre profesionales legales pasó del 19% al 79%. Cuatro medios analizaron por qué tu área legal ya no puede seguir operando con correos, Excel y carpetas dispersas.</p>
+        </a>
+        <div class="story-sources">
+          <span class="story-sources-label">En:</span>
+          <a href="https://www.elperuano.pe/noticia/290282-ia-transforma-la-gestion-de-departamentos-legales" target="_blank" rel="noopener" class="story-source-pill">El Peruano</a>
+          <a href="https://www.infobae.com/peru/2026/01/26/adios-a-la-montana-de-expedientes-como-la-ia-esta-reduciendo-costos-y-acelerando-la-resolucion-de-controversias-en-peru/" target="_blank" rel="noopener" class="story-source-pill">Infobae</a>
+          <a href="https://www.exitosanoticias.pe/actualidad/menos-carga-operativa-mas-estrategia-como-ia-esta-cambiando-trabajo-legal-n167673" target="_blank" rel="noopener" class="story-source-pill">Exitosa</a>
+          <a href="https://www.expreso.com.pe/actualidad/menos-carga-operativa-mas-estrategia-la-inteligencia-artificial-revoluciona-el-trabajo-legal-en-empresas-peruanas-noticia/1256431/" target="_blank" rel="noopener" class="story-source-pill">Expreso</a>
+        </div>
+        <a href="/prensa/ia-gestion-legal/" class="story-read">Leer historia completa →</a>
+      </div>
+    </article>
+
+    <article class="story-card-wide au au2">
+      <a href="/prensa/horas-coordinacion-contractual/" class="story-media">
+        <img src="images/story-horas-coordinacion.png" alt="Profesionales en tránsito en un entorno corporativo" width="960" height="540" loading="lazy" decoding="async">
+        <div class="story-visual-scrim ci-3"></div>
+        <div class="story-visual-dots"></div>
+        <div class="story-visual-stat">
+          <div class="story-visual-stat-num">300 h</div>
+          <div class="story-visual-stat-desc">que tu equipo pierde moviendo contratos, no redactándolos</div>
+        </div>
+        <div class="story-visual-badges">
+          <span>El Comercio</span>
+        </div>
+      </a>
+
+      <div class="story-content">
+        <a href="/prensa/horas-coordinacion-contractual/" class="story-content-card">
+          <div class="story-meta">
+            <span class="card-tag secondary">Investigación</span>
+            <span class="card-date">Marzo 2026</span>
+          </div>
+          <h2>Equipos legales pierden entre 50 y 300 horas mensuales en coordinación contractual</h2>
+          <p>El problema no es cuánto tarda tu equipo en redactar un contrato. Es cuánto tiempo pierde moviéndolo: recordatorios, firmas, validaciones, notificaciones. Un cuello de botella que casi nadie ha medido todavía.</p>
+        </a>
+        <div class="story-sources">
+          <span class="story-sources-label">En:</span>
+          <a href="https://elcomercio.pe/economia/dia-1/equipos-legales-pierden-hasta-300-horas-al-mes-en-coordinaciones-contractuales-juzina-noticia/" target="_blank" rel="noopener" class="story-source-pill">El Comercio</a>
+        </div>
+        <a href="/prensa/horas-coordinacion-contractual/" class="story-read">Leer historia completa →</a>
+      </div>
+    </article>
+
+    <article class="story-card-wide au au3">
+      <a href="/prensa/95-sin-base-de-datos/" class="story-media">
+        <img src="images/story-95-sin-base-de-datos.png" alt="Equipo jurídico revisando documentos y tableta en oficina" width="960" height="540" loading="lazy" decoding="async">
+        <div class="story-visual-scrim ci-2"></div>
+        <div class="story-visual-dots"></div>
+        <div class="story-visual-stat">
+          <div class="story-visual-stat-num">95%</div>
+          <div class="story-visual-stat-desc">de equipos legales sin base de datos estructurada</div>
+        </div>
+        <div class="story-visual-badges">
+          <span>Infobae</span>
+          <span>Caretas</span>
+          <span>Rev. Economía</span>
+        </div>
+      </a>
+
+      <div class="story-content">
+        <a href="/prensa/95-sin-base-de-datos/" class="story-content-card">
+          <div class="story-meta">
+            <span class="card-tag secondary">Investigación</span>
+            <span class="card-date">Febrero 2026</span>
+          </div>
+          <h2>El 95% de equipos legales en el Perú opera sin base de datos estructurada</h2>
+          <p>Si tu equipo también construye reportes en Excel cada vez que alguien los pide, no estás solo: el 95% de las áreas legales hace lo mismo. Y ese costo silencioso se acumula más rápido de lo que parece.</p>
+        </a>
+        <div class="story-sources">
+          <span class="story-sources-label">En:</span>
+          <a href="https://www.infobae.com/peru/2026/02/26/el-95-de-equipos-legales-en-peru-opera-sin-base-de-datos-estructurada-el-sobrecosto-oculto-que-estan-ignorando/" target="_blank" rel="noopener" class="story-source-pill">Infobae</a>
+          <a href="https://caretas.pe/tecnologia/areas-legales-en-alerta-95-trabaja-sin-bases-de-datos-estructuradas/" target="_blank" rel="noopener" class="story-source-pill">Caretas</a>
+          <a href="https://www.revistaeconomia.com/peru-95-de-equipos-legales-opera-sin-base-de-datos-estructurada/" target="_blank" rel="noopener" class="story-source-pill">Rev. Economía</a>
+          <a href="https://elperuano.pe/noticia/291616-equipos-legales-el-95-opera-sin-una-base-de-datos-estructurada" target="_blank" rel="noopener" class="story-source-pill">El Peruano</a>
+        </div>
+        <a href="/prensa/95-sin-base-de-datos/" class="story-read">Leer historia completa →</a>
+      </div>
+    </article>
+
+    <article class="story-card-wide au au4">
+      <a href="/prensa/75-menos-tiempo-operativo/" class="story-media">
+        <img src="images/story-75-menos-tiempo.png" alt="Ejecutivo revisando documentación legal con concentración" width="960" height="540" loading="lazy" decoding="async">
+        <div class="story-visual-scrim ci-4"></div>
+        <div class="story-visual-dots"></div>
+        <div class="story-visual-stat">
+          <div class="story-visual-stat-num">75%</div>
+          <div class="story-visual-stat-desc">menos tiempo en documentos operativos con tecnología especializada</div>
+        </div>
+        <div class="story-visual-badges">
+          <span>Gestión</span>
+          <span>El Peruano</span>
+        </div>
+      </a>
+
+      <div class="story-content">
+        <a href="/prensa/75-menos-tiempo-operativo/" class="story-content-card">
+          <div class="story-meta">
+            <span class="card-tag">Cobertura</span>
+            <span class="card-date">Abril 2026</span>
+          </div>
+          <h2>Hasta 75% menos tiempo en tareas operativas: lo que la tecnología ya le devuelve a tu equipo legal</h2>
+          <p>Tu equipo legal pierde horas en elaborar contratos desde cero, rastrear versiones por correo, buscar documentos en carpetas dispersas. Gestión y El Peruano cubrieron cuánto tiempo está dejando sobre la mesa.</p>
+        </a>
+        <div class="story-sources">
+          <span class="story-sources-label">En:</span>
+          <a href="https://gestion.pe/tecnologia/el-nuevo-rol-de-la-ia-en-empresas-no-basta-automatizar-para-producir-mas-noticia/" target="_blank" rel="noopener" class="story-source-pill">Gestión</a>
+          <a href="https://elperuano.pe/noticia/293603-areas-legales-pueden-reducir-hasta-en-75-tiempo-de-elaboracion-de-documentos-con-tecnologia-especializada" target="_blank" rel="noopener" class="story-source-pill">El Peruano</a>
+        </div>
+        <a href="/prensa/75-menos-tiempo-operativo/" class="story-read">Leer historia completa →</a>
+      </div>
+    </article>
+
+  </div>
+</div>
+
+<div class="press-contact">
+  <h2>Conversemos</h2>
+  <p>Escríbenos si tienes preguntas sobre Binder, nuestro producto, nuestra visión o cómo entendemos el futuro del trabajo legal. Te responderemos lo antes posible.</p>
+  <a href="mailto:prensa@thelegalbinder.com" class="mail-link">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+    prensa@thelegalbinder.com
+  </a>
+</div>
+
+<div class="cta-footer">
+  <span class="cta-footer-eyebrow">¿Listo para el siguiente paso?</span>
+  <h2>¿Quieres ver Binder en acción?</h2>
+  <p>Agenda una demo y transforma la gestión legal de tu organización.</p>
+  <a href="#" class="btn btn-cta" style="font-size:.88rem;padding:13px 32px;">Agendar demo</a>
+</div>
+
+<footer>
+  <div class="footer-logo">
+    <div class="logo-icon" style="width:24px;height:24px;border-radius:6px;">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+        <rect x="1" y="1" width="5" height="14" rx="2.5" fill="white"/>
+        <rect x="9" y="1" width="5" height="9" rx="2.5" fill="white" opacity=".65"/>
+      </svg>
+    </div>
+    Binder
+  </div>
+  <a href="mailto:prensa@thelegalbinder.com" class="footer-mail">prensa@thelegalbinder.com</a>
+  <div class="footer-note">© 2026 Binder · Lima, Perú</div>
+</footer>
+
+</body>
+</html>
