@@ -13,24 +13,36 @@ export const JsonLd = ({ data }: JsonLdProps) => (
 );
 
 export const PressMediaBar = () => (
-  <section className="press-media-bar" aria-labelledby="press-media-title">
-    <div className="press-media-bar__header">
-      <h2 id="press-media-title">Cobertura en medios</h2>
-      <p>Principales publicaciones que han cubierto el trabajo de Binder.</p>
-    </div>
+  <section className="press-media-bar" aria-label="Medios destacados">
+    <div className="press-media-bar__track">
+      <div className="press-media-bar__logos">
+        {pressMediaOutlets.map((outlet) => (
+          <a
+            key={outlet.name}
+            href={outlet.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Abrir cobertura en ${outlet.name}`}
+            title={outlet.name}
+          >
+            <img src={outlet.logo} alt={outlet.name} loading="lazy" />
+          </a>
+        ))}
 
-    <div className="press-media-bar__logos">
-      {pressMediaOutlets.map((outlet) => (
-        <a
-          key={outlet.name}
-          href={outlet.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`Abrir cobertura en ${outlet.name}`}
-        >
-          <img src={outlet.logo} alt={outlet.name} loading="lazy" />
-        </a>
-      ))}
+        {pressMediaOutlets.map((outlet) => (
+          <a
+            key={`${outlet.name}-loop`}
+            href={outlet.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-hidden="true"
+            tabIndex={-1}
+            title={outlet.name}
+          >
+            <img src={outlet.logo} alt="" loading="lazy" />
+          </a>
+        ))}
+      </div>
     </div>
   </section>
 );

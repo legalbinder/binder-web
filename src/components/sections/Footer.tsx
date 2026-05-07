@@ -40,6 +40,14 @@ export const Footer = () => {
                 <h4 className="column-title">{column.title}</h4>
                 <ul className="column-links">
                   {column.links.map((link, linkIndex) => {
+                    if (link.groupTitle) {
+                      return (
+                        <li key={linkIndex} className="column-subtitle">
+                          {link.label}
+                        </li>
+                      );
+                    }
+
                     if (isExternalLink(link.href)) {
                       return (
                         <li key={linkIndex}>

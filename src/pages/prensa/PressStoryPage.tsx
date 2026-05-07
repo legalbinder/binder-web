@@ -2,7 +2,7 @@ import { Link, Navigate, useParams } from 'react-router-dom';
 import { Breadcrumbs } from '../../components/layout/Breadcrumbs';
 import { PageHead } from '../../components/seo/PageHead';
 import { getAdjacentPressStories, getPressStoryBySlug } from '../../content/prensa';
-import { JsonLd, PressContactBlock, PressMediaBar } from './PressComponents';
+import { JsonLd, PressContactBlock } from './PressComponents';
 import './Press.css';
 
 const siteUrl = 'https://binder.la';
@@ -119,8 +119,6 @@ export const PressStoryPage = () => {
         </section>
 
         <div className="press-container">
-          <PressMediaBar />
-
           <div className="press-article-layout">
             <div className="press-article-body">
               {story.body.map((block, index) => {

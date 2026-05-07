@@ -50,42 +50,42 @@ export interface PressStory {
 export const pressMediaOutlets: PressMediaOutlet[] = [
   {
     name: 'El Comercio',
-    logo: '/prensa/images/media-logos/el-comercio.png',
+    logo: '/prensa/images/media-logos-gray/el-comercio.png',
     url: 'https://elcomercio.pe/economia/dia-1/equipos-legales-pierden-hasta-300-horas-al-mes-en-coordinaciones-contractuales-juzina-noticia/',
   },
   {
     name: 'Gestión',
-    logo: '/prensa/images/media-logos/gestion.png',
+    logo: '/prensa/images/media-logos-gray/gestion.png',
     url: 'https://gestion.pe/tecnologia/el-nuevo-rol-de-la-ia-en-empresas-no-basta-automatizar-para-producir-mas-noticia/',
   },
   {
     name: 'El Peruano',
-    logo: '/prensa/images/media-logos/el-peruano.png',
+    logo: '/prensa/images/media-logos-gray/el-peruano.png',
     url: 'https://www.elperuano.pe/noticia/290282-ia-transforma-la-gestion-de-departamentos-legales',
   },
   {
     name: 'Infobae',
-    logo: '/prensa/images/media-logos/infobae.png',
+    logo: '/prensa/images/media-logos-gray/infobae.png',
     url: 'https://www.infobae.com/peru/2026/01/26/adios-a-la-montana-de-expedientes-como-la-ia-esta-reduciendo-costos-y-acelerando-la-resolucion-de-controversias-en-peru/',
   },
   {
     name: 'Exitosa',
-    logo: '/prensa/images/media-logos/exitosa.png',
+    logo: '/prensa/images/media-logos-gray/exitosa.png',
     url: 'https://www.exitosanoticias.pe/actualidad/menos-carga-operativa-mas-estrategia-como-ia-esta-cambiando-trabajo-legal-n167673',
   },
   {
     name: 'Caretas',
-    logo: '/prensa/images/media-logos/caretas.png',
+    logo: '/prensa/images/media-logos-gray/caretas.png',
     url: 'https://caretas.pe/tecnologia/areas-legales-en-alerta-95-trabaja-sin-bases-de-datos-estructuradas/',
   },
   {
     name: 'Revista Economía',
-    logo: '/prensa/images/media-logos/revista-economia.png',
+    logo: '/prensa/images/media-logos-gray/revista-economia.png',
     url: 'https://www.revistaeconomia.com/peru-95-de-equipos-legales-opera-sin-base-de-datos-estructurada/',
   },
   {
     name: 'Expreso',
-    logo: '/prensa/images/media-logos/expreso.png',
+    logo: '/prensa/images/media-logos-gray/expreso.png',
     url: 'https://www.expreso.com.pe/actualidad/menos-carga-operativa-mas-estrategia-la-inteligencia-artificial-revoluciona-el-trabajo-legal-en-empresas-peruanas-noticia/1256431/',
   },
 ];

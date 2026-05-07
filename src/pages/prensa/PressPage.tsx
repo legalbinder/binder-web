@@ -63,79 +63,83 @@ export const PressPage = () => (
             { label: 'Prensa', path: '/prensa' },
           ]}
         />
-        <div className="press-hero__layout">
-          <div className="press-hero__content">
-            <h1 id="press-title">Binder en los medios</h1>
-            <p>
-              Todo lo que medios, prensa especializada y líderes del sector están diciendo sobre
-              Binder y la transformación del trabajo legal en Latinoamérica.
-            </p>
+        <div className="press-hero__content">
+          <div className="press-eyebrow">
+            <span className="press-eyebrow__dot" />
+            Prensa
           </div>
-
-          <aside className="press-hero__panel" aria-label="Resumen de cobertura">
-            <div>
-              <strong>4</strong>
-              <span>historias publicadas</span>
-            </div>
-            <div>
-              <strong>8</strong>
-              <span>medios con cobertura</span>
-            </div>
-            <div>
-              <strong>2026</strong>
-              <span>cobertura especializada</span>
-            </div>
-          </aside>
+          <h1 id="press-title">
+            Binder en los <em>medios</em>
+          </h1>
+          <p>
+            Todo lo que medios, prensa especializada y líderes del sector están diciendo sobre
+            Binder y la transformación del trabajo legal en Latinoamérica.
+          </p>
         </div>
       </div>
     </section>
 
-    <div className="press-container">
-      <PressMediaBar />
+    <PressMediaBar />
 
-      <section className="press-stories" aria-label="Historias de prensa">
-        {pressStories.map((story, index) => (
-          <article
-            className={`press-story-card ${index % 2 === 1 ? 'press-story-card--reverse' : ''}`}
-            key={story.slug}
-          >
-            <Link className="press-story-card__image" to={`/prensa/${story.slug}`}>
-              <img src={story.image} alt={story.imageAlt} loading={index === 0 ? 'eager' : 'lazy'} />
-            </Link>
+    <section className="press-stories-wrap" aria-label="Historias de prensa">
+      <div className="press-container">
+        <div className="press-stories-label">Últimas historias</div>
+        <div className="press-stories">
+          {pressStories.map((story, index) => (
+            <article
+              className={`press-story-card press-story-card--tone-${index + 1} ${
+                index % 2 === 1 ? 'press-story-card--reverse' : ''
+              }`}
+              key={story.slug}
+            >
+              <Link className="press-story-card__image" to={`/prensa/${story.slug}`}>
+                <img src={story.image} alt={story.imageAlt} loading={index === 0 ? 'eager' : 'lazy'} />
+                <span className="press-story-card__scrim" aria-hidden="true" />
+                <span className="press-story-card__dots" aria-hidden="true" />
+                <span className="press-story-card__visual-stat">
+                  <strong>{story.heroStat.value}</strong>
+                  <span>{story.heroStat.label}</span>
+                </span>
+                <span className="press-story-card__visual-badges" aria-hidden="true">
+                  {story.badges.map((badge) => (
+                    <span key={badge}>{badge}</span>
+                  ))}
+                </span>
+              </Link>
 
-            <div className="press-story-card__body">
-              <div className="press-story-card__meta">
-                <span>{story.tag}</span>
-                <span>{story.dateLabel}</span>
-              </div>
-              <h2>
-                <Link to={`/prensa/${story.slug}`}>{story.title}</Link>
-              </h2>
-              <p>{story.description}</p>
-
-              <div className="press-story-card__stat" aria-label={story.heroStat.label}>
-                <strong>{story.heroStat.value}</strong>
-                <span>{story.heroStat.label}</span>
-              </div>
-
-              <div className="press-story-card__badges" aria-label="Medios">
-                {story.badges.map((badge) => (
-                  <span key={badge}>{badge}</span>
-                ))}
-              </div>
-
-              <div className="press-story-card__footer">
-                <Link className="press-link" to={`/prensa/${story.slug}`}>
-                  Leer historia
+              <div className="press-story-card__content">
+                <Link className="press-story-card__content-card" to={`/prensa/${story.slug}`}>
+                  <div className="press-story-card__meta">
+                    <span className={`press-card-tag ${story.tag === 'Investigación' ? 'secondary' : ''}`}>
+                      {story.tag}
+                    </span>
+                    <span className="press-card-date">{story.dateLabel}</span>
+                  </div>
+                  <h2>{story.title}</h2>
+                  <p>{story.description}</p>
                 </Link>
-                <span>{story.coverage.length} cobertura{story.coverage.length > 1 ? 's' : ''}</span>
-              </div>
-            </div>
-          </article>
-        ))}
-      </section>
 
-      <PressContactBlock />
-    </div>
+                <div className="press-story-card__sources">
+                  <span>En:</span>
+                  <div className="press-story-card__source-list">
+                    {story.coverage.map((item) => (
+                      <a key={item.url} href={item.url} target="_blank" rel="noopener noreferrer">
+                        {item.outlet}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+
+                <Link className="press-story-card__read" to={`/prensa/${story.slug}`}>
+                  Leer historia completa →
+                </Link>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <PressContactBlock />
+      </div>
+    </section>
   </main>
 );

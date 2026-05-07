@@ -3,6 +3,7 @@ interface FooterColumn {
   links: Array<{
     label: string;
     href: string;
+    groupTitle?: boolean;
   }>;
 }
 
@@ -12,6 +13,8 @@ export const footerContent = {
       title: "Compañía",
       links: [
         { label: "Sobre Binder", href: "/sobrebinder" },
+        { label: "Prensa", href: "/prensa" },
+        { label: "Acceso", href: "#", groupTitle: true },
         { label: "Iniciar sesión", href: "https://thelegalbinder.com" },
       ],
     },

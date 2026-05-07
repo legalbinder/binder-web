@@ -57,6 +57,14 @@
   transform: translateX(4px);
 }
 
+.column-subtitle {
+  color: #30339C;
+  font-size: var(--fs-16);
+  font-weight: var(--font-weight-bold);
+  margin-top: var(--spacing-sm);
+  opacity: 0.9;
+}
+
 /* Footer Bottom */
 .footer-bottom {
   display: flex;
