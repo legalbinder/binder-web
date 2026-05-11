@@ -6,6 +6,9 @@ import { JsonLd, PressContactBlock, PressMediaBar } from './PressComponents';
 import './Press.css';
 
 const siteUrl = 'https://binder.la';
+const pressStoriesNewestFirst = [...pressStories].sort(
+  (first, second) => Date.parse(second.publishedAt) - Date.parse(first.publishedAt),
+);
 
 const pressPageSchema = [
   {
@@ -35,7 +38,7 @@ const pressPageSchema = [
     url: `${siteUrl}/prensa`,
     mainEntity: {
       '@type': 'ItemList',
-      itemListElement: pressStories.map((story, index) => ({
+      itemListElement: pressStoriesNewestFirst.map((story, index) => ({
         '@type': 'ListItem',
         position: index + 1,
         url: `${siteUrl}/prensa/${story.slug}`,
@@ -64,13 +67,7 @@ export const PressPage = () => (
           ]}
         />
         <div className="press-hero__content">
-          <div className="press-eyebrow">
-            <span className="press-eyebrow__dot" />
-            Prensa
-          </div>
-          <h1 id="press-title">
-            Binder en los <em>medios</em>
-          </h1>
+          <h1 id="press-title">Binder en los medios</h1>
           <p>
             Todo lo que medios, prensa especializada y líderes del sector están diciendo sobre
             Binder y la transformación del trabajo legal en Latinoamérica.
@@ -85,7 +82,7 @@ export const PressPage = () => (
       <div className="press-container">
         <div className="press-stories-label">Últimas historias</div>
         <div className="press-stories">
-          {pressStories.map((story, index) => (
+          {pressStoriesNewestFirst.map((story, index) => (
             <article
               className={`press-story-card press-story-card--tone-${index + 1} ${
                 index % 2 === 1 ? 'press-story-card--reverse' : ''
