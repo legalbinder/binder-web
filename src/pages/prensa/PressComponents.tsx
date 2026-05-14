@@ -57,11 +57,11 @@ export const PressContactBlock = () => (
       </p>
     </div>
     <div className="press-contact__actions">
-      <Link className="press-button press-button--primary" to="/contacto">
-        Contactar a Binder
-      </Link>
+      <a className="press-button press-button--primary" href="/#contacto">
+        Agenda una conversación
+      </a>
       <Link className="press-button press-button--secondary" to="/diagnostico-legal-ops-formulario-inicio">
-        Diagnóstico Legal Ops
+        Mide tu madurez Legal Ops
       </Link>
     </div>
   </section>

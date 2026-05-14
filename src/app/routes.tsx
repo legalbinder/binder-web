@@ -10,7 +10,6 @@ import { WhyBinder } from '../components/sections/WhyBinder';
 import { CLMPage } from '../pages/casos-uso/CLMPage';
 import { CasesPage } from '../pages/casos-uso/CasesPage';
 import { ExpedienteDigitalPage } from '../pages/casos-uso/ExpedienteDigitalPage';
-import { ContactoPage } from '../pages/ContactoPage';
 import { DiagnosticoLegalOpsPageGateStart } from '../pages/DiagnosticoLegalOpsPageGateStart';
 import { Hito2AnexosPage } from '../pages/docs/Hito2AnexosPage';
 import { OnboardingAnexo1Page } from '../pages/docs/onboarding/OnboardingAnexo1Page';
@@ -56,7 +55,6 @@ export const AppRoutes = () => (
     <Route path="/funcionalidades" element={<FuncionalidadesPage />} />
     <Route path="/soluciones" element={<SolucionesPage />} />
     <Route path="/testimonios" element={<TestimoniosPage />} />
-    <Route path="/contacto" element={<ContactoPage />} />
     <Route path="/gracias" element={<GraciasPage />} />
     <Route
       path="/diagnostico-legal-ops-formulario-inicio"

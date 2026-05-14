@@ -5,7 +5,6 @@ export const DealsContact = () => (
   <LeadCaptureSection
     id="deals-contact"
     source="deals-contact-form"
-    webhookKind="useCasesAndDiagnosisForm"
     emptyChallengeValue={null}
     classes={{
       section: 'deals-contact-section',

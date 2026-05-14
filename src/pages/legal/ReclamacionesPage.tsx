@@ -209,7 +209,7 @@ export const ReclamacionesPage = () => {
         timestamp: new Date().toISOString(),
       };
 
-      await postBubbleWorkflow(getBubbleWebhookUrl('complaintBookForm'), payload);
+      await postBubbleWorkflow(getBubbleWebhookUrl(), payload);
 
       setFormData(initialFormData);
       setSuccessMessage(

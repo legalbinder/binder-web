@@ -27,15 +27,14 @@ npm run preview
 Las variables se configuran en Vercel como Environment Variables. Los webhooks estan documentados en [WEBHOOKS.md](WEBHOOKS.md).
 
 ```env
-VITE_BUBBLE_HOME_CONTACT_WEBHOOK_URL=
-VITE_BUBBLE_EVENT_REGISTRATION_WEBHOOK_URL=
-VITE_BUBBLE_USE_CASES_AND_DIAGNOSIS_WEBHOOK_URL=
-VITE_BUBBLE_COMPLAINT_BOOK_WEBHOOK_URL=
+VITE_BUBBLE_WEBHOOK_URL=
 
 VITE_GA_MEASUREMENT_ID=
 VITE_GOOGLE_ADS_ID=
 VITE_LINKEDIN_PARTNER_ID=
 ```
+
+`VITE_BUBBLE_WEBHOOK_URL` apunta a un unico Backend Workflow de Bubble. Cada formulario envia un campo `source` para que Bubble identifique el origen del registro.
 
 ## Vistas y rutas
 
@@ -47,7 +46,6 @@ VITE_LINKEDIN_PARTNER_ID=
 | `/funcionalidades` | Funcionalidades | Resumen de capacidades de la plataforma: contratos, procesos, expediente digital, IA y gestion legal. |
 | `/soluciones` | Soluciones | Vista general de soluciones Binder por necesidad operativa legal. |
 | `/testimonios` | Testimonios | Casos y referencias de clientes. |
-| `/contacto` | Contacto | Pagina interna de contacto y solicitud de informacion/demo. |
 | `/gracias` | Gracias | Confirmacion posterior a formularios que usa datos guardados en `sessionStorage`. |
 | `/diagnostico-legal-ops-formulario-inicio` | Diagnostico Legal Ops | Gate de lead, quiz de madurez, resultado por nivel y envio a Bubble. |
 | `/diagnostico-legal-ops` | Redirect | Redirige a `/diagnostico-legal-ops-formulario-inicio`. |
@@ -76,13 +74,17 @@ VITE_LINKEDIN_PARTNER_ID=
 
 ## Formularios
 
-| Formulario | Ubicacion | Webhook |
+Todos los formularios usan `VITE_BUBBLE_WEBHOOK_URL`. Bubble distingue cada origen por el campo `source`.
+
+| Formulario | Ubicacion | Identificador enviado |
 | --- | --- | --- |
-| Contacto home | `src/components/sections/Contact.tsx` + `src/shared/forms/lead-capture/LeadCaptureSection.tsx` | `VITE_BUBBLE_HOME_CONTACT_WEBHOOK_URL` |
-| Casos de uso | `CasesContact`, `DealsContact`, `ExpedienteContact` + `LeadCaptureSection` | `VITE_BUBBLE_USE_CASES_AND_DIAGNOSIS_WEBHOOK_URL` |
-| Diagnostico Legal Ops | `src/pages/DiagnosticoLegalOpsPageGateStart.tsx` | `VITE_BUBBLE_USE_CASES_AND_DIAGNOSIS_WEBHOOK_URL` |
-| Registro de eventos | `src/pages/eventos/EventPage.tsx` | `VITE_BUBBLE_EVENT_REGISTRATION_WEBHOOK_URL` |
-| Libro de reclamaciones | `src/pages/legal/ReclamacionesPage.tsx` | `VITE_BUBBLE_COMPLAINT_BOOK_WEBHOOK_URL` |
+| Contacto home | `src/components/sections/Contact.tsx` + `src/shared/forms/lead-capture/LeadCaptureSection.tsx` | `source: "contact-form"` |
+| Caso de uso Gestion de Procesos | `CasesContact` + `LeadCaptureSection` | `source: "cases-contact-form"` |
+| Caso de uso CLM | `DealsContact` + `LeadCaptureSection` | `source: "deals-contact-form"` |
+| Caso de uso Expediente Digital | `ExpedienteContact` + `LeadCaptureSection` | `source: "expediente-contact-form"` |
+| Diagnostico Legal Ops | `src/pages/DiagnosticoLegalOpsPageGateStart.tsx` | `source: "legal-ops-diagnosis"` |
+| Registro de eventos | `src/pages/eventos/EventPage.tsx` | `source: "event-registration"` |
+| Libro de reclamaciones | `src/pages/legal/ReclamacionesPage.tsx` | `source: "libro-reclamaciones"` |
 
 ## Estructura principal
 
@@ -133,7 +135,7 @@ npm run build
 
 Revisar tambien:
 
-- Variables `VITE_BUBBLE_*_WEBHOOK_URL` configuradas en Vercel.
+- Variable `VITE_BUBBLE_WEBHOOK_URL` configurada en Vercel.
 - Formularios probados contra workflows reales de Bubble.
 - Consentimiento de cookies validado antes de activar tracking.
 - `/legal/reclamaciones` probado en desktop y mobile.

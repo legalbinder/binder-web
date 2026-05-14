@@ -6,7 +6,6 @@ export const Contact = () => (
   <LeadCaptureSection
     id="contacto"
     source="contact-form"
-    webhookKind="homeContactForm"
     emptyChallengeValue="-"
     sectionStyle={{ '--section-bg': '#FFFFFF' } as CSSProperties}
     classes={{

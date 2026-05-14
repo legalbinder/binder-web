@@ -303,7 +303,7 @@ export const DiagnosticoLegalOpsPageGateStart = () => {
     setGateErrors({});
 
     try {
-      await postBubbleWorkflow(getBubbleWebhookUrl('useCasesAndDiagnosisForm'), {
+      await postBubbleWorkflow(getBubbleWebhookUrl(), {
         name: gateFormData.name.trim(),
         company: gateFormData.company.trim(),
         email: gateFormData.email.trim(),
@@ -384,10 +384,10 @@ export const DiagnosticoLegalOpsPageGateStart = () => {
           <section className="diagnostico-stage">
             <div className="container">
               <div className="diagnostico-card">
-                <h2>Obtén tu diagnóstico en tu correo</h2>
+                <h2>Conoce el nivel de madurez de tu operación legal</h2>
                 <p>
-                  Déjanos tus datos para enviarte el resultado y una guía breve con
-                  acciones por nivel.
+                  Completa tus datos para acceder al resultado y ver qué acciones puede
+                  priorizar tu equipo.
                 </p>
 
                 <form onSubmit={handleGateSubmit} className="diagnostico-form" noValidate>
@@ -468,8 +468,8 @@ export const DiagnosticoLegalOpsPageGateStart = () => {
                   </div>
 
                   <p className="diagnostico-note">
-                    Tu información es confidencial y se usa solo para enviarte el
-                    diagnóstico y coordinar una conversación si la solicitas.
+                    Tu información es confidencial y se usa solo para coordinar una
+                    conversación si la solicitas.
                   </p>
 
                   <button type="submit" className="diagnostico-primary-button">
