@@ -27,6 +27,7 @@ import { PrivacidadPage } from '../pages/legal/PrivacidadPage';
 import { ReclamacionesPage } from '../pages/legal/ReclamacionesPage';
 import { SeguridadPage } from '../pages/legal/SeguridadPage';
 import { TerminosPage } from '../pages/legal/TerminosPage';
+import { NotFoundPage } from '../pages/NotFoundPage';
 import { PressPage } from '../pages/prensa/PressPage';
 import { PressStoryPage } from '../pages/prensa/PressStoryPage';
 import { PorQueBinderPage } from '../pages/PorQueBinderPage';
@@ -86,5 +87,6 @@ export const AppRoutes = () => (
     <Route path="/hito2/anexos/onboarding/anexo-5" element={<OnboardingAnexo5Page />} />
     <Route path="/eventos/:slug" element={<EventPage />} />
     <Route path="/" element={<HomePage />} />
+    <Route path="*" element={<NotFoundPage />} />
   </Routes>
 );

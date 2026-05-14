@@ -60,6 +60,7 @@ VITE_LINKEDIN_PARTNER_ID=
 | `/legal/aviso` | Aviso legal | Pagina de aviso legal. |
 | `/legal/seguridad` | Seguridad de datos | Pagina de seguridad y cumplimiento. |
 | `/legal/reclamaciones` | Libro de reclamaciones | Formulario de reclamos/quejas con validacion local y envio dedicado a Bubble. |
+| `*` | Página no disponible | Pantalla 404 para rutas no existentes, incluyendo `/contacto`. |
 | `/docs/prep-reunion-oka-ciberseguridad` | Documento interno | Vista interna para preparacion de reunion/ciberseguridad. |
 | `/hito2/anexos` | Anexos Hito 2 | Hub de anexos internos. |
 | `/hito2/anexos/onboarding/anexo-1` | Anexo onboarding 1 | Estructura estandar de carpeta de onboarding. |
