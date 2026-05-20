@@ -1,5 +1,5 @@
 import { type FormEvent, useMemo, useState } from 'react';
-import type { LeadCapturePayload } from '../../integrations/bubble/bubbleWebhooks';
+import type { BubbleFormOrigin } from '../../integrations/bubble/bubbleWebhooks';
 import { postBubbleWorkflow } from '../../integrations/bubble/postBubbleWorkflow';
 import { storeFormSubmission } from '../../utils/formSubmission';
 import {
@@ -17,7 +17,13 @@ interface UseLeadCaptureFormOptions {
   blockedDomains: string[];
   countries: Country[];
   resolveWebhookUrl: () => string;
-  source: LeadCapturePayload['source'];
+  origen: Extract<
+    BubbleFormOrigin,
+    | 'formulario-contacto'
+    | 'formulario-caso-procesos'
+    | 'formulario-caso-clm'
+    | 'formulario-caso-expediente'
+  >;
   emptyChallengeValue: string | null;
   onSuccess: () => void;
 }
@@ -34,7 +40,7 @@ export function useLeadCaptureForm({
   blockedDomains,
   countries,
   resolveWebhookUrl,
-  source,
+  origen,
   emptyChallengeValue,
   onSuccess,
 }: UseLeadCaptureFormOptions): UseLeadCaptureFormResult {
@@ -71,7 +77,7 @@ export function useLeadCaptureForm({
 
     try {
       const requestBody = buildLeadCapturePayload(formData, countries, {
-        source,
+        origen,
         emptyChallengeValue,
       });
 

@@ -5,7 +5,7 @@ import './Contact.css';
 export const Contact = () => (
   <LeadCaptureSection
     id="contacto"
-    source="contact-form"
+    origen="formulario-contacto"
     emptyChallengeValue="-"
     sectionStyle={{ '--section-bg': '#FFFFFF' } as CSSProperties}
     classes={{

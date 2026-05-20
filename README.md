@@ -34,7 +34,7 @@ VITE_GOOGLE_ADS_ID=
 VITE_LINKEDIN_PARTNER_ID=
 ```
 
-`VITE_BUBBLE_WEBHOOK_URL` apunta a un unico Backend Workflow de Bubble. Cada formulario envia un campo `source` para que Bubble identifique el origen del registro.
+`VITE_BUBBLE_WEBHOOK_URL` apunta a un unico Backend Workflow de Bubble. Cada formulario envia un campo `origen` para que Bubble identifique el registro.
 
 ## Vistas y rutas
 
@@ -75,17 +75,17 @@ VITE_LINKEDIN_PARTNER_ID=
 
 ## Formularios
 
-Todos los formularios usan `VITE_BUBBLE_WEBHOOK_URL`. Bubble distingue cada origen por el campo `source`.
+Todos los formularios usan `VITE_BUBBLE_WEBHOOK_URL`. Bubble distingue cada origen por el campo `origen` y los datos se envian con claves genericas (`textoExtraXX`, `numeroExtraXX`, etc.) documentadas en [WEBHOOKS.md](WEBHOOKS.md).
 
 | Formulario | Ubicacion | Identificador enviado |
 | --- | --- | --- |
-| Contacto home | `src/components/sections/Contact.tsx` + `src/shared/forms/lead-capture/LeadCaptureSection.tsx` | `source: "contact-form"` |
-| Caso de uso Gestion de Procesos | `CasesContact` + `LeadCaptureSection` | `source: "cases-contact-form"` |
-| Caso de uso CLM | `DealsContact` + `LeadCaptureSection` | `source: "deals-contact-form"` |
-| Caso de uso Expediente Digital | `ExpedienteContact` + `LeadCaptureSection` | `source: "expediente-contact-form"` |
-| Diagnostico Legal Ops | `src/pages/DiagnosticoLegalOpsPageGateStart.tsx` | `source: "legal-ops-diagnosis"` |
-| Registro de eventos | `src/pages/eventos/EventPage.tsx` | `source: "event-registration"` |
-| Libro de reclamaciones | `src/pages/legal/ReclamacionesPage.tsx` | `source: "libro-reclamaciones"` |
+| Contacto home | `src/components/sections/Contact.tsx` + `src/shared/forms/lead-capture/LeadCaptureSection.tsx` | `origen: "formulario-contacto"` |
+| Caso de uso Gestion de Procesos | `CasesContact` + `LeadCaptureSection` | `origen: "formulario-caso-procesos"` |
+| Caso de uso CLM | `DealsContact` + `LeadCaptureSection` | `origen: "formulario-caso-clm"` |
+| Caso de uso Expediente Digital | `ExpedienteContact` + `LeadCaptureSection` | `origen: "formulario-caso-expediente"` |
+| Diagnostico Legal Ops | `src/pages/DiagnosticoLegalOpsPageGateStart.tsx` | `origen: "diagnostico-legal-ops"` |
+| Registro de eventos | `src/pages/eventos/EventPage.tsx` | `origen: "registro-evento"` |
+| Libro de reclamaciones | `src/pages/legal/ReclamacionesPage.tsx` | `origen: "libro-reclamaciones"` |
 
 ## Estructura principal
 

@@ -3,7 +3,7 @@ import {
   getEmailDomain,
   isBlockedPersonalEmailDomain,
 } from '../../utils/corporateEmailValidation';
-import type { LeadCapturePayload } from '../../integrations/bubble/bubbleWebhooks';
+import type { BubbleFormOrigin, BubbleFormPayload } from '../../integrations/bubble/bubbleWebhooks';
 import type { FormSubmissionData } from '../../utils/formSubmission';
 
 export interface Country {
@@ -32,7 +32,13 @@ export interface LeadCaptureFormErrors {
 }
 
 interface BuildLeadCapturePayloadOptions {
-  source: LeadCapturePayload['source'];
+  origen: Extract<
+    BubbleFormOrigin,
+    | 'formulario-contacto'
+    | 'formulario-caso-procesos'
+    | 'formulario-caso-clm'
+    | 'formulario-caso-expediente'
+  >;
   emptyChallengeValue: string | null;
 }
 
@@ -109,21 +115,23 @@ export function buildLeadCapturePayload(
   formData: LeadCaptureFormData,
   countries: Country[],
   options: BuildLeadCapturePayloadOptions
-): LeadCapturePayload {
+): BubbleFormPayload {
   const phone = formatLeadCapturePhone(countries, formData.phoneCountry, formData.phone);
   const trimmedMessage = formData.message.trim();
+  const fechaEnvio = new Date().toISOString();
 
   return {
-    name: formData.name.trim(),
-    company: formData.company.trim(),
-    email: normalizeLeadCaptureEmail(formData.email),
-    phone,
-    telefono: phone,
-    phoneCountry: formData.phoneCountry,
-    challenge: trimmedMessage || options.emptyChallengeValue,
-    consent: formData.consent,
-    timestamp: new Date().toISOString(),
-    source: options.source,
+    origen: options.origen,
+    fechaEnvio,
+    textoExtra01: formData.name.trim(),
+    textoExtra04: normalizeLeadCaptureEmail(formData.email),
+    textoExtra05: phone,
+    textoExtra06: formData.phoneCountry,
+    textoExtra07: formData.company.trim(),
+    textoExtra10: trimmedMessage || options.emptyChallengeValue,
+    textoExtra11: `${window.location.pathname}${window.location.hash}`,
+    booleanoExtra01: formData.consent,
+    fechaExtra01: fechaEnvio,
   };
 }
 

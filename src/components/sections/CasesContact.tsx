@@ -4,7 +4,7 @@ import './CasesContact.css';
 export const CasesContact = () => (
   <LeadCaptureSection
     id="cases-contact"
-    source="cases-contact-form"
+    origen="formulario-caso-procesos"
     emptyChallengeValue={null}
     classes={{
       section: 'cases-contact-section',

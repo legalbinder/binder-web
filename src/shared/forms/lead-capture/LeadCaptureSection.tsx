@@ -6,7 +6,7 @@ import countriesData from '../../../data/countries.json';
 import { useScrollAnimation } from '../../../hooks/useScrollAnimation';
 import {
   getBubbleWebhookUrl,
-  type LeadCapturePayload,
+  type BubbleFormOrigin,
 } from '../../integrations/bubble/bubbleWebhooks';
 import { useLeadCaptureForm } from './useLeadCaptureForm';
 import type { Country } from './leadCapture';
@@ -32,7 +32,13 @@ interface LeadCaptureSectionClasses {
 interface LeadCaptureSectionProps {
   id: string;
   classes: LeadCaptureSectionClasses;
-  source: LeadCapturePayload['source'];
+  origen: Extract<
+    BubbleFormOrigin,
+    | 'formulario-contacto'
+    | 'formulario-caso-procesos'
+    | 'formulario-caso-clm'
+    | 'formulario-caso-expediente'
+  >;
   emptyChallengeValue: string | null;
   sectionStyle?: CSSProperties;
 }
@@ -40,7 +46,7 @@ interface LeadCaptureSectionProps {
 export const LeadCaptureSection = ({
   id,
   classes,
-  source,
+  origen,
   emptyChallengeValue,
   sectionStyle,
 }: LeadCaptureSectionProps) => {
@@ -56,7 +62,7 @@ export const LeadCaptureSection = ({
     blockedDomains,
     countries,
     resolveWebhookUrl: getBubbleWebhookUrl,
-    source,
+    origen,
     emptyChallengeValue,
     onSuccess: () => navigate('/gracias'),
   });

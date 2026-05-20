@@ -4,7 +4,7 @@ import './DealsContact.css';
 export const DealsContact = () => (
   <LeadCaptureSection
     id="deals-contact"
-    source="deals-contact-form"
+    origen="formulario-caso-clm"
     emptyChallengeValue={null}
     classes={{
       section: 'deals-contact-section',

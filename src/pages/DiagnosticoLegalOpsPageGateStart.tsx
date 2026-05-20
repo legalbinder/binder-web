@@ -7,7 +7,10 @@ import {
   CORPORATE_EMAIL_REQUIRED_MESSAGE,
   isBlockedPersonalEmailDomain,
 } from '../shared/utils/corporateEmailValidation';
-import { getBubbleWebhookUrl } from '../shared/integrations/bubble/bubbleWebhooks';
+import {
+  type BubbleFormPayload,
+  getBubbleWebhookUrl,
+} from '../shared/integrations/bubble/bubbleWebhooks';
 import { postBubbleWorkflow } from '../shared/integrations/bubble/postBubbleWorkflow';
 import { storeFormSubmission } from '../shared/utils/formSubmission';
 import './DiagnosticoLegalOpsPage.css';
@@ -303,29 +306,36 @@ export const DiagnosticoLegalOpsPageGateStart = () => {
     setGateErrors({});
 
     try {
-      await postBubbleWorkflow(getBubbleWebhookUrl(), {
-        name: gateFormData.name.trim(),
-        company: gateFormData.company.trim(),
-        email: gateFormData.email.trim(),
-        phone: null,
-        phoneCountry: null,
-        challenge: `Diagnóstico Legal Ops - Nivel ${finalLevel.number} (${finalLevel.level})`,
-        consent: true,
-        timestamp: new Date().toISOString(),
-        source: 'legal-ops-diagnosis',
-        role: gateFormData.role,
-        diagnosis: {
-          levelNumber: finalLevel.number,
-          levelName: finalLevel.level,
-          noCount,
-          yesCount: questions.length - noCount,
-          totalQuestions: questions.length,
-          answers: answers.map((answer, index) => ({
-            question: questions[index].question,
-            answer: answer === true ? 'Sí' : 'No',
-          })),
-        },
-      });
+      const fechaEnvio = new Date().toISOString();
+      const payload: BubbleFormPayload = {
+        origen: 'diagnostico-legal-ops',
+        fechaEnvio,
+        textoExtra01: gateFormData.name.trim(),
+        textoExtra04: gateFormData.email.trim(),
+        textoExtra07: gateFormData.company.trim(),
+        textoExtra09: gateFormData.role,
+        textoExtra10: `Diagnóstico Legal Ops - Nivel ${finalLevel.number} (${finalLevel.level})`,
+        textoExtra11: '/diagnostico-legal-ops-formulario-inicio',
+        textoExtra13: finalLevel.level,
+        numeroExtra01: finalLevel.number,
+        numeroExtra02: noCount,
+        numeroExtra03: questions.length - noCount,
+        numeroExtra04: questions.length,
+        booleanoExtra01: true,
+        fechaExtra01: fechaEnvio,
+        listaObjetoExtra01: answers.map((answer, index) => ({
+          tipo: 'pregunta-respuesta',
+          clave: `pregunta${String(index + 1).padStart(2, '0')}`,
+          pregunta: questions[index].question,
+          respuestaTexto: answer === true ? 'Sí' : 'No',
+          respuestaNumero: answer === true ? 1 : 0,
+          respuestaBooleano: answer === true,
+          respuestaFecha: fechaEnvio,
+          categoria: 'diagnostico-legal-ops',
+        })),
+      };
+
+      await postBubbleWorkflow(getBubbleWebhookUrl(), payload);
 
       storeFormSubmission({
         name: gateFormData.name.trim(),

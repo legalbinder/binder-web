@@ -1,7 +1,10 @@
 import { FormEvent, useState } from 'react';
 import { InternalPage } from '../../components/layout/InternalPage';
 import { PageHead } from '../../components/seo/PageHead';
-import { getBubbleWebhookUrl } from '../../shared/integrations/bubble/bubbleWebhooks';
+import {
+  type BubbleFormPayload,
+  getBubbleWebhookUrl,
+} from '../../shared/integrations/bubble/bubbleWebhooks';
 import { postBubbleWorkflow } from '../../shared/integrations/bubble/postBubbleWorkflow';
 import './ReclamacionesPage.css';
 
@@ -29,12 +32,6 @@ interface ComplaintFormData {
 }
 
 type ComplaintErrors = Partial<Record<keyof ComplaintFormData | 'submit', string>>;
-
-interface ComplaintBookPayload extends ComplaintFormData {
-  source: 'libro-reclamaciones';
-  fullName: string;
-  timestamp: string;
-}
 
 const documentTypes: Exclude<DocumentType, ''>[] = [
   'DNI',
@@ -191,22 +188,30 @@ export const ReclamacionesPage = () => {
     setIsSubmitting(true);
 
     try {
-      const payload: ComplaintBookPayload = {
-        ...formData,
-        documentNumber: formData.documentNumber.trim(),
-        firstName: formData.firstName.trim(),
-        lastName: formData.lastName.trim(),
-        phone: formData.phone.trim(),
-        email: formData.email.trim(),
-        province: formData.province.trim(),
-        district: formData.district.trim(),
-        address: formData.address.trim(),
-        claimDepartment: formData.claimDepartment.trim(),
-        detail: formData.detail.trim(),
-        request: formData.request.trim(),
-        fullName: `${formData.firstName.trim()} ${formData.lastName.trim()}`,
-        source: 'libro-reclamaciones',
-        timestamp: new Date().toISOString(),
+      const fechaEnvio = new Date().toISOString();
+      const payload: BubbleFormPayload = {
+        origen: 'libro-reclamaciones',
+        fechaEnvio,
+        textoExtra01: `${formData.firstName.trim()} ${formData.lastName.trim()}`,
+        textoExtra02: formData.firstName.trim(),
+        textoExtra03: formData.lastName.trim(),
+        textoExtra04: formData.email.trim(),
+        textoExtra05: formData.phone.trim(),
+        textoExtra11: '/legal/reclamaciones',
+        textoExtra13: formData.documentType,
+        textoExtra14: formData.documentNumber.trim(),
+        textoExtra15: formData.addressDepartment,
+        textoExtra16: formData.province.trim(),
+        textoExtra17: formData.district.trim(),
+        textoExtra18: formData.address.trim(),
+        textoExtra19: formData.claimDepartment.trim(),
+        textoExtra20: formData.productType,
+        textoExtra21: formData.reason,
+        textoExtra22: formData.detail.trim(),
+        textoExtra23: formData.request.trim(),
+        booleanoExtra01: formData.acceptsConditions,
+        booleanoExtra02: formData.acceptsConditions,
+        fechaExtra01: fechaEnvio,
       };
 
       await postBubbleWorkflow(getBubbleWebhookUrl(), payload);

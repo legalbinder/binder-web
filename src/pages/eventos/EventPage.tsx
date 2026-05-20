@@ -10,7 +10,7 @@ import {
   isBlockedPersonalEmailDomain,
 } from '../../shared/utils/corporateEmailValidation';
 import {
-  type EventRegistrationPayload,
+  type BubbleFormPayload,
   getBubbleWebhookUrl,
 } from '../../shared/integrations/bubble/bubbleWebhooks';
 import { postBubbleWorkflow } from '../../shared/integrations/bubble/postBubbleWorkflow';
@@ -137,19 +137,22 @@ export function EventPage() {
     setErrors((previous) => ({ ...previous, submit: undefined }));
 
     const phone = formatLeadCapturePhone(countries, form.phoneCountry, form.phone) ?? '';
-    const requestBody: EventRegistrationPayload = {
-      Nombres: `${form.firstName.trim()} ${form.lastName.trim()}`.trim(),
-      firstName: form.firstName.trim(),
-      lastName: form.lastName.trim(),
-      email: normalizeLeadCaptureEmail(form.email),
-      jobTitle: form.jobTitle.trim(),
-      company: form.company.trim(),
-      phone,
-      phoneCountry: form.phoneCountry,
-      consent: form.consent,
-      timestamp: new Date().toISOString(),
-      source: 'event-registration',
-      eventSlug: event.slug,
+    const fechaEnvio = new Date().toISOString();
+    const requestBody: BubbleFormPayload = {
+      origen: 'registro-evento',
+      fechaEnvio,
+      textoExtra01: `${form.firstName.trim()} ${form.lastName.trim()}`.trim(),
+      textoExtra02: form.firstName.trim(),
+      textoExtra03: form.lastName.trim(),
+      textoExtra04: normalizeLeadCaptureEmail(form.email),
+      textoExtra05: phone,
+      textoExtra06: form.phoneCountry,
+      textoExtra07: form.company.trim(),
+      textoExtra08: form.jobTitle.trim(),
+      textoExtra11: canonicalPath,
+      textoExtra12: event.slug,
+      booleanoExtra01: form.consent,
+      fechaExtra01: fechaEnvio,
     };
 
     try {
