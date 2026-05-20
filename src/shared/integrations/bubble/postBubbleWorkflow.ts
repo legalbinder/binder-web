@@ -16,7 +16,7 @@ export async function postBubbleWorkflow<TBody>(
 
   if (optionalUrl && optionalUrl !== url) {
     try {
-      await postSingleBubbleWorkflow(optionalUrl, body);
+      await postOptionalTestingWebhook(optionalUrl, body);
     } catch {
       // Optional testing webhook must never block the production submission.
     }
@@ -57,4 +57,15 @@ async function postSingleBubbleWorkflow<TBody>(
     rawText,
     parsed,
   };
+}
+
+async function postOptionalTestingWebhook<TBody>(url: string, body: TBody): Promise<void> {
+  await fetch(url, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: {
+      'Content-Type': 'text/plain;charset=UTF-8',
+    },
+    body: JSON.stringify(body),
+  });
 }

@@ -32,6 +32,7 @@ Reglas:
 
 - Si `VITE_WEBHOOK_URL` esta vacia, no se envia nada al segundo webhook.
 - Si `VITE_WEBHOOK_URL` falla, esta apagada o responde con error, se ignora y no bloquea el formulario.
+- El webhook secundario se envia como `text/plain` y `no-cors` para evitar el preflight `OPTIONS` en herramientas como webhook.site.
 - `VITE_BUBBLE_WEBHOOK_URL` sigue siendo el webhook principal y obligatorio.
 - Como es una variable `VITE_`, cualquier cambio en Vercel requiere redeploy.
 
