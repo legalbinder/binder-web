@@ -28,6 +28,7 @@ Las variables se configuran en Vercel como Environment Variables. Los webhooks e
 
 ```env
 VITE_BUBBLE_WEBHOOK_URL=
+VITE_WEBHOOK_URL=
 
 VITE_GA_MEASUREMENT_ID=
 VITE_GOOGLE_ADS_ID=
@@ -35,6 +36,7 @@ VITE_LINKEDIN_PARTNER_ID=
 ```
 
 `VITE_BUBBLE_WEBHOOK_URL` apunta a un unico Backend Workflow de Bubble. Cada formulario envia un campo `origen` para que Bubble identifique el registro.
+`VITE_WEBHOOK_URL` es opcional y sirve para duplicar envios hacia un webhook de prueba sin bloquear el formulario si falla.
 
 ## Vistas y rutas
 
@@ -137,6 +139,7 @@ npm run build
 Revisar tambien:
 
 - Variable `VITE_BUBBLE_WEBHOOK_URL` configurada en Vercel.
+- Variable opcional `VITE_WEBHOOK_URL` configurada solo si se necesita duplicar envios a un webhook de prueba.
 - Formularios probados contra workflows reales de Bubble.
 - Consentimiento de cookies validado antes de activar tracking.
 - `/legal/reclamaciones` probado en desktop y mobile.

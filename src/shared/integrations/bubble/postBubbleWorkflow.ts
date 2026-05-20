@@ -1,4 +1,5 @@
 import { getBubbleWorkflowErrorMessage } from './bubbleWorkflowError';
+import { getOptionalWebhookUrl } from './bubbleWebhooks';
 
 interface BubbleWorkflowResponse {
   response: Response;
@@ -7,6 +8,24 @@ interface BubbleWorkflowResponse {
 }
 
 export async function postBubbleWorkflow<TBody>(
+  url: string,
+  body: TBody
+): Promise<BubbleWorkflowResponse> {
+  const primaryResponse = await postSingleBubbleWorkflow(url, body);
+  const optionalUrl = getOptionalWebhookUrl();
+
+  if (optionalUrl && optionalUrl !== url) {
+    try {
+      await postSingleBubbleWorkflow(optionalUrl, body);
+    } catch {
+      // Optional testing webhook must never block the production submission.
+    }
+  }
+
+  return primaryResponse;
+}
+
+async function postSingleBubbleWorkflow<TBody>(
   url: string,
   body: TBody
 ): Promise<BubbleWorkflowResponse> {

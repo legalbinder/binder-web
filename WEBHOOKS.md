@@ -18,6 +18,23 @@ Este es el link que usa la web para enviar datos reales:
 https://binder0.bubbleapps.io/api/1.1/wf/binderla-formulario/
 ```
 
+## Webhook secundario opcional
+
+Para pruebas se puede configurar una segunda variable de entorno:
+
+```env
+VITE_WEBHOOK_URL=
+```
+
+Si `VITE_WEBHOOK_URL` tiene un valor, la web envia una copia del mismo payload a ese segundo webhook despues del envio principal.
+
+Reglas:
+
+- Si `VITE_WEBHOOK_URL` esta vacia, no se envia nada al segundo webhook.
+- Si `VITE_WEBHOOK_URL` falla, esta apagada o responde con error, se ignora y no bloquea el formulario.
+- `VITE_BUBBLE_WEBHOOK_URL` sigue siendo el webhook principal y obligatorio.
+- Como es una variable `VITE_`, cualquier cambio en Vercel requiere redeploy.
+
 ## Link para inicializar Bubble
 
 El link de inicializacion se usa solo para que Bubble detecte los campos y tipos:
@@ -644,8 +661,9 @@ Cada item de `listaObjetoExtra01` usa:
 3. Enviar el JSON completo de inicializacion al endpoint `/initialize`.
 4. Confirmar que Bubble detecte todos los campos.
 5. Configurar `VITE_BUBBLE_WEBHOOK_URL` en Vercel con el endpoint de produccion.
-6. Hacer redeploy.
-7. Probar cada formulario y validar en Bubble que `origen` permita separar la logica.
+6. Opcionalmente configurar `VITE_WEBHOOK_URL` en Vercel para duplicar envios hacia un webhook de prueba.
+7. Hacer redeploy.
+8. Probar cada formulario y validar en Bubble que `origen` permita separar la logica.
 
 ## Regla para futuros formularios
 
@@ -658,3 +676,5 @@ Si falta la variable en Vercel, el formulario mostrara este error:
 ```text
 Configura VITE_BUBBLE_WEBHOOK_URL antes de publicar este formulario.
 ```
+
+`VITE_WEBHOOK_URL` no muestra error si falta o si falla, porque es solo un webhook secundario de pruebas.

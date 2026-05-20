@@ -1,20 +1,25 @@
 import { normalizeBubbleWorkflowPostUrl } from './normalizeBubbleWorkflowUrl';
 
 const bubbleWebhookEnvKey = 'VITE_BUBBLE_WEBHOOK_URL';
+const optionalWebhookEnvKey = 'VITE_WEBHOOK_URL';
 
-function readBubbleWebhookEnvValue(): string | undefined {
-  const rawValue = import.meta.env[bubbleWebhookEnvKey]?.trim();
+function readWebhookEnvValue(envKey: 'VITE_BUBBLE_WEBHOOK_URL' | 'VITE_WEBHOOK_URL'): string | undefined {
+  const rawValue = import.meta.env[envKey]?.trim();
   return rawValue ? normalizeBubbleWorkflowPostUrl(rawValue) : undefined;
 }
 
 export function getBubbleWebhookUrl(): string {
-  const url = readBubbleWebhookEnvValue();
+  const url = readWebhookEnvValue(bubbleWebhookEnvKey);
 
   if (!url) {
     throw new Error(`Configura ${bubbleWebhookEnvKey} antes de publicar este formulario.`);
   }
 
   return url;
+}
+
+export function getOptionalWebhookUrl(): string | undefined {
+  return readWebhookEnvValue(optionalWebhookEnvKey);
 }
 
 export type BubbleFormOrigin =
