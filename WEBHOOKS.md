@@ -394,7 +394,7 @@ Este payload inicializa un contrato generico y reutilizable. La web usa las mism
 
 ## Formularios activos
 
-Hay 7 formularios funcionales en la web:
+Hay 7 formularios funcionales en la web. El diagnostico envia 2 llamados al webhook: uno al completar los datos iniciales y otro al finalizar el cuestionario.
 
 | Formulario | Ruta | Valor de `origen` |
 | --- | --- | --- |
@@ -402,7 +402,8 @@ Hay 7 formularios funcionales en la web:
 | Caso de uso Gestion de Procesos | `/casos-uso/gestion-procesos` | `formulario-caso-procesos` |
 | Caso de uso CLM | `/casos-uso/clm` | `formulario-caso-clm` |
 | Caso de uso Expediente Digital | `/casos-uso/expediente-digital` | `formulario-caso-expediente` |
-| Diagnostico Legal Ops | `/diagnostico-legal-ops-formulario-inicio` | `diagnostico-legal-ops` |
+| Diagnostico Legal Ops - inicio | `/diagnostico-legal-ops-formulario-inicio` | `Diagnóstico-inicio` |
+| Diagnostico Legal Ops - resultado final | `/diagnostico-legal-ops-formulario-inicio` | `diagnostico-legal-ops` |
 | Registro de evento | `/eventos/:slug` | `registro-evento` |
 | Libro de reclamaciones | `/legal/reclamaciones` | `libro-reclamaciones` |
 
@@ -412,6 +413,8 @@ Estas claves mantienen el mismo significado cuando aplican al formulario:
 
 | Clave | Significado |
 | --- | --- |
+| `origen` | Identificador del formulario, por ejemplo `formulario-contacto` |
+| `fechaEnvio` | Fecha/hora del envio en formato ISO, por ejemplo `2026-05-20T15:00:00.000Z` |
 | `textoExtra01` | Nombre completo |
 | `textoExtra02` | Nombres |
 | `textoExtra03` | Apellidos |
@@ -424,6 +427,7 @@ Estas claves mantienen el mismo significado cuando aplican al formulario:
 | `textoExtra10` | Reto, necesidad o resultado resumido |
 | `textoExtra11` | Pagina o ruta desde donde se envio |
 | `textoExtra12` | Evento o slug del evento |
+| `textoExtra24` | Texto completo del consentimiento, cuando aplique |
 | `booleanoExtra01` | Consentimiento aceptado |
 | `booleanoExtra02` | Condiciones aceptadas |
 | `fechaExtra01` | Fecha de envio |
@@ -434,6 +438,8 @@ Estas claves mantienen el mismo significado cuando aplican al formulario:
 
 | Clave | Significado |
 | --- | --- |
+| `origen` | Valor fijo: `formulario-contacto` |
+| `fechaEnvio` | Fecha/hora del envio en formato ISO |
 | `textoExtra01` | Nombre completo |
 | `textoExtra04` | Correo |
 | `textoExtra05` | Telefono |
@@ -448,6 +454,8 @@ Estas claves mantienen el mismo significado cuando aplican al formulario:
 
 | Clave | Significado |
 | --- | --- |
+| `origen` | Valor fijo segun el caso: `formulario-caso-procesos`, `formulario-caso-clm` o `formulario-caso-expediente` |
+| `fechaEnvio` | Fecha/hora del envio en formato ISO |
 | `textoExtra01` | Nombre completo |
 | `textoExtra04` | Correo |
 | `textoExtra05` | Telefono |
@@ -458,10 +466,31 @@ Estas claves mantienen el mismo significado cuando aplican al formulario:
 | `booleanoExtra01` | Consentimiento aceptado |
 | `fechaExtra01` | Fecha de envio |
 
-### `diagnostico-legal-ops`
+### `Diagnóstico-inicio`
+
+Este llamado se envia cuando la persona completa la primera pantalla del diagnostico y presiona "Empezar diagnostico". Sirve para capturar el lead aunque no termine el cuestionario.
 
 | Clave | Significado |
 | --- | --- |
+| `origen` | Valor fijo: `Diagnóstico-inicio` |
+| `fechaEnvio` | Fecha/hora del envio en formato ISO |
+| `textoExtra01` | Nombre completo |
+| `textoExtra04` | Correo |
+| `textoExtra07` | Empresa |
+| `textoExtra09` | Rol |
+| `textoExtra11` | Pagina de origen |
+| `textoExtra24` | Texto completo del consentimiento |
+| `booleanoExtra01` | Consentimiento aceptado |
+| `fechaExtra01` | Fecha de envio |
+
+### `diagnostico-legal-ops`
+
+Este llamado se envia al finalizar el cuestionario del diagnostico, junto con el nivel obtenido y las respuestas.
+
+| Clave | Significado |
+| --- | --- |
+| `origen` | Valor fijo: `diagnostico-legal-ops` |
+| `fechaEnvio` | Fecha/hora del envio en formato ISO |
 | `textoExtra01` | Nombre completo |
 | `textoExtra04` | Correo |
 | `textoExtra07` | Empresa |
@@ -469,6 +498,7 @@ Estas claves mantienen el mismo significado cuando aplican al formulario:
 | `textoExtra10` | Resultado resumido del diagnostico |
 | `textoExtra11` | Pagina de origen |
 | `textoExtra13` | Nombre del nivel de madurez |
+| `textoExtra24` | Texto completo del consentimiento |
 | `numeroExtra01` | Numero del nivel de madurez |
 | `numeroExtra02` | Cantidad de respuestas No |
 | `numeroExtra03` | Cantidad de respuestas Si |
@@ -494,6 +524,8 @@ Cada item de `listaObjetoExtra01` usa:
 
 | Clave | Significado |
 | --- | --- |
+| `origen` | Valor fijo: `registro-evento` |
+| `fechaEnvio` | Fecha/hora del envio en formato ISO |
 | `textoExtra01` | Nombre completo |
 | `textoExtra02` | Nombres |
 | `textoExtra03` | Apellidos |
@@ -511,6 +543,8 @@ Cada item de `listaObjetoExtra01` usa:
 
 | Clave | Significado |
 | --- | --- |
+| `origen` | Valor fijo: `libro-reclamaciones` |
+| `fechaEnvio` | Fecha/hora del envio en formato ISO |
 | `textoExtra01` | Nombre completo |
 | `textoExtra02` | Nombres |
 | `textoExtra03` | Apellidos |
@@ -552,7 +586,24 @@ Cada item de `listaObjetoExtra01` usa:
 }
 ```
 
-### Diagnostico Legal Ops
+### Diagnostico Legal Ops - inicio
+
+```json
+{
+  "origen": "Diagnóstico-inicio",
+  "fechaEnvio": "2026-05-20T15:00:00.000Z",
+  "textoExtra01": "Juan Perez",
+  "textoExtra04": "juan@empresa.com",
+  "textoExtra07": "Empresa XYZ",
+  "textoExtra09": "GC",
+  "textoExtra11": "/diagnostico-legal-ops-formulario-inicio",
+  "textoExtra24": "Tu información es confidencial y se usa solo para coordinar una conversación si la solicitas.",
+  "booleanoExtra01": true,
+  "fechaExtra01": "2026-05-20T15:00:00.000Z"
+}
+```
+
+### Diagnostico Legal Ops - resultado final
 
 ```json
 {
@@ -565,6 +616,7 @@ Cada item de `listaObjetoExtra01` usa:
   "textoExtra10": "Diagnóstico Legal Ops - Nivel 2 (Estructurado)",
   "textoExtra11": "/diagnostico-legal-ops-formulario-inicio",
   "textoExtra13": "Estructurado",
+  "textoExtra24": "Tu información es confidencial y se usa solo para coordinar una conversación si la solicitas.",
   "numeroExtra01": 2,
   "numeroExtra02": 4,
   "numeroExtra03": 3,
@@ -645,6 +697,7 @@ Cada item de `listaObjetoExtra01` usa:
     "formulario-caso-procesos",
     "formulario-caso-clm",
     "formulario-caso-expediente",
+    "Diagnóstico-inicio",
     "diagnostico-legal-ops",
     "registro-evento",
     "libro-reclamaciones"

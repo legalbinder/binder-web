@@ -77,7 +77,7 @@ VITE_LINKEDIN_PARTNER_ID=
 
 ## Formularios
 
-Todos los formularios usan `VITE_BUBBLE_WEBHOOK_URL`. Bubble distingue cada origen por el campo `origen` y los datos se envian con claves genericas (`textoExtraXX`, `numeroExtraXX`, etc.) documentadas en [WEBHOOKS.md](WEBHOOKS.md).
+Todos los formularios usan `VITE_BUBBLE_WEBHOOK_URL`. Bubble distingue cada origen por el campo `origen` y los datos se envian con claves genericas (`textoExtraXX`, `numeroExtraXX`, etc.) documentadas en [WEBHOOKS.md](WEBHOOKS.md). El diagnostico Legal Ops envia dos llamados: uno al completar los datos iniciales y otro al finalizar el cuestionario.
 
 | Formulario | Ubicacion | Identificador enviado |
 | --- | --- | --- |
@@ -85,7 +85,8 @@ Todos los formularios usan `VITE_BUBBLE_WEBHOOK_URL`. Bubble distingue cada orig
 | Caso de uso Gestion de Procesos | `CasesContact` + `LeadCaptureSection` | `origen: "formulario-caso-procesos"` |
 | Caso de uso CLM | `DealsContact` + `LeadCaptureSection` | `origen: "formulario-caso-clm"` |
 | Caso de uso Expediente Digital | `ExpedienteContact` + `LeadCaptureSection` | `origen: "formulario-caso-expediente"` |
-| Diagnostico Legal Ops | `src/pages/DiagnosticoLegalOpsPageGateStart.tsx` | `origen: "diagnostico-legal-ops"` |
+| Diagnostico Legal Ops - inicio | `src/pages/DiagnosticoLegalOpsPageGateStart.tsx` | `origen: "Diagnóstico-inicio"` |
+| Diagnostico Legal Ops - resultado final | `src/pages/DiagnosticoLegalOpsPageGateStart.tsx` | `origen: "diagnostico-legal-ops"` |
 | Registro de eventos | `src/pages/eventos/EventPage.tsx` | `origen: "registro-evento"` |
 | Libro de reclamaciones | `src/pages/legal/ReclamacionesPage.tsx` | `origen: "libro-reclamaciones"` |
 

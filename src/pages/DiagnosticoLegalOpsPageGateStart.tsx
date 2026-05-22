@@ -189,6 +189,9 @@ const roleOptions: RoleOption[] = [
   'Otros',
 ];
 
+const diagnosticoConsentText =
+  'Tu información es confidencial y se usa solo para coordinar una conversación si la solicitas.';
+
 const getLevelByNoCount = (noCount: number): LevelContent => {
   if (noCount >= 6) return levels[0];
   if (noCount >= 4) return levels[1];
@@ -264,14 +267,43 @@ export const DiagnosticoLegalOpsPageGateStart = () => {
     return Object.keys(errors).length === 0;
   };
 
-  const handleGateSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleGateSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (!validateGate()) {
       return;
     }
 
-    setStage('quiz');
+    setIsSubmitting(true);
+    setGateErrors({});
+
+    try {
+      const fechaEnvio = new Date().toISOString();
+      const payload: BubbleFormPayload = {
+        origen: 'Diagnóstico-inicio',
+        fechaEnvio,
+        textoExtra01: gateFormData.name.trim(),
+        textoExtra04: gateFormData.email.trim(),
+        textoExtra07: gateFormData.company.trim(),
+        textoExtra09: gateFormData.role,
+        textoExtra11: '/diagnostico-legal-ops-formulario-inicio',
+        textoExtra24: diagnosticoConsentText,
+        booleanoExtra01: true,
+        fechaExtra01: fechaEnvio,
+      };
+
+      await postBubbleWorkflow(getBubbleWebhookUrl(), payload);
+      setStage('quiz');
+    } catch (error) {
+      setGateErrors({
+        submit:
+          error instanceof Error
+            ? error.message
+            : 'No se pudo iniciar el diagnóstico. Intenta nuevamente.',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleSetAnswer = (value: boolean) => {
@@ -317,6 +349,7 @@ export const DiagnosticoLegalOpsPageGateStart = () => {
         textoExtra10: `Diagnóstico Legal Ops - Nivel ${finalLevel.number} (${finalLevel.level})`,
         textoExtra11: '/diagnostico-legal-ops-formulario-inicio',
         textoExtra13: finalLevel.level,
+        textoExtra24: diagnosticoConsentText,
         numeroExtra01: finalLevel.number,
         numeroExtra02: noCount,
         numeroExtra03: questions.length - noCount,
@@ -477,13 +510,18 @@ export const DiagnosticoLegalOpsPageGateStart = () => {
                     </label>
                   </div>
 
-                  <p className="diagnostico-note">
-                    Tu información es confidencial y se usa solo para coordinar una
-                    conversación si la solicitas.
-                  </p>
+                  <p className="diagnostico-note">{diagnosticoConsentText}</p>
 
-                  <button type="submit" className="diagnostico-primary-button">
-                    Empezar diagnóstico
+                  {gateErrors.submit && (
+                    <p className="error-text submit-error">{gateErrors.submit}</p>
+                  )}
+
+                  <button
+                    type="submit"
+                    className="diagnostico-primary-button"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? 'Enviando...' : 'Empezar diagnóstico'}
                   </button>
                 </form>
               </div>
