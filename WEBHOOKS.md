@@ -241,92 +241,92 @@ Este payload inicializa un contrato generico y reutilizable. La web usa las mism
   },
   "listaObjetoExtra01": [
     {
-      "tipo": "pregunta-respuesta",
-      "clave": "pregunta01",
+      "tipo": "diagnostico-respuesta",
+      "clave": "contratos-centralizados",
       "pregunta": "¿Tienes contratos centralizados?",
       "respuestaTexto": "No",
       "respuestaNumero": 0,
       "respuestaBooleano": false,
       "respuestaFecha": "2026-05-20T15:00:00.000Z",
-      "categoria": "contratos"
+      "categoria": "diagnostico-legal-ops"
     }
   ],
   "listaObjetoExtra02": [
     {
-      "tipo": "pregunta-respuesta",
-      "clave": "pregunta02",
+      "tipo": "diagnostico-respuesta",
+      "clave": "alertas-vencimiento-renovacion",
       "pregunta": "¿Tienes alertas automatizadas?",
       "respuestaTexto": "Sí",
       "respuestaNumero": 1,
       "respuestaBooleano": true,
       "respuestaFecha": "2026-05-21T15:00:00.000Z",
-      "categoria": "automatizacion"
+      "categoria": "diagnostico-legal-ops"
     }
   ],
   "listaObjetoExtra03": [
     {
-      "tipo": "pregunta-respuesta",
-      "clave": "pregunta03",
+      "tipo": "diagnostico-respuesta",
+      "clave": "archivo-contratos-consistente",
       "pregunta": "Pregunta de ejemplo 03",
       "respuestaTexto": "Respuesta",
       "respuestaNumero": 3,
       "respuestaBooleano": true,
       "respuestaFecha": "2026-05-22T15:00:00.000Z",
-      "categoria": "general"
+      "categoria": "diagnostico-legal-ops"
     }
   ],
   "listaObjetoExtra04": [
     {
-      "tipo": "pregunta-respuesta",
-      "clave": "pregunta04",
+      "tipo": "diagnostico-respuesta",
+      "clave": "estado-solicitudes-tiempo-real",
       "pregunta": "Pregunta de ejemplo 04",
       "respuestaTexto": "Respuesta",
       "respuestaNumero": 4,
       "respuestaBooleano": false,
       "respuestaFecha": "2026-05-23T15:00:00.000Z",
-      "categoria": "general"
+      "categoria": "diagnostico-legal-ops"
     }
   ],
   "listaObjetoExtra05": [
     {
-      "tipo": "pregunta-respuesta",
-      "clave": "pregunta05",
+      "tipo": "diagnostico-respuesta",
+      "clave": "medicion-sla",
       "pregunta": "Pregunta de ejemplo 05",
       "respuestaTexto": "Respuesta",
       "respuestaNumero": 5,
       "respuestaBooleano": true,
       "respuestaFecha": "2026-05-24T15:00:00.000Z",
-      "categoria": "general"
+      "categoria": "diagnostico-legal-ops"
     }
   ],
   "listaObjetoExtra06": [
     {
-      "tipo": "pregunta-respuesta",
-      "clave": "pregunta06",
+      "tipo": "diagnostico-respuesta",
+      "clave": "indicadores-carga-desempeno",
       "pregunta": "Pregunta de ejemplo 06",
       "respuestaTexto": "Respuesta",
       "respuestaNumero": 6,
       "respuestaBooleano": false,
       "respuestaFecha": "2026-05-25T15:00:00.000Z",
-      "categoria": "general"
+      "categoria": "diagnostico-legal-ops"
     }
   ],
   "listaObjetoExtra07": [
     {
-      "tipo": "pregunta-respuesta",
-      "clave": "pregunta07",
+      "tipo": "diagnostico-respuesta",
+      "clave": "automatizacion-tareas-repetitivas",
       "pregunta": "Pregunta de ejemplo 07",
       "respuestaTexto": "Respuesta",
       "respuestaNumero": 7,
       "respuestaBooleano": true,
       "respuestaFecha": "2026-05-26T15:00:00.000Z",
-      "categoria": "general"
+      "categoria": "diagnostico-legal-ops"
     }
   ],
   "listaObjetoExtra08": [
     {
-      "tipo": "pregunta-respuesta",
-      "clave": "pregunta08",
+      "tipo": "diagnostico-respuesta",
+      "clave": "pregunta-futura-08",
       "pregunta": "Pregunta de ejemplo 08",
       "respuestaTexto": "Respuesta",
       "respuestaNumero": 8,
@@ -337,8 +337,8 @@ Este payload inicializa un contrato generico y reutilizable. La web usa las mism
   ],
   "listaObjetoExtra09": [
     {
-      "tipo": "pregunta-respuesta",
-      "clave": "pregunta09",
+      "tipo": "diagnostico-respuesta",
+      "clave": "pregunta-futura-09",
       "pregunta": "Pregunta de ejemplo 09",
       "respuestaTexto": "Respuesta",
       "respuestaNumero": 9,
@@ -349,8 +349,8 @@ Este payload inicializa un contrato generico y reutilizable. La web usa las mism
   ],
   "listaObjetoExtra10": [
     {
-      "tipo": "pregunta-respuesta",
-      "clave": "pregunta10",
+      "tipo": "diagnostico-respuesta",
+      "clave": "pregunta-futura-10",
       "pregunta": "Pregunta de ejemplo 10",
       "respuestaTexto": "Respuesta",
       "respuestaNumero": 10,
@@ -513,8 +513,8 @@ Cada item de `listaObjetoExtra01` usa:
 
 | Clave del objeto | Significado |
 | --- | --- |
-| `tipo` | `pregunta-respuesta` |
-| `clave` | Identificador de la pregunta |
+| `tipo` | `diagnostico-respuesta` |
+| `clave` | Identificador semantico estable de la pregunta |
 | `pregunta` | Texto de la pregunta |
 | `respuestaTexto` | Respuesta visible, por ejemplo `Sí` o `No` |
 | `respuestaNumero` | Valor numerico de la respuesta, por ejemplo `1` o `0` |
@@ -630,8 +630,8 @@ Cada item de `listaObjetoExtra01` usa:
   "fechaExtra01": "2026-05-20T15:00:00.000Z",
   "listaObjetoExtra01": [
     {
-      "tipo": "pregunta-respuesta",
-      "clave": "pregunta01",
+      "tipo": "diagnostico-respuesta",
+      "clave": "contratos-centralizados",
       "pregunta": "¿Tus contratos están centralizados en un repositorio único?",
       "respuestaTexto": "No",
       "respuestaNumero": 0,

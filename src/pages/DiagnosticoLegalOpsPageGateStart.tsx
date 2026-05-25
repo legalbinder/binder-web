@@ -47,6 +47,7 @@ interface GateErrors {
 }
 
 interface Question {
+  id: string;
   question: string;
   yesLabel: string;
   noLabel: string;
@@ -66,36 +67,43 @@ interface LevelContent {
 
 const questions: Question[] = [
   {
+    id: 'contratos-centralizados',
     question: '¿Tus contratos están centralizados en un repositorio único?',
     yesLabel: 'Repositorio digital con control de acceso/identidad',
     noLabel: 'Están distribuidos en distintos soportes o carpetas',
   },
   {
+    id: 'archivo-contratos-consistente',
     question: '¿Tienes un sistema consistente para archivar y organizar contratos?',
     yesLabel: 'Se guardan con estructura definida y automática',
     noLabel: 'No hay garantía de que queden correctamente archivados',
   },
   {
+    id: 'alertas-vencimiento-renovacion',
     question: '¿Tienes alertas automatizadas de vencimiento/renovación?',
     yesLabel: 'El sistema avisa con anticipación',
     noLabel: 'Dependemos de recordatorios manuales o agendas personales',
   },
   {
+    id: 'estado-solicitudes-tiempo-real',
     question: '¿Puedes ver el estado de cada solicitud de contrato en tiempo real?',
     yesLabel: 'Tengo visibilidad del avance y responsables',
     noLabel: 'Debo pedir actualizaciones por correo o WhatsApp',
   },
   {
+    id: 'medicion-sla',
     question: '¿Miden tiempos de atención (SLA) de las solicitudes?',
     yesLabel: 'Medimos cuánto demora cada tipo de caso',
     noLabel: 'Solo tenemos una idea aproximada',
   },
   {
+    id: 'indicadores-carga-desempeno',
     question: '¿Tienes indicadores de carga y desempeño del equipo?',
     yesLabel: 'Conozco carga y tiempos por persona/proceso',
     noLabel: 'Pregunto manualmente quién tiene disponibilidad',
   },
   {
+    id: 'automatizacion-tareas-repetitivas',
     question: '¿Las tareas repetitivas están automatizadas?',
     yesLabel: 'Rutinas (seguimientos, recordatorios, updates) se ejecutan en automático',
     noLabel: 'Aún se hacen seguimientos y actualizaciones manuales',
@@ -365,8 +373,8 @@ export const DiagnosticoLegalOpsPageGateStart = () => {
         booleanoExtra01: gateFormData.privacyConsent,
         fechaExtra01: fechaEnvio,
         listaObjetoExtra01: answers.map((answer, index) => ({
-          tipo: 'pregunta-respuesta',
-          clave: `pregunta${String(index + 1).padStart(2, '0')}`,
+          tipo: 'diagnostico-respuesta',
+          clave: questions[index].id,
           pregunta: questions[index].question,
           respuestaTexto: answer === true ? 'Sí' : 'No',
           respuestaNumero: answer === true ? 1 : 0,
