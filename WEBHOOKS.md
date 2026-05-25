@@ -427,8 +427,8 @@ Estas claves mantienen el mismo significado cuando aplican al formulario:
 | `textoExtra10` | Reto, necesidad o resultado resumido |
 | `textoExtra11` | Pagina o ruta desde donde se envio |
 | `textoExtra12` | Evento o slug del evento |
-| `textoExtra24` | Texto completo del consentimiento, cuando aplique |
-| `booleanoExtra01` | Consentimiento aceptado |
+| `textoExtra24` | Texto completo del consentimiento de privacidad, cuando aplique |
+| `booleanoExtra01` | Política de Privacidad aceptada |
 | `booleanoExtra02` | Condiciones aceptadas |
 | `fechaExtra01` | Fecha de envio |
 
@@ -447,7 +447,8 @@ Estas claves mantienen el mismo significado cuando aplican al formulario:
 | `textoExtra07` | Empresa |
 | `textoExtra10` | Reto o necesidad seleccionada |
 | `textoExtra11` | Pagina de origen |
-| `booleanoExtra01` | Consentimiento aceptado |
+| `textoExtra24` | Texto completo del consentimiento de privacidad |
+| `booleanoExtra01` | Política de Privacidad aceptada |
 | `fechaExtra01` | Fecha de envio |
 
 ### `formulario-caso-procesos`, `formulario-caso-clm`, `formulario-caso-expediente`
@@ -463,7 +464,8 @@ Estas claves mantienen el mismo significado cuando aplican al formulario:
 | `textoExtra07` | Empresa |
 | `textoExtra10` | Reto o necesidad, si existe |
 | `textoExtra11` | Pagina de origen |
-| `booleanoExtra01` | Consentimiento aceptado |
+| `textoExtra24` | Texto completo del consentimiento de privacidad |
+| `booleanoExtra01` | Política de Privacidad aceptada |
 | `fechaExtra01` | Fecha de envio |
 
 ### `Diagnóstico-inicio`
@@ -479,8 +481,8 @@ Este llamado se envia cuando la persona completa la primera pantalla del diagnos
 | `textoExtra07` | Empresa |
 | `textoExtra09` | Rol |
 | `textoExtra11` | Pagina de origen |
-| `textoExtra24` | Texto completo del consentimiento |
-| `booleanoExtra01` | Consentimiento aceptado |
+| `textoExtra24` | Texto completo del consentimiento de privacidad |
+| `booleanoExtra01` | Política de Privacidad aceptada |
 | `fechaExtra01` | Fecha de envio |
 
 ### `diagnostico-legal-ops`
@@ -498,12 +500,12 @@ Este llamado se envia al finalizar el cuestionario del diagnostico, junto con el
 | `textoExtra10` | Resultado resumido del diagnostico |
 | `textoExtra11` | Pagina de origen |
 | `textoExtra13` | Nombre del nivel de madurez |
-| `textoExtra24` | Texto completo del consentimiento |
+| `textoExtra24` | Texto completo del consentimiento de privacidad |
 | `numeroExtra01` | Numero del nivel de madurez |
 | `numeroExtra02` | Cantidad de respuestas No |
 | `numeroExtra03` | Cantidad de respuestas Si |
 | `numeroExtra04` | Total de preguntas |
-| `booleanoExtra01` | Consentimiento aceptado |
+| `booleanoExtra01` | Política de Privacidad aceptada |
 | `fechaExtra01` | Fecha de envio |
 | `listaObjetoExtra01` | Lista de preguntas y respuestas del diagnostico |
 
@@ -536,7 +538,8 @@ Cada item de `listaObjetoExtra01` usa:
 | `textoExtra08` | Cargo |
 | `textoExtra11` | Pagina de origen |
 | `textoExtra12` | Slug del evento |
-| `booleanoExtra01` | Consentimiento aceptado |
+| `textoExtra24` | Texto completo del consentimiento de privacidad |
+| `booleanoExtra01` | Política de Privacidad aceptada |
 | `fechaExtra01` | Fecha de envio |
 
 ### `libro-reclamaciones`
@@ -562,8 +565,9 @@ Cada item de `listaObjetoExtra01` usa:
 | `textoExtra21` | Motivo: Reclamo o Queja |
 | `textoExtra22` | Detalle |
 | `textoExtra23` | Pedido del cliente |
-| `booleanoExtra01` | Consentimiento aceptado |
-| `booleanoExtra02` | Condiciones aceptadas |
+| `textoExtra24` | Texto completo del consentimiento de privacidad |
+| `booleanoExtra01` | Política de Privacidad aceptada |
+| `booleanoExtra02` | Condiciones de atención aceptadas |
 | `fechaExtra01` | Fecha de envio |
 
 ## Ejemplos reales enviados por la web
@@ -581,6 +585,7 @@ Cada item de `listaObjetoExtra01` usa:
   "textoExtra07": "Empresa XYZ",
   "textoExtra10": "Gestion documental desordenada",
   "textoExtra11": "/#contacto",
+  "textoExtra24": "Al enviar este formulario, aceptas la Política de Privacidad y autorizas a Binder a contactarte con información sobre sus servicios.",
   "booleanoExtra01": true,
   "fechaExtra01": "2026-05-20T15:00:00.000Z"
 }
@@ -597,7 +602,7 @@ Cada item de `listaObjetoExtra01` usa:
   "textoExtra07": "Empresa XYZ",
   "textoExtra09": "GC",
   "textoExtra11": "/diagnostico-legal-ops-formulario-inicio",
-  "textoExtra24": "Tu información es confidencial y se usa solo para coordinar una conversación si la solicitas.",
+  "textoExtra24": "Al enviar este formulario, aceptas la Política de Privacidad y autorizas a Binder a contactarte con información sobre sus servicios.",
   "booleanoExtra01": true,
   "fechaExtra01": "2026-05-20T15:00:00.000Z"
 }
@@ -616,7 +621,7 @@ Cada item de `listaObjetoExtra01` usa:
   "textoExtra10": "Diagnóstico Legal Ops - Nivel 2 (Estructurado)",
   "textoExtra11": "/diagnostico-legal-ops-formulario-inicio",
   "textoExtra13": "Estructurado",
-  "textoExtra24": "Tu información es confidencial y se usa solo para coordinar una conversación si la solicitas.",
+  "textoExtra24": "Al enviar este formulario, aceptas la Política de Privacidad y autorizas a Binder a contactarte con información sobre sus servicios.",
   "numeroExtra01": 2,
   "numeroExtra02": 4,
   "numeroExtra03": 3,
@@ -654,6 +659,7 @@ Cada item de `listaObjetoExtra01` usa:
   "textoExtra08": "Legal Counsel",
   "textoExtra11": "/eventos/webinar-legalops-binder-niubox",
   "textoExtra12": "webinar-legalops-binder-niubox",
+  "textoExtra24": "Al enviar este formulario, aceptas la Política de Privacidad y autorizas a Binder a contactarte con información sobre sus servicios.",
   "booleanoExtra01": true,
   "fechaExtra01": "2026-05-20T15:00:00.000Z"
 }
@@ -682,6 +688,7 @@ Cada item de `listaObjetoExtra01` usa:
   "textoExtra21": "Reclamo",
   "textoExtra22": "Detalle del reclamo o queja",
   "textoExtra23": "Pedido o solucion esperada",
+  "textoExtra24": "Al enviar este formulario, aceptas la Política de Privacidad y autorizas a Binder a contactarte con información sobre sus servicios.",
   "booleanoExtra01": true,
   "booleanoExtra02": true,
   "fechaExtra01": "2026-05-20T15:00:00.000Z"

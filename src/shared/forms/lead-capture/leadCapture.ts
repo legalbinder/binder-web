@@ -5,6 +5,7 @@ import {
 } from '../../utils/corporateEmailValidation';
 import type { BubbleFormOrigin, BubbleFormPayload } from '../../integrations/bubble/bubbleWebhooks';
 import type { FormSubmissionData } from '../../utils/formSubmission';
+import { PRIVACY_CONSENT_TEXT } from '../privacyConsent';
 
 export interface Country {
   code: string;
@@ -85,7 +86,7 @@ export function validateLeadCaptureForm(
   }
 
   if (!formData.consent) {
-    errors.consent = 'Debes aceptar el consentimiento';
+    errors.consent = 'Debes aceptar la Política de Privacidad para continuar';
   }
 
   return errors;
@@ -130,6 +131,7 @@ export function buildLeadCapturePayload(
     textoExtra07: formData.company.trim(),
     textoExtra10: trimmedMessage || options.emptyChallengeValue,
     textoExtra11: `${window.location.pathname}${window.location.hash}`,
+    textoExtra24: PRIVACY_CONSENT_TEXT,
     booleanoExtra01: formData.consent,
     fechaExtra01: fechaEnvio,
   };

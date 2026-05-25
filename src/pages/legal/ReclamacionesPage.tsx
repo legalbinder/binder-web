@@ -6,6 +6,10 @@ import {
   getBubbleWebhookUrl,
 } from '../../shared/integrations/bubble/bubbleWebhooks';
 import { postBubbleWorkflow } from '../../shared/integrations/bubble/postBubbleWorkflow';
+import {
+  PRIVACY_CONSENT_TEXT,
+  PrivacyConsentLabel,
+} from '../../shared/forms/privacyConsent';
 import './ReclamacionesPage.css';
 
 type DocumentType = '' | 'DNI' | 'Pasaporte' | 'RUC' | 'Carnet de extranjería';
@@ -28,6 +32,7 @@ interface ComplaintFormData {
   reason: ComplaintReason;
   detail: string;
   request: string;
+  privacyConsent: boolean;
   acceptsConditions: boolean;
 }
 
@@ -84,6 +89,7 @@ const initialFormData: ComplaintFormData = {
   reason: 'Reclamo',
   detail: '',
   request: '',
+  privacyConsent: false,
   acceptsConditions: false,
 };
 
@@ -173,6 +179,10 @@ export const ReclamacionesPage = () => {
       nextErrors.acceptsConditions = 'Debes aceptar las condiciones de atención.';
     }
 
+    if (!formData.privacyConsent) {
+      nextErrors.privacyConsent = 'Debes aceptar la Política de Privacidad para continuar.';
+    }
+
     setErrors(nextErrors);
     return Object.keys(nextErrors).length === 0;
   };
@@ -209,7 +219,8 @@ export const ReclamacionesPage = () => {
         textoExtra21: formData.reason,
         textoExtra22: formData.detail.trim(),
         textoExtra23: formData.request.trim(),
-        booleanoExtra01: formData.acceptsConditions,
+        textoExtra24: PRIVACY_CONSENT_TEXT,
+        booleanoExtra01: formData.privacyConsent,
         booleanoExtra02: formData.acceptsConditions,
         fechaExtra01: fechaEnvio,
       };
@@ -617,6 +628,24 @@ export const ReclamacionesPage = () => {
             {errors.acceptsConditions && (
               <span className="reclamaciones-error reclamaciones-error--block">
                 {errors.acceptsConditions}
+              </span>
+            )}
+
+            <div className="reclamaciones-confirm-row">
+              <input
+                type="checkbox"
+                id="privacyConsent"
+                checked={formData.privacyConsent}
+                onChange={(event) => updateField('privacyConsent', event.target.checked)}
+                aria-invalid={Boolean(errors.privacyConsent)}
+              />
+              <label htmlFor="privacyConsent">
+                <PrivacyConsentLabel />
+              </label>
+            </div>
+            {errors.privacyConsent && (
+              <span className="reclamaciones-error reclamaciones-error--block">
+                {errors.privacyConsent}
               </span>
             )}
 

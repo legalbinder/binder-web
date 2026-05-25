@@ -19,6 +19,10 @@ import {
   normalizeLeadCaptureEmail,
   type Country,
 } from '../../shared/forms/lead-capture/leadCapture';
+import {
+  PRIVACY_CONSENT_TEXT,
+  PrivacyConsentLabel,
+} from '../../shared/forms/privacyConsent';
 import { trackGoogleEvent } from '../../tracking/tracking';
 import './EventPage.css';
 
@@ -120,7 +124,9 @@ export function EventPage() {
 
     if (!form.jobTitle.trim()) nextErrors.jobTitle = 'El cargo es requerido';
     if (!form.company.trim()) nextErrors.company = 'La empresa es requerida';
-    if (!form.consent) nextErrors.consent = 'Debes aceptar para continuar';
+    if (!form.consent) {
+      nextErrors.consent = 'Debes aceptar la Política de Privacidad para continuar';
+    }
 
     setErrors(nextErrors);
     return Object.keys(nextErrors).length === 0;
@@ -151,6 +157,7 @@ export function EventPage() {
       textoExtra08: form.jobTitle.trim(),
       textoExtra11: canonicalPath,
       textoExtra12: event.slug,
+      textoExtra24: PRIVACY_CONSENT_TEXT,
       booleanoExtra01: form.consent,
       fechaExtra01: fechaEnvio,
     };
@@ -444,15 +451,7 @@ export function EventPage() {
                             onChange={(e) => setField('consent', e.target.checked)}
                           />
                           <label htmlFor="event-consent-checkbox">
-                            Acepto el tratamiento de mis datos según la{' '}
-                            <Link
-                              to="/legal/privacidad"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              política de privacidad
-                            </Link>
-                            .
+                            <PrivacyConsentLabel />
                           </label>
                         </div>
                         {errors.consent && (

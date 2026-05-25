@@ -8,6 +8,7 @@ import {
   getBubbleWebhookUrl,
   type BubbleFormOrigin,
 } from '../../integrations/bubble/bubbleWebhooks';
+import { PrivacyConsentLabel } from '../privacyConsent';
 import { useLeadCaptureForm } from './useLeadCaptureForm';
 import type { Country } from './leadCapture';
 
@@ -176,7 +177,9 @@ export const LeadCaptureSection = ({
                     checked={formData.consent}
                     onChange={(event) => handleChange('consent', event.target.checked)}
                   />
-                  <span>{contactoContent.form.consent.text}</span>
+                  <span>
+                    <PrivacyConsentLabel />
+                  </span>
                 </label>
                 {errors.consent && (
                   <span className={classes.errorMessage}>{errors.consent}</span>

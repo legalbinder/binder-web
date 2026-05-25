@@ -43,7 +43,7 @@ export const contactoContent = {
       },
     },
     consent: {
-      text: "Acepto que Binder contacte conmigo con información sobre sus productos y servicios.",
+      text: "Al enviar este formulario, aceptas la Política de Privacidad y autorizas a Binder a contactarte con información sobre sus servicios.",
       required: true,
     },
     submitText: "Agendar demo",

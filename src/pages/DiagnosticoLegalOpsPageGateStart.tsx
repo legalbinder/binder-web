@@ -12,6 +12,10 @@ import {
   getBubbleWebhookUrl,
 } from '../shared/integrations/bubble/bubbleWebhooks';
 import { postBubbleWorkflow } from '../shared/integrations/bubble/postBubbleWorkflow';
+import {
+  PRIVACY_CONSENT_TEXT,
+  PrivacyConsentLabel,
+} from '../shared/forms/privacyConsent';
 import { storeFormSubmission } from '../shared/utils/formSubmission';
 import './DiagnosticoLegalOpsPage.css';
 
@@ -30,6 +34,7 @@ interface GateFormData {
   email: string;
   company: string;
   role: RoleOption | '';
+  privacyConsent: boolean;
 }
 
 interface GateErrors {
@@ -37,6 +42,7 @@ interface GateErrors {
   email?: string;
   company?: string;
   role?: string;
+  privacyConsent?: string;
   submit?: string;
 }
 
@@ -189,9 +195,6 @@ const roleOptions: RoleOption[] = [
   'Otros',
 ];
 
-const diagnosticoConsentText =
-  'Tu información es confidencial y se usa solo para coordinar una conversación si la solicitas.';
-
 const getLevelByNoCount = (noCount: number): LevelContent => {
   if (noCount >= 6) return levels[0];
   if (noCount >= 4) return levels[1];
@@ -208,6 +211,7 @@ export const DiagnosticoLegalOpsPageGateStart = () => {
     email: '',
     company: '',
     role: '',
+    privacyConsent: false,
   });
   const [gateErrors, setGateErrors] = useState<GateErrors>({});
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -263,6 +267,10 @@ export const DiagnosticoLegalOpsPageGateStart = () => {
       errors.role = 'Selecciona tu cargo.';
     }
 
+    if (!gateFormData.privacyConsent) {
+      errors.privacyConsent = 'Debes aceptar la Política de Privacidad para continuar.';
+    }
+
     setGateErrors(errors);
     return Object.keys(errors).length === 0;
   };
@@ -287,8 +295,8 @@ export const DiagnosticoLegalOpsPageGateStart = () => {
         textoExtra07: gateFormData.company.trim(),
         textoExtra09: gateFormData.role,
         textoExtra11: '/diagnostico-legal-ops-formulario-inicio',
-        textoExtra24: diagnosticoConsentText,
-        booleanoExtra01: true,
+        textoExtra24: PRIVACY_CONSENT_TEXT,
+        booleanoExtra01: gateFormData.privacyConsent,
         fechaExtra01: fechaEnvio,
       };
 
@@ -349,12 +357,12 @@ export const DiagnosticoLegalOpsPageGateStart = () => {
         textoExtra10: `Diagnóstico Legal Ops - Nivel ${finalLevel.number} (${finalLevel.level})`,
         textoExtra11: '/diagnostico-legal-ops-formulario-inicio',
         textoExtra13: finalLevel.level,
-        textoExtra24: diagnosticoConsentText,
+        textoExtra24: PRIVACY_CONSENT_TEXT,
         numeroExtra01: finalLevel.number,
         numeroExtra02: noCount,
         numeroExtra03: questions.length - noCount,
         numeroExtra04: questions.length,
-        booleanoExtra01: true,
+        booleanoExtra01: gateFormData.privacyConsent,
         fechaExtra01: fechaEnvio,
         listaObjetoExtra01: answers.map((answer, index) => ({
           tipo: 'pregunta-respuesta',
@@ -510,7 +518,31 @@ export const DiagnosticoLegalOpsPageGateStart = () => {
                     </label>
                   </div>
 
-                  <p className="diagnostico-note">{diagnosticoConsentText}</p>
+                  <label className="diagnostico-checkbox-label">
+                    <input
+                      type="checkbox"
+                      checked={gateFormData.privacyConsent}
+                      onChange={(event) => {
+                        setGateFormData((prev) => ({
+                          ...prev,
+                          privacyConsent: event.target.checked,
+                        }));
+                        if (gateErrors.privacyConsent) {
+                          setGateErrors((prev) => ({
+                            ...prev,
+                            privacyConsent: undefined,
+                          }));
+                        }
+                      }}
+                      aria-invalid={Boolean(gateErrors.privacyConsent)}
+                    />
+                    <span>
+                      <PrivacyConsentLabel />
+                    </span>
+                  </label>
+                  {gateErrors.privacyConsent && (
+                    <span className="error-text">{gateErrors.privacyConsent}</span>
+                  )}
 
                   {gateErrors.submit && (
                     <p className="error-text submit-error">{gateErrors.submit}</p>
