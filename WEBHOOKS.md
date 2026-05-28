@@ -488,7 +488,7 @@ Este llamado se envia cuando la persona completa la primera pantalla del diagnos
 
 ### `diagnostico-legal-ops`
 
-Este llamado se envia al finalizar el cuestionario del diagnostico, junto con el nivel obtenido y las respuestas.
+Este llamado se envia cuando la persona responde la ultima pregunta y presiona "Ver mi diagnostico". Incluye el nivel obtenido y las respuestas.
 
 | Clave | Significado |
 | --- | --- |

@@ -328,70 +328,51 @@ export const DiagnosticoLegalOpsPageGateStart = () => {
     setAnswers(updatedAnswers);
   };
 
-  const handleNextQuestion = () => {
-    if (currentAnswer === null) {
-      return;
-    }
+  const buildDiagnosisPayload = (fechaEnvio: string): BubbleFormPayload => ({
+    origen: 'diagnostico-legal-ops',
+    fechaEnvio,
+    textoExtra01: gateFormData.name.trim(),
+    textoExtra04: gateFormData.email.trim(),
+    textoExtra07: gateFormData.company.trim(),
+    textoExtra09: gateFormData.role,
+    textoExtra10: `Diagnóstico Legal Ops - Nivel ${finalLevel.number} (${finalLevel.level})`,
+    textoExtra11: '/diagnostico-legal-ops-formulario-inicio',
+    textoExtra13: finalLevel.level,
+    textoExtra24: PRIVACY_CONSENT_TEXT,
+    numeroExtra01: finalLevel.number,
+    numeroExtra02: noCount,
+    numeroExtra03: questions.length - noCount,
+    numeroExtra04: questions.length,
+    booleanoExtra01: gateFormData.privacyConsent,
+    fechaExtra01: fechaEnvio,
+    listaObjetoExtra01: answers.map((answer, index) => ({
+      tipo: 'Si-no',
+      clave: questions[index].id,
+      pregunta: questions[index].question,
+      respuestaTexto: answer === true ? 'Sí' : 'No',
+      respuestaNumero: answer === true ? 1 : 0,
+      respuestaBooleano: answer === true,
+      respuestaFecha: fechaEnvio,
+      categoria: 'diagnostico-legal-ops',
+    })),
+  });
 
-    if (currentQuestionIndex === questions.length - 1) {
-      setStage('result');
-      return;
-    }
-
-    setCurrentQuestionIndex((index) => index + 1);
+  const storeDiagnosisLead = () => {
+    storeFormSubmission({
+      name: gateFormData.name.trim(),
+      company: gateFormData.company.trim(),
+      email: gateFormData.email.trim(),
+    });
   };
 
-  const handlePreviousQuestion = () => {
-    if (currentQuestionIndex === 0) {
-      return;
-    }
-
-    setCurrentQuestionIndex((index) => index - 1);
-  };
-
-  const handleSubmitDiagnosis = async () => {
+  const submitDiagnosisAndShowResult = async () => {
     setIsSubmitting(true);
     setGateErrors({});
 
     try {
-      const fechaEnvio = new Date().toISOString();
-      const payload: BubbleFormPayload = {
-        origen: 'diagnostico-legal-ops',
-        fechaEnvio,
-        textoExtra01: gateFormData.name.trim(),
-        textoExtra04: gateFormData.email.trim(),
-        textoExtra07: gateFormData.company.trim(),
-        textoExtra09: gateFormData.role,
-        textoExtra10: `Diagnóstico Legal Ops - Nivel ${finalLevel.number} (${finalLevel.level})`,
-        textoExtra11: '/diagnostico-legal-ops-formulario-inicio',
-        textoExtra13: finalLevel.level,
-        textoExtra24: PRIVACY_CONSENT_TEXT,
-        numeroExtra01: finalLevel.number,
-        numeroExtra02: noCount,
-        numeroExtra03: questions.length - noCount,
-        numeroExtra04: questions.length,
-        booleanoExtra01: gateFormData.privacyConsent,
-        fechaExtra01: fechaEnvio,
-        listaObjetoExtra01: answers.map((answer, index) => ({
-          tipo: 'Si-no',
-          clave: questions[index].id,
-          pregunta: questions[index].question,
-          respuestaTexto: answer === true ? 'Sí' : 'No',
-          respuestaNumero: answer === true ? 1 : 0,
-          respuestaBooleano: answer === true,
-          respuestaFecha: fechaEnvio,
-          categoria: 'diagnostico-legal-ops',
-        })),
-      };
-
-      await postBubbleWorkflow(getBubbleWebhookUrl(), payload);
-
-      storeFormSubmission({
-        name: gateFormData.name.trim(),
-        company: gateFormData.company.trim(),
-        email: gateFormData.email.trim(),
-      });
-      navigate('/gracias');
+      await postBubbleWorkflow(getBubbleWebhookUrl(), buildDiagnosisPayload(new Date().toISOString()));
+      storeDiagnosisLead();
+      setStage('result');
     } catch (error) {
       setGateErrors({
         submit:
@@ -399,8 +380,35 @@ export const DiagnosticoLegalOpsPageGateStart = () => {
             ? error.message
             : 'No se pudo enviar el diagnóstico. Intenta nuevamente.',
       });
+    } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const handleNextQuestion = async () => {
+    if (currentAnswer === null || isSubmitting) {
+      return;
+    }
+
+    if (currentQuestionIndex === questions.length - 1) {
+      await submitDiagnosisAndShowResult();
+      return;
+    }
+
+    setCurrentQuestionIndex((index) => index + 1);
+  };
+
+  const handlePreviousQuestion = () => {
+    if (currentQuestionIndex === 0 || isSubmitting) {
+      return;
+    }
+
+    setCurrentQuestionIndex((index) => index - 1);
+  };
+
+  const handleRequestRoadmapDemo = () => {
+    storeDiagnosisLead();
+    navigate('/gracias');
   };
 
   return (
@@ -624,6 +632,7 @@ export const DiagnosticoLegalOpsPageGateStart = () => {
                       type="button"
                       className={`diagnostico-option ${currentAnswer === true ? 'selected' : ''}`}
                       onClick={() => handleSetAnswer(true)}
+                      disabled={isSubmitting}
                     >
                       <strong>Sí</strong>
                       <span>{currentQuestion.yesLabel}</span>
@@ -632,6 +641,7 @@ export const DiagnosticoLegalOpsPageGateStart = () => {
                       type="button"
                       className={`diagnostico-option ${currentAnswer === false ? 'selected' : ''}`}
                       onClick={() => handleSetAnswer(false)}
+                      disabled={isSubmitting}
                     >
                       <strong>No</strong>
                       <span>{currentQuestion.noLabel}</span>
@@ -642,7 +652,7 @@ export const DiagnosticoLegalOpsPageGateStart = () => {
                     <button
                       type="button"
                       onClick={handlePreviousQuestion}
-                      disabled={currentQuestionIndex === 0}
+                      disabled={currentQuestionIndex === 0 || isSubmitting}
                       className="diagnostico-secondary-button"
                     >
                       Anterior
@@ -650,14 +660,20 @@ export const DiagnosticoLegalOpsPageGateStart = () => {
                     <button
                       type="button"
                       onClick={handleNextQuestion}
-                      disabled={currentAnswer === null}
+                      disabled={currentAnswer === null || isSubmitting}
                       className="diagnostico-primary-button"
                     >
-                      {currentQuestionIndex === questions.length - 1
-                        ? 'Ver mi diagnóstico'
-                        : 'Siguiente'}
+                      {isSubmitting
+                        ? 'Enviando...'
+                        : currentQuestionIndex === questions.length - 1
+                          ? 'Ver mi diagnóstico'
+                          : 'Siguiente'}
                     </button>
                   </div>
+
+                  {gateErrors.submit && (
+                    <p className="error-text submit-error">{gateErrors.submit}</p>
+                  )}
                 </article>
               </div>
             </div>
@@ -745,10 +761,9 @@ export const DiagnosticoLegalOpsPageGateStart = () => {
                 <button
                   type="button"
                   className="diagnostico-primary-button"
-                  onClick={handleSubmitDiagnosis}
-                  disabled={isSubmitting}
+                  onClick={handleRequestRoadmapDemo}
                 >
-                  {isSubmitting ? 'Enviando...' : 'Ver roadmap en una demo'}
+                  Ver roadmap en una demo
                 </button>
               </div>
             </div>

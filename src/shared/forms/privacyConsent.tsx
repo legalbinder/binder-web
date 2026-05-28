@@ -7,7 +7,7 @@ export const PRIVACY_CONSENT_TEXT =
 
 export const PrivacyConsentLabel = () => (
   <>
-    Al enviar este formulario, aceptas la{' '}
+    Al enviar este formulario aceptas la{' '}
     <Link to={PRIVACY_POLICY_PATH} target="_blank" rel="noopener noreferrer">
       Política de Privacidad
     </Link>{' '}

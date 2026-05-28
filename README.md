@@ -77,7 +77,7 @@ VITE_LINKEDIN_PARTNER_ID=
 
 ## Formularios
 
-Todos los formularios usan `VITE_BUBBLE_WEBHOOK_URL`. Bubble distingue cada origen por el campo `origen` y los datos se envian con claves genericas (`textoExtraXX`, `numeroExtraXX`, etc.) documentadas en [WEBHOOKS.md](WEBHOOKS.md). El diagnostico Legal Ops envia dos llamados: uno al completar los datos iniciales y otro al finalizar el cuestionario.
+Todos los formularios usan `VITE_BUBBLE_WEBHOOK_URL`. Bubble distingue cada origen por el campo `origen` y los datos se envian con claves genericas (`textoExtraXX`, `numeroExtraXX`, etc.) documentadas en [WEBHOOKS.md](WEBHOOKS.md). El diagnostico Legal Ops envia dos llamados: uno al completar los datos iniciales y otro al presionar `Ver mi diagnóstico`.
 
 | Formulario | Ubicacion | Identificador enviado |
 | --- | --- | --- |
