@@ -26,12 +26,13 @@ Para pruebas se puede configurar una segunda variable de entorno:
 VITE_WEBHOOK_URL=
 ```
 
-Si `VITE_WEBHOOK_URL` tiene un valor, la web envia una copia del mismo payload a ese segundo webhook despues del envio principal.
+Si `VITE_WEBHOOK_URL` tiene un valor, la web envia una copia del mismo payload a ese segundo webhook de forma independiente al envio principal.
 
 Reglas:
 
 - Si `VITE_WEBHOOK_URL` esta vacia, no se envia nada al segundo webhook.
 - Si `VITE_WEBHOOK_URL` falla, esta apagada o responde con error, se ignora y no bloquea el formulario.
+- Si `VITE_BUBBLE_WEBHOOK_URL` falla, la web igual intenta enviar la copia a `VITE_WEBHOOK_URL`.
 - El webhook secundario se envia como `text/plain` y `no-cors` para evitar el preflight `OPTIONS` en herramientas como webhook.site.
 - `VITE_BUBBLE_WEBHOOK_URL` sigue siendo el webhook principal y obligatorio.
 - Como es una variable `VITE_`, cualquier cambio en Vercel requiere redeploy.
@@ -241,7 +242,7 @@ Este payload inicializa un contrato generico y reutilizable. La web usa las mism
   },
   "listaObjetoExtra01": [
     {
-      "tipo": "diagnostico-respuesta",
+      "tipo": "Si-no",
       "clave": "contratos-centralizados",
       "pregunta": "¿Tienes contratos centralizados?",
       "respuestaTexto": "No",
@@ -253,47 +254,47 @@ Este payload inicializa un contrato generico y reutilizable. La web usa las mism
   ],
   "listaObjetoExtra02": [
     {
-      "tipo": "diagnostico-respuesta",
-      "clave": "alertas-vencimiento-renovacion",
-      "pregunta": "¿Tienes alertas automatizadas?",
-      "respuestaTexto": "Sí",
-      "respuestaNumero": 1,
-      "respuestaBooleano": true,
-      "respuestaFecha": "2026-05-21T15:00:00.000Z",
-      "categoria": "diagnostico-legal-ops"
+      "tipo": "Fecha",
+      "clave": "fecha-vencimiento-contrato",
+      "pregunta": "¿Cuál es la fecha de vencimiento del contrato?",
+      "respuestaTexto": "2026-12-31",
+      "respuestaNumero": null,
+      "respuestaBooleano": null,
+      "respuestaFecha": "2026-12-31T00:00:00.000Z",
+      "categoria": "contratos"
     }
   ],
   "listaObjetoExtra03": [
     {
-      "tipo": "diagnostico-respuesta",
-      "clave": "archivo-contratos-consistente",
-      "pregunta": "Pregunta de ejemplo 03",
-      "respuestaTexto": "Respuesta",
-      "respuestaNumero": 3,
-      "respuestaBooleano": true,
-      "respuestaFecha": "2026-05-22T15:00:00.000Z",
-      "categoria": "diagnostico-legal-ops"
+      "tipo": "Numero",
+      "clave": "cantidad-contratos-activos",
+      "pregunta": "¿Cuántos contratos activos tienes?",
+      "respuestaTexto": "120",
+      "respuestaNumero": 120,
+      "respuestaBooleano": null,
+      "respuestaFecha": null,
+      "categoria": "contratos"
     }
   ],
   "listaObjetoExtra04": [
     {
-      "tipo": "diagnostico-respuesta",
-      "clave": "estado-solicitudes-tiempo-real",
-      "pregunta": "Pregunta de ejemplo 04",
-      "respuestaTexto": "Respuesta",
-      "respuestaNumero": 4,
-      "respuestaBooleano": false,
-      "respuestaFecha": "2026-05-23T15:00:00.000Z",
+      "tipo": "Texto",
+      "clave": "principal-reto-legal",
+      "pregunta": "¿Cuál es el principal reto de tu equipo legal?",
+      "respuestaTexto": "Tenemos información dispersa en varias carpetas.",
+      "respuestaNumero": null,
+      "respuestaBooleano": null,
+      "respuestaFecha": null,
       "categoria": "diagnostico-legal-ops"
     }
   ],
   "listaObjetoExtra05": [
     {
-      "tipo": "diagnostico-respuesta",
+      "tipo": "Si-no",
       "clave": "medicion-sla",
       "pregunta": "Pregunta de ejemplo 05",
-      "respuestaTexto": "Respuesta",
-      "respuestaNumero": 5,
+      "respuestaTexto": "Sí",
+      "respuestaNumero": 1,
       "respuestaBooleano": true,
       "respuestaFecha": "2026-05-24T15:00:00.000Z",
       "categoria": "diagnostico-legal-ops"
@@ -301,11 +302,11 @@ Este payload inicializa un contrato generico y reutilizable. La web usa las mism
   ],
   "listaObjetoExtra06": [
     {
-      "tipo": "diagnostico-respuesta",
+      "tipo": "Si-no",
       "clave": "indicadores-carga-desempeno",
       "pregunta": "Pregunta de ejemplo 06",
-      "respuestaTexto": "Respuesta",
-      "respuestaNumero": 6,
+      "respuestaTexto": "No",
+      "respuestaNumero": 0,
       "respuestaBooleano": false,
       "respuestaFecha": "2026-05-25T15:00:00.000Z",
       "categoria": "diagnostico-legal-ops"
@@ -313,11 +314,11 @@ Este payload inicializa un contrato generico y reutilizable. La web usa las mism
   ],
   "listaObjetoExtra07": [
     {
-      "tipo": "diagnostico-respuesta",
+      "tipo": "Si-no",
       "clave": "automatizacion-tareas-repetitivas",
       "pregunta": "Pregunta de ejemplo 07",
-      "respuestaTexto": "Respuesta",
-      "respuestaNumero": 7,
+      "respuestaTexto": "Sí",
+      "respuestaNumero": 1,
       "respuestaBooleano": true,
       "respuestaFecha": "2026-05-26T15:00:00.000Z",
       "categoria": "diagnostico-legal-ops"
@@ -325,36 +326,36 @@ Este payload inicializa un contrato generico y reutilizable. La web usa las mism
   ],
   "listaObjetoExtra08": [
     {
-      "tipo": "diagnostico-respuesta",
+      "tipo": "Texto",
       "clave": "pregunta-futura-08",
       "pregunta": "Pregunta de ejemplo 08",
       "respuestaTexto": "Respuesta",
-      "respuestaNumero": 8,
-      "respuestaBooleano": false,
-      "respuestaFecha": "2026-05-27T15:00:00.000Z",
+      "respuestaNumero": null,
+      "respuestaBooleano": null,
+      "respuestaFecha": null,
       "categoria": "general"
     }
   ],
   "listaObjetoExtra09": [
     {
-      "tipo": "diagnostico-respuesta",
+      "tipo": "Numero",
       "clave": "pregunta-futura-09",
       "pregunta": "Pregunta de ejemplo 09",
-      "respuestaTexto": "Respuesta",
+      "respuestaTexto": "9",
       "respuestaNumero": 9,
-      "respuestaBooleano": true,
-      "respuestaFecha": "2026-05-28T15:00:00.000Z",
+      "respuestaBooleano": null,
+      "respuestaFecha": null,
       "categoria": "general"
     }
   ],
   "listaObjetoExtra10": [
     {
-      "tipo": "diagnostico-respuesta",
+      "tipo": "Fecha",
       "clave": "pregunta-futura-10",
       "pregunta": "Pregunta de ejemplo 10",
-      "respuestaTexto": "Respuesta",
-      "respuestaNumero": 10,
-      "respuestaBooleano": false,
+      "respuestaTexto": "2026-05-29",
+      "respuestaNumero": null,
+      "respuestaBooleano": null,
       "respuestaFecha": "2026-05-29T15:00:00.000Z",
       "categoria": "general"
     }
@@ -513,7 +514,7 @@ Cada item de `listaObjetoExtra01` usa:
 
 | Clave del objeto | Significado |
 | --- | --- |
-| `tipo` | `diagnostico-respuesta` |
+| `tipo` | Tipo de dato de la respuesta: `Si-no`, `Fecha`, `Numero` o `Texto` |
 | `clave` | Identificador semantico estable de la pregunta |
 | `pregunta` | Texto de la pregunta |
 | `respuestaTexto` | Respuesta visible, por ejemplo `Sí` o `No` |
@@ -585,7 +586,7 @@ Cada item de `listaObjetoExtra01` usa:
   "textoExtra07": "Empresa XYZ",
   "textoExtra10": "Gestion documental desordenada",
   "textoExtra11": "/#contacto",
-  "textoExtra24": "Al enviar este formulario, aceptas la Política de Privacidad y autorizas a Binder a contactarte con información sobre sus servicios.",
+  "textoExtra24": "Al enviar este formulario aceptas la Política de Privacidad y autorizas a Binder a contactarte con información sobre sus servicios.",
   "booleanoExtra01": true,
   "fechaExtra01": "2026-05-20T15:00:00.000Z"
 }
@@ -602,7 +603,7 @@ Cada item de `listaObjetoExtra01` usa:
   "textoExtra07": "Empresa XYZ",
   "textoExtra09": "GC",
   "textoExtra11": "/diagnostico-legal-ops-formulario-inicio",
-  "textoExtra24": "Al enviar este formulario, aceptas la Política de Privacidad y autorizas a Binder a contactarte con información sobre sus servicios.",
+  "textoExtra24": "Al enviar este formulario aceptas la Política de Privacidad y autorizas a Binder a contactarte con información sobre sus servicios.",
   "booleanoExtra01": true,
   "fechaExtra01": "2026-05-20T15:00:00.000Z"
 }
@@ -621,7 +622,7 @@ Cada item de `listaObjetoExtra01` usa:
   "textoExtra10": "Diagnóstico Legal Ops - Nivel 2 (Estructurado)",
   "textoExtra11": "/diagnostico-legal-ops-formulario-inicio",
   "textoExtra13": "Estructurado",
-  "textoExtra24": "Al enviar este formulario, aceptas la Política de Privacidad y autorizas a Binder a contactarte con información sobre sus servicios.",
+  "textoExtra24": "Al enviar este formulario aceptas la Política de Privacidad y autorizas a Binder a contactarte con información sobre sus servicios.",
   "numeroExtra01": 2,
   "numeroExtra02": 4,
   "numeroExtra03": 3,
@@ -630,7 +631,7 @@ Cada item de `listaObjetoExtra01` usa:
   "fechaExtra01": "2026-05-20T15:00:00.000Z",
   "listaObjetoExtra01": [
     {
-      "tipo": "diagnostico-respuesta",
+      "tipo": "Si-no",
       "clave": "contratos-centralizados",
       "pregunta": "¿Tus contratos están centralizados en un repositorio único?",
       "respuestaTexto": "No",
@@ -659,7 +660,7 @@ Cada item de `listaObjetoExtra01` usa:
   "textoExtra08": "Legal Counsel",
   "textoExtra11": "/eventos/webinar-legalops-binder-niubox",
   "textoExtra12": "webinar-legalops-binder-niubox",
-  "textoExtra24": "Al enviar este formulario, aceptas la Política de Privacidad y autorizas a Binder a contactarte con información sobre sus servicios.",
+  "textoExtra24": "Al enviar este formulario aceptas la Política de Privacidad y autorizas a Binder a contactarte con información sobre sus servicios.",
   "booleanoExtra01": true,
   "fechaExtra01": "2026-05-20T15:00:00.000Z"
 }
@@ -688,7 +689,7 @@ Cada item de `listaObjetoExtra01` usa:
   "textoExtra21": "Reclamo",
   "textoExtra22": "Detalle del reclamo o queja",
   "textoExtra23": "Pedido o solucion esperada",
-  "textoExtra24": "Al enviar este formulario, aceptas la Política de Privacidad y autorizas a Binder a contactarte con información sobre sus servicios.",
+  "textoExtra24": "Al enviar este formulario aceptas la Política de Privacidad y autorizas a Binder a contactarte con información sobre sus servicios.",
   "booleanoExtra01": true,
   "booleanoExtra02": true,
   "fechaExtra01": "2026-05-20T15:00:00.000Z"
@@ -711,6 +712,7 @@ Cada item de `listaObjetoExtra01` usa:
   ],
   "textoExtra20": ["Producto", "Servicio"],
   "textoExtra21": ["Reclamo", "Queja"],
+  "listaObjetoExtra01[].tipo": ["Si-no", "Fecha", "Numero", "Texto"],
   "listaObjetoExtra01[].respuestaTexto": ["Sí", "No"]
 }
 ```

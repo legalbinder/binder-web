@@ -36,7 +36,7 @@ VITE_LINKEDIN_PARTNER_ID=
 ```
 
 `VITE_BUBBLE_WEBHOOK_URL` apunta a un unico Backend Workflow de Bubble. Cada formulario envia un campo `origen` para que Bubble identifique el registro.
-`VITE_WEBHOOK_URL` es opcional y sirve para duplicar envios hacia un webhook de prueba sin bloquear el formulario si falla.
+`VITE_WEBHOOK_URL` es opcional y sirve para duplicar envios hacia un webhook de prueba de forma independiente al webhook principal.
 
 ## Vistas y rutas
 

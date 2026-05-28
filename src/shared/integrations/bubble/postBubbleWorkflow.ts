@@ -8,21 +8,28 @@ interface BubbleWorkflowResponse {
 }
 
 export async function postBubbleWorkflow<TBody>(
-  url: string,
+  url: string | undefined,
   body: TBody
 ): Promise<BubbleWorkflowResponse> {
-  const primaryResponse = await postSingleBubbleWorkflow(url, body);
   const optionalUrl = getOptionalWebhookUrl();
+  const optionalRequest =
+    optionalUrl && optionalUrl !== url
+      ? postOptionalTestingWebhook(optionalUrl, body).catch(() => undefined)
+      : Promise.resolve();
 
-  if (optionalUrl && optionalUrl !== url) {
-    try {
-      await postOptionalTestingWebhook(optionalUrl, body);
-    } catch {
-      // Optional testing webhook must never block the production submission.
-    }
+  if (!url) {
+    await optionalRequest;
+    throw new Error('Configura VITE_BUBBLE_WEBHOOK_URL antes de publicar este formulario.');
   }
 
-  return primaryResponse;
+  try {
+    const primaryResponse = await postSingleBubbleWorkflow(url, body);
+    await optionalRequest;
+    return primaryResponse;
+  } catch (error) {
+    await optionalRequest;
+    throw error;
+  }
 }
 
 async function postSingleBubbleWorkflow<TBody>(

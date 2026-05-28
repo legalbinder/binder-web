@@ -16,7 +16,7 @@ import {
 interface UseLeadCaptureFormOptions {
   blockedDomains: string[];
   countries: Country[];
-  resolveWebhookUrl: () => string;
+  resolveWebhookUrl: () => string | undefined;
   origen: Extract<
     BubbleFormOrigin,
     | 'formulario-contacto'

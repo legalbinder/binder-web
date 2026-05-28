@@ -373,7 +373,7 @@ export const DiagnosticoLegalOpsPageGateStart = () => {
         booleanoExtra01: gateFormData.privacyConsent,
         fechaExtra01: fechaEnvio,
         listaObjetoExtra01: answers.map((answer, index) => ({
-          tipo: 'diagnostico-respuesta',
+          tipo: 'Si-no',
           clave: questions[index].id,
           pregunta: questions[index].question,
           respuestaTexto: answer === true ? 'Sí' : 'No',

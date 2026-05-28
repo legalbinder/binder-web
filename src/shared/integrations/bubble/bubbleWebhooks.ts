@@ -8,14 +8,8 @@ function readWebhookEnvValue(envKey: 'VITE_BUBBLE_WEBHOOK_URL' | 'VITE_WEBHOOK_U
   return rawValue ? normalizeBubbleWorkflowPostUrl(rawValue) : undefined;
 }
 
-export function getBubbleWebhookUrl(): string {
-  const url = readWebhookEnvValue(bubbleWebhookEnvKey);
-
-  if (!url) {
-    throw new Error(`Configura ${bubbleWebhookEnvKey} antes de publicar este formulario.`);
-  }
-
-  return url;
+export function getBubbleWebhookUrl(): string | undefined {
+  return readWebhookEnvValue(bubbleWebhookEnvKey);
 }
 
 export function getOptionalWebhookUrl(): string | undefined {
