@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import { InternalPage } from '../../components/layout/InternalPage';
+import { PageHead } from '../../components/seo/PageHead';
+import { SchemaMarkup } from '../../components/seo/SchemaMarkup';
 import { trackingConfig } from '../../tracking/config';
 
 const analyticsProviderLabel = trackingConfig.gaMeasurementId
@@ -7,8 +9,20 @@ const analyticsProviderLabel = trackingConfig.gaMeasurementId
   : 'Google Analytics';
 
 export const CookiesPage = () => {
+  const breadcrumbs = [
+    { label: 'Inicio', path: '/' },
+    { label: 'Política de Cookies', path: '/legal/cookies' },
+  ];
+
   return (
-    <InternalPage title="Política de Cookies">
+    <>
+      <PageHead
+        title="Política de Cookies | Binder"
+        description="Información sobre cookies esenciales, analíticas y preferencias de privacidad en el sitio web de Binder."
+        canonicalUrl="/legal/cookies"
+      />
+      <SchemaMarkup type="breadcrumbList" data={{ breadcrumbs }} />
+      <InternalPage title="Política de Cookies" breadcrumbs={breadcrumbs}>
       <p>
         En Binder utilizamos cookies y tecnologías similares para mejorar su
         experiencia en nuestro sitio web, analizar el uso del sitio y
@@ -187,12 +201,7 @@ export const CookiesPage = () => {
         periódicamente para mantenerse informado sobre nuestro uso de cookies.
       </p>
       <p>
-        <strong>Última actualización:</strong>{' '}
-        {new Date().toLocaleDateString('es-ES', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-        })}
+        <strong>Última actualización:</strong> 1 de junio de 2026
       </p>
 
       <h2>Contacto</h2>
@@ -202,6 +211,7 @@ export const CookiesPage = () => {
         <Link to="/legal/privacidad">Política de Privacidad</Link> para obtener
         más información sobre cómo manejamos sus datos personales.
       </p>
-    </InternalPage>
+      </InternalPage>
+    </>
   );
 };

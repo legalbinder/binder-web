@@ -1,6 +1,6 @@
 # Binder Web
 
-Sitio web comercial de Binder construido con React, TypeScript y Vite. La app funciona como SPA en Vercel y cubre landing principal, paginas comerciales, casos de uso, eventos, diagnostico Legal Ops, formularios de captacion y paginas legales.
+Sitio web comercial de Binder construido con React, TypeScript y Vite. La app funciona como React SPA en navegador, pero el build genera HTML SEO estatico para las rutas publicas principales en Vercel. Cubre landing principal, paginas comerciales, casos de uso, prensa, eventos, diagnostico Legal Ops, formularios de captacion y paginas legales.
 
 ## Stack
 
@@ -8,19 +8,32 @@ Sitio web comercial de Binder construido con React, TypeScript y Vite. La app fu
 - TypeScript
 - Vite 5
 - React Router DOM 7
-- Framer Motion
 - react-helmet-async
 - ESLint
+- Generacion post-build de HTML SEO por ruta conocida
 
 ## Comandos
 
+El proyecto usa `pnpm` como gestor de paquetes. No usar `npm install` para evitar recrear `package-lock.json` y mezclar lockfiles.
+
 ```bash
-npm install
-npm run dev
-npm run lint
-npm run build
-npm run preview
+pnpm install
+pnpm dev
+pnpm lint
+pnpm build
+pnpm preview
 ```
+
+`pnpm build` ejecuta TypeScript, Vite y `scripts/generate-seo-html.mjs`. Ese script crea archivos como `dist/prensa/index.html`, `dist/casos-uso/clm/index.html` y `dist/404.html` con title, description, canonical, Open Graph, Twitter Card, JSON-LD y contenido fallback crawlable.
+
+## SEO e indexabilidad
+
+- Las rutas comerciales, casos de uso, prensa y legales tienen canonical propio y metadata dedicada.
+- Las historias de prensa se publican como paginas indexables independientes con `Article`, `BreadcrumbList`, Open Graph y Twitter Card.
+- `/gracias`, rutas internas, pruebas, docs internos y eventos pasados usan `noindex` mediante metadata y/o `X-Robots-Tag`.
+- `vercel.json` usa redirects reales para rutas legacy (`/cases`, `/diagnostico-legal-ops`) y evita el rewrite global que convertia rutas inexistentes en soft 404.
+- `public/sitemap.xml` lista solo las rutas que deben indexarse.
+- `public/robots.txt` bloquea rutas de prueba/desarrollo y apunta al sitemap de produccion.
 
 ## Variables de entorno
 
@@ -48,6 +61,8 @@ VITE_LINKEDIN_PARTNER_ID=
 | `/funcionalidades` | Funcionalidades | Resumen de capacidades de la plataforma: contratos, procesos, expediente digital, IA y gestion legal. |
 | `/soluciones` | Soluciones | Vista general de soluciones Binder por necesidad operativa legal. |
 | `/testimonios` | Testimonios | Casos y referencias de clientes. |
+| `/prensa` | Prensa | Índice de historias y cobertura de medios sobre Binder. |
+| `/prensa/:slug` | Historia de prensa | Página individual indexable para cada cobertura o investigación. |
 | `/gracias` | Gracias | Confirmacion posterior a formularios que usa datos guardados en `sessionStorage`. |
 | `/diagnostico-legal-ops-formulario-inicio` | Diagnostico Legal Ops | Gate de lead, quiz de madurez, resultado por nivel y envio a Bubble. |
 | `/diagnostico-legal-ops` | Redirect | Redirige a `/diagnostico-legal-ops-formulario-inicio`. |
@@ -101,19 +116,33 @@ src/
     routes.tsx                    # Mapa de rutas
   components/
     layout/                       # Navegacion, SEO global, tracking, paginas internas
-    sections/                     # Secciones visuales y wrappers por landing
+    sections/                     # Secciones compartidas de home y wrappers visuales transversales
     ui/                           # UI transversal: botones, cookies, backgrounds
     seo/                          # PageHead y SchemaMarkup
+  config/
+    seo-routes.json               # Metadata SEO, sitemap y fallback HTML por ruta
+    seo.ts                        # Helpers tipados para consumir metadata SEO
   content/                        # Contenido editable de home, soluciones, eventos, footer, etc.
   context/                        # Theme, background y consentimiento de cookies
   data/                           # Paises y dominios bloqueados
+  features/
+    casos-uso/                    # Landings CLM, gestion de procesos y expediente digital
+      components/                 # Componentes especificos de casos de uso
+      content/                    # Contenido editable de casos de uso
+      index.ts                    # API publica del feature
+    prensa/                       # Pagina indice, historias, estilos y contenido de prensa
+      content/
+      index.ts
   hooks/                          # Hooks visuales/transversales
-  pages/                          # Paginas por ruta
+  pages/                          # Paginas por ruta que aun no requieren feature propio
   shared/
+    forms/                        # Builders de payload Bubble, validacion y formularios reutilizables
     forms/lead-capture/           # Formulario reusable de leads y payloads
     integrations/bubble/          # Resolucion de webhooks, POST y errores Bubble
     utils/                        # Utilidades compartidas de email y sessionStorage
   tracking/                       # Configuracion y carga runtime de tracking
+scripts/
+  generate-seo-html.mjs           # HTML SEO estatico post-build para rutas conocidas
 ```
 
 ## Tracking y cookies
@@ -126,15 +155,17 @@ src/
 ## Contenido editable
 
 - Eventos: `src/content/eventos.ts`.
+- Prensa: `src/features/prensa/content/prensa.ts`.
 - Home y secciones comerciales: `src/content/home.ts`, `src/content/porquebinder.ts`, `src/content/soluciones.ts`, `src/content/apps.ts`, `src/content/contacto.ts`.
-- Casos de uso: `src/content/cases.ts`, `src/content/deals.ts`, `src/content/expedienteDigital.ts`.
+- Casos de uso: `src/features/casos-uso/content/cases.ts`, `src/features/casos-uso/content/deals.ts`, `src/features/casos-uso/content/expedienteDigital.ts`.
 - Footer: `src/content/footer.ts`.
+- SEO y sitemap: `src/config/seo-routes.json`.
 
 ## Checklist antes de publicar
 
 ```bash
-npm run lint
-npm run build
+pnpm lint
+pnpm build
 ```
 
 Revisar tambien:

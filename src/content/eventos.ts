@@ -47,6 +47,7 @@ interface EventData {
   formNoteHtml?: string;
   heroImageUrl?: string;
   heroImageAlt?: string;
+  startDate: string;
   toolbarDateTime: string;
   infoDateTitle: string;
   infoTimeText: string;
@@ -120,6 +121,7 @@ const eventsBySlug: Record<string, EventData> = {
     footerNote: '© 2026 · Webinar LegalTech · De lo reactivo al control',
     formNoteHtml:
       'Al registrarte aceptas recibir comunicaciones de Binder y Niubox.<br /><strong>Sin spam. Puedes darte de baja en cualquier momento.</strong>',
+    startDate: '2026-04-15T11:00:00-05:00',
     toolbarDateTime: 'MIÉ 15 ABRIL · 11:00 a. m.',
     infoDateTitle: 'MIÉRCOLES 15 DE ABRIL',
     infoTimeText: '11:00 a. m.',

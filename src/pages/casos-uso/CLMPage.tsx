@@ -1,13 +1,15 @@
-import { DealsHero } from '../../components/sections/DealsHero';
-import { DealsStats } from '../../components/sections/DealsStats';
-import { DealsTabs } from '../../components/sections/DealsTabs';
-import { DealsComparison } from '../../components/sections/DealsComparison';
-import { DealsFAQ } from '../../components/sections/DealsFAQ';
-import { DealsContact } from '../../components/sections/DealsContact';
+import {
+  DealsComparison,
+  DealsContact,
+  DealsFAQ,
+  DealsHero,
+  DealsStats,
+  DealsTabs,
+  dealsContent,
+} from '../../features/casos-uso';
 import { PageHead } from '../../components/seo/PageHead';
 import { SchemaMarkup } from '../../components/seo/SchemaMarkup';
 import { Breadcrumbs } from '../../components/layout/Breadcrumbs';
-import { dealsContent } from '../../content/deals';
 
 export const CLMPage = () => {
   const faqItems = dealsContent.faq.items.map(item => ({

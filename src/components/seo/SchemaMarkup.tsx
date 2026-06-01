@@ -1,4 +1,5 @@
 import { Helmet } from 'react-helmet-async';
+import { siteUrl } from '../../config/seo';
 
 interface BreadcrumbItem {
   name?: string;
@@ -16,8 +17,6 @@ interface SchemaMarkupProps {
 }
 
 export const SchemaMarkup = ({ type, data }: SchemaMarkupProps) => {
-  const siteUrl = 'https://binder.la';
-
   const getSchema = () => {
     switch (type) {
       case 'organization':

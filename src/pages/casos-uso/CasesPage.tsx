@@ -1,13 +1,15 @@
-import { CasesHero } from '../../components/sections/CasesHero';
-import { CasesStats } from '../../components/sections/CasesStats';
-import { CasesTabs } from '../../components/sections/CasesTabs';
-import { CasesComparison } from '../../components/sections/CasesComparison';
-import { CasesFAQ } from '../../components/sections/CasesFAQ';
-import { CasesContact } from '../../components/sections/CasesContact';
+import {
+  CasesComparison,
+  CasesContact,
+  CasesFAQ,
+  CasesHero,
+  CasesStats,
+  CasesTabs,
+  casesContent,
+} from '../../features/casos-uso';
 import { PageHead } from '../../components/seo/PageHead';
 import { SchemaMarkup } from '../../components/seo/SchemaMarkup';
 import { Breadcrumbs } from '../../components/layout/Breadcrumbs';
-import { casesContent } from '../../content/cases';
 
 export const CasesPage = () => {
   const faqItems = casesContent.faq.items.map(item => ({

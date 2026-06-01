@@ -9,9 +9,8 @@ Disallow: /test/
 Disallow: /gentle-waves
 Disallow: /canyon-flows
 Disallow: /flow-pattern
-
-# Bloquear página de agradecimiento (no necesita indexación)
-Disallow: /gracias
+Disallow: /docs/
+Disallow: /hito2/
 
 # Sitemap
 Sitemap: https://binder.la/sitemap.xml

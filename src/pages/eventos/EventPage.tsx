@@ -1,53 +1,26 @@
 import { Fragment, useCallback, useEffect, useMemo, useState, type FormEvent } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link, Navigate, useParams } from 'react-router-dom';
+import { PageHead } from '../../components/seo/PageHead';
+import { siteUrl as SITE_URL } from '../../config/seo';
 import { getEventBySlug } from '../../content/eventos';
 import blockedEmailDomains from '../../data/blockedEmailDomains.json';
 import countriesData from '../../data/countries.json';
-import {
-  CORPORATE_EMAIL_REQUIRED_MESSAGE,
-  getEmailDomain,
-  isBlockedPersonalEmailDomain,
-} from '../../shared/utils/corporateEmailValidation';
-import {
-  type BubbleFormPayload,
-  getBubbleWebhookUrl,
-} from '../../shared/integrations/bubble/bubbleWebhooks';
+import { getBubbleWebhookUrl } from '../../shared/integrations/bubble/bubbleWebhooks';
 import { postBubbleWorkflow } from '../../shared/integrations/bubble/postBubbleWorkflow';
+import { type Country } from '../../shared/forms/lead-capture/leadCapture';
+import { PrivacyConsentLabel } from '../../shared/forms/privacyConsent';
 import {
-  formatLeadCapturePhone,
-  normalizeLeadCaptureEmail,
-  type Country,
-} from '../../shared/forms/lead-capture/leadCapture';
-import {
-  PRIVACY_CONSENT_TEXT,
-  PrivacyConsentLabel,
-} from '../../shared/forms/privacyConsent';
+  buildEventRegistrationPayload,
+  type EventRegistrationErrors,
+  type EventRegistrationFormData,
+  validateEventRegistrationForm,
+} from '../../shared/forms/eventRegistration';
 import { trackGoogleEvent } from '../../tracking/tracking';
 import './EventPage.css';
 
-const SITE_URL = 'https://binder.la';
-
-interface FormState {
-  firstName: string;
-  lastName: string;
-  email: string;
-  jobTitle: string;
-  company: string;
-  phoneCountry: string;
-  phone: string;
-  consent: boolean;
-}
-
-interface FieldErrors {
-  firstName?: string;
-  lastName?: string;
-  email?: string;
-  jobTitle?: string;
-  company?: string;
-  consent?: string;
-  submit?: string;
-}
+type FormState = EventRegistrationFormData;
+type FieldErrors = EventRegistrationErrors;
 
 function WebinarPartnerLogos() {
   return (
@@ -105,29 +78,7 @@ export function EventPage() {
   }, []);
 
   const validate = useCallback((): boolean => {
-    const nextErrors: FieldErrors = {};
-
-    if (!form.firstName.trim()) nextErrors.firstName = 'El nombre es requerido';
-    if (!form.lastName.trim()) nextErrors.lastName = 'El apellido es requerido';
-
-    const email = form.email.trim();
-    if (!email) {
-      nextErrors.email = 'El correo es requerido';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      nextErrors.email = 'Correo inválido';
-    } else {
-      const domain = getEmailDomain(email);
-      if (domain && isBlockedPersonalEmailDomain(domain, blockedDomains)) {
-        nextErrors.email = CORPORATE_EMAIL_REQUIRED_MESSAGE;
-      }
-    }
-
-    if (!form.jobTitle.trim()) nextErrors.jobTitle = 'El cargo es requerido';
-    if (!form.company.trim()) nextErrors.company = 'La empresa es requerida';
-    if (!form.consent) {
-      nextErrors.consent = 'Debes aceptar la Política de Privacidad para continuar';
-    }
-
+    const nextErrors = validateEventRegistrationForm(form, blockedDomains);
     setErrors(nextErrors);
     return Object.keys(nextErrors).length === 0;
   }, [blockedDomains, form]);
@@ -142,25 +93,12 @@ export function EventPage() {
     setSubmitting(true);
     setErrors((previous) => ({ ...previous, submit: undefined }));
 
-    const phone = formatLeadCapturePhone(countries, form.phoneCountry, form.phone) ?? '';
-    const fechaEnvio = new Date().toISOString();
-    const requestBody: BubbleFormPayload = {
-      origen: 'registro-evento',
-      fechaEnvio,
-      textoExtra01: `${form.firstName.trim()} ${form.lastName.trim()}`.trim(),
-      textoExtra02: form.firstName.trim(),
-      textoExtra03: form.lastName.trim(),
-      textoExtra04: normalizeLeadCaptureEmail(form.email),
-      textoExtra05: phone,
-      textoExtra06: form.phoneCountry,
-      textoExtra07: form.company.trim(),
-      textoExtra08: form.jobTitle.trim(),
-      textoExtra11: canonicalPath,
-      textoExtra12: event.slug,
-      textoExtra24: PRIVACY_CONSENT_TEXT,
-      booleanoExtra01: form.consent,
-      fechaExtra01: fechaEnvio,
-    };
+    const requestBody = buildEventRegistrationPayload({
+      formData: form,
+      countries,
+      canonicalPath,
+      eventSlug: event.slug,
+    });
 
     try {
       await postBubbleWorkflow(getBubbleWebhookUrl(), requestBody);
@@ -200,22 +138,48 @@ export function EventPage() {
     return <Navigate to="/" replace />;
   }
 
+  const eventSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Event',
+    name: event.seoTitle,
+    description: event.seoDescription,
+    startDate: event.startDate,
+    eventAttendanceMode: 'https://schema.org/OnlineEventAttendanceMode',
+    eventStatus: 'https://schema.org/EventCompleted',
+    url: fullUrl,
+    image: `${SITE_URL}/metatag.jpeg`,
+    inLanguage: 'es-PE',
+    organizer: {
+      '@type': 'Organization',
+      name: 'Binder',
+      url: SITE_URL,
+    },
+    performer: event.speakers.map((speaker) => ({
+      '@type': 'Person',
+      name: speaker.name,
+      jobTitle: speaker.role,
+      worksFor: {
+        '@type': 'Organization',
+        name: speaker.company,
+      },
+    })),
+    location: {
+      '@type': 'VirtualLocation',
+      url: fullUrl,
+    },
+  };
+
   return (
     <>
+      <PageHead
+        title={event.seoTitle}
+        description={event.seoDescription}
+        canonicalUrl={canonicalPath}
+        ogImage="/metatag.jpeg"
+        robots="noindex, follow"
+      />
       <Helmet>
-        <title>{event.seoTitle}</title>
-        <meta name="description" content={event.seoDescription} />
-        <link rel="canonical" href={fullUrl} />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={fullUrl} />
-        <meta property="og:title" content={event.seoTitle} />
-        <meta property="og:description" content={event.seoDescription} />
-        <meta property="og:site_name" content="Binder" />
-        <meta property="og:locale" content="es_ES" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:url" content={fullUrl} />
-        <meta name="twitter:title" content={event.seoTitle} />
-        <meta name="twitter:description" content={event.seoDescription} />
+        <script type="application/ld+json">{JSON.stringify(eventSchema)}</script>
       </Helmet>
 
       <div className="ev">

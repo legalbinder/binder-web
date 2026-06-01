@@ -1,7 +1,6 @@
 import {
-  CORPORATE_EMAIL_REQUIRED_MESSAGE,
-  getEmailDomain,
-  isBlockedPersonalEmailDomain,
+  normalizeEmailDomain,
+  validateEmail,
 } from '../../utils/corporateEmailValidation';
 import type { BubbleFormOrigin, BubbleFormPayload } from '../../integrations/bubble/bubbleWebhooks';
 import type { FormSubmissionData } from '../../utils/formSubmission';
@@ -64,7 +63,6 @@ export function validateLeadCaptureForm(
   blockedDomains: string[]
 ): LeadCaptureFormErrors {
   const errors: LeadCaptureFormErrors = {};
-  const email = formData.email.trim();
 
   if (!formData.name.trim()) {
     errors.name = 'El nombre es requerido';
@@ -74,15 +72,13 @@ export function validateLeadCaptureForm(
     errors.company = 'La empresa es requerida';
   }
 
-  if (!email) {
-    errors.email = 'El correo es requerido';
-  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    errors.email = 'Correo inválido';
-  } else {
-    const emailDomain = getEmailDomain(email);
-    if (emailDomain && isBlockedPersonalEmailDomain(emailDomain, blockedDomains)) {
-      errors.email = CORPORATE_EMAIL_REQUIRED_MESSAGE;
-    }
+  const emailError = validateEmail(formData.email, {
+    requiredMessage: 'El correo es requerido',
+    invalidMessage: 'Correo inválido',
+    blockedDomains,
+  });
+  if (emailError) {
+    errors.email = emailError;
   }
 
   if (!formData.consent) {
@@ -93,12 +89,7 @@ export function validateLeadCaptureForm(
 }
 
 export function normalizeLeadCaptureEmail(email: string): string {
-  const trimmedEmail = email.trim();
-  const atPosition = trimmedEmail.lastIndexOf('@');
-
-  return atPosition > 0
-    ? `${trimmedEmail.slice(0, atPosition + 1)}${trimmedEmail.slice(atPosition + 1).toLowerCase()}`
-    : trimmedEmail;
+  return normalizeEmailDomain(email);
 }
 
 export function formatLeadCapturePhone(

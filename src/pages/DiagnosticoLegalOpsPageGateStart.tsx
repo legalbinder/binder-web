@@ -3,19 +3,19 @@ import { useNavigate } from 'react-router-dom';
 import { PageHead } from '../components/seo/PageHead';
 import { SchemaMarkup } from '../components/seo/SchemaMarkup';
 import blockedEmailDomains from '../data/blockedEmailDomains.json';
-import {
-  CORPORATE_EMAIL_REQUIRED_MESSAGE,
-  isBlockedPersonalEmailDomain,
-} from '../shared/utils/corporateEmailValidation';
-import {
-  type BubbleFormPayload,
-  getBubbleWebhookUrl,
-} from '../shared/integrations/bubble/bubbleWebhooks';
+import { getBubbleWebhookUrl } from '../shared/integrations/bubble/bubbleWebhooks';
 import { postBubbleWorkflow } from '../shared/integrations/bubble/postBubbleWorkflow';
 import {
-  PRIVACY_CONSENT_TEXT,
   PrivacyConsentLabel,
 } from '../shared/forms/privacyConsent';
+import {
+  buildDiagnosticoGatePayload,
+  buildDiagnosticoResultPayload,
+  createDiagnosticoSubmissionData,
+  type DiagnosticoGateErrors,
+  type DiagnosticoGateFormData,
+  validateDiagnosticoGateForm,
+} from '../shared/forms/diagnosticoLegalOps';
 import { storeFormSubmission } from '../shared/utils/formSubmission';
 import './DiagnosticoLegalOpsPage.css';
 
@@ -29,22 +29,8 @@ type RoleOption =
   | 'Procurement'
   | 'Otros';
 
-interface GateFormData {
-  name: string;
-  email: string;
-  company: string;
-  role: RoleOption | '';
-  privacyConsent: boolean;
-}
-
-interface GateErrors {
-  name?: string;
-  email?: string;
-  company?: string;
-  role?: string;
-  privacyConsent?: string;
-  submit?: string;
-}
+type GateFormData = Omit<DiagnosticoGateFormData, 'role'> & { role: RoleOption | '' };
+type GateErrors = DiagnosticoGateErrors;
 
 interface Question {
   id: string;
@@ -249,36 +235,7 @@ export const DiagnosticoLegalOpsPageGateStart = () => {
   ];
 
   const validateGate = (): boolean => {
-    const errors: GateErrors = {};
-
-    if (!gateFormData.name.trim()) {
-      errors.name = 'El nombre y apellido es requerido.';
-    }
-
-    if (!gateFormData.company.trim()) {
-      errors.company = 'La empresa es requerida.';
-    }
-
-    const email = gateFormData.email.trim();
-    if (!email) {
-      errors.email = 'El email corporativo es requerido.';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      errors.email = 'Ingresa un email válido.';
-    } else {
-      const domain = email.split('@')[1]?.toLowerCase();
-      if (domain && isBlockedPersonalEmailDomain(domain, blockedDomains)) {
-        errors.email = CORPORATE_EMAIL_REQUIRED_MESSAGE;
-      }
-    }
-
-    if (!gateFormData.role) {
-      errors.role = 'Selecciona tu cargo.';
-    }
-
-    if (!gateFormData.privacyConsent) {
-      errors.privacyConsent = 'Debes aceptar la Política de Privacidad para continuar.';
-    }
-
+    const errors = validateDiagnosticoGateForm(gateFormData, blockedDomains);
     setGateErrors(errors);
     return Object.keys(errors).length === 0;
   };
@@ -294,21 +251,7 @@ export const DiagnosticoLegalOpsPageGateStart = () => {
     setGateErrors({});
 
     try {
-      const fechaEnvio = new Date().toISOString();
-      const payload: BubbleFormPayload = {
-        origen: 'Diagnóstico-inicio',
-        fechaEnvio,
-        textoExtra01: gateFormData.name.trim(),
-        textoExtra04: gateFormData.email.trim(),
-        textoExtra07: gateFormData.company.trim(),
-        textoExtra09: gateFormData.role,
-        textoExtra11: '/diagnostico-legal-ops-formulario-inicio',
-        textoExtra24: PRIVACY_CONSENT_TEXT,
-        booleanoExtra01: gateFormData.privacyConsent,
-        fechaExtra01: fechaEnvio,
-      };
-
-      await postBubbleWorkflow(getBubbleWebhookUrl(), payload);
+      await postBubbleWorkflow(getBubbleWebhookUrl(), buildDiagnosticoGatePayload(gateFormData));
       setStage('quiz');
     } catch (error) {
       setGateErrors({
@@ -328,41 +271,8 @@ export const DiagnosticoLegalOpsPageGateStart = () => {
     setAnswers(updatedAnswers);
   };
 
-  const buildDiagnosisPayload = (fechaEnvio: string): BubbleFormPayload => ({
-    origen: 'diagnostico-legal-ops',
-    fechaEnvio,
-    textoExtra01: gateFormData.name.trim(),
-    textoExtra04: gateFormData.email.trim(),
-    textoExtra07: gateFormData.company.trim(),
-    textoExtra09: gateFormData.role,
-    textoExtra10: `Diagnóstico Legal Ops - Nivel ${finalLevel.number} (${finalLevel.level})`,
-    textoExtra11: '/diagnostico-legal-ops-formulario-inicio',
-    textoExtra13: finalLevel.level,
-    textoExtra24: PRIVACY_CONSENT_TEXT,
-    numeroExtra01: finalLevel.number,
-    numeroExtra02: noCount,
-    numeroExtra03: questions.length - noCount,
-    numeroExtra04: questions.length,
-    booleanoExtra01: gateFormData.privacyConsent,
-    fechaExtra01: fechaEnvio,
-    listaObjetoExtra01: answers.map((answer, index) => ({
-      tipo: 'Si-no',
-      clave: questions[index].id,
-      pregunta: questions[index].question,
-      respuestaTexto: answer === true ? 'Sí' : 'No',
-      respuestaNumero: answer === true ? 1 : 0,
-      respuestaBooleano: answer === true,
-      respuestaFecha: fechaEnvio,
-      categoria: 'diagnostico-legal-ops',
-    })),
-  });
-
   const storeDiagnosisLead = () => {
-    storeFormSubmission({
-      name: gateFormData.name.trim(),
-      company: gateFormData.company.trim(),
-      email: gateFormData.email.trim(),
-    });
+    storeFormSubmission(createDiagnosticoSubmissionData(gateFormData));
   };
 
   const submitDiagnosisAndShowResult = async () => {
@@ -370,7 +280,16 @@ export const DiagnosticoLegalOpsPageGateStart = () => {
     setGateErrors({});
 
     try {
-      await postBubbleWorkflow(getBubbleWebhookUrl(), buildDiagnosisPayload(new Date().toISOString()));
+      await postBubbleWorkflow(
+        getBubbleWebhookUrl(),
+        buildDiagnosticoResultPayload({
+          formData: gateFormData,
+          finalLevel,
+          noCount,
+          questions,
+          answers,
+        })
+      );
       storeDiagnosisLead();
       setStage('result');
     } catch (error) {

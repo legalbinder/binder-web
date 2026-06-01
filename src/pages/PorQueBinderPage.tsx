@@ -18,6 +18,7 @@ export const PorQueBinderPage = () => {
       />
       <SchemaMarkup type="breadcrumbList" data={{ breadcrumbs }} />
       <Breadcrumbs items={breadcrumbs} />
+      <h1 className="sr-only">Por qué Binder</h1>
       <WhyBinder />
     </>
   );

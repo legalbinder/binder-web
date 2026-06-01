@@ -1,47 +1,74 @@
 import { Helmet } from 'react-helmet-async';
+import {
+  defaultOgImage,
+  getSeoRoute,
+  siteUrl,
+  toAbsoluteAsset,
+  toAbsoluteUrl,
+  type OgType,
+} from '../../config/seo';
 
 interface PageHeadProps {
   title: string;
   description: string;
   canonicalUrl?: string;
   ogImage?: string;
+  ogType?: OgType;
+  robots?: string;
+  publishedTime?: string;
+  modifiedTime?: string;
 }
 
 export const PageHead = ({ 
   title, 
   description, 
   canonicalUrl,
-  ogImage = '/metatag.jpeg'
+  ogImage = defaultOgImage,
+  ogType = 'website',
+  robots,
+  publishedTime,
+  modifiedTime,
 }: PageHeadProps) => {
-  const siteUrl = 'https://binder.la';
-  const fullUrl = canonicalUrl ? `${siteUrl}${canonicalUrl}` : siteUrl;
-  const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
+  const routeMetadata = canonicalUrl ? getSeoRoute(canonicalUrl) : undefined;
+  const seoTitle = routeMetadata?.title ?? title;
+  const seoDescription = routeMetadata?.description ?? description;
+  const seoCanonicalUrl = canonicalUrl ?? routeMetadata?.path;
+  const seoRobots = routeMetadata?.robots ?? robots;
+  const seoOgType = routeMetadata?.type ?? ogType;
+  const seoOgImage = routeMetadata?.image ?? ogImage;
+  const seoPublishedTime = routeMetadata?.publishedAt ?? publishedTime;
+  const seoModifiedTime = routeMetadata?.modifiedAt ?? modifiedTime;
+  const fullUrl = seoCanonicalUrl ? toAbsoluteUrl(seoCanonicalUrl) : siteUrl;
+  const ogImageUrl = toAbsoluteAsset(seoOgImage);
 
   return (
     <Helmet>
-      <title>{title}</title>
-      <meta name="description" content={description} />
-      {canonicalUrl && <link rel="canonical" href={fullUrl} />}
+      <title>{seoTitle}</title>
+      <meta name="description" content={seoDescription} />
+      {seoCanonicalUrl && <link rel="canonical" href={fullUrl} />}
+      {seoRobots && <meta name="robots" content={seoRobots} />}
       
       {/* Open Graph / Facebook */}
-      <meta property="og:type" content="website" />
+      <meta property="og:type" content={seoOgType} />
       <meta property="og:url" content={fullUrl} />
-      <meta property="og:title" content={title} />
-      <meta property="og:description" content={description} />
+      <meta property="og:title" content={seoTitle} />
+      <meta property="og:description" content={seoDescription} />
       <meta property="og:image" content={ogImageUrl} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
-      <meta property="og:image:alt" content={title} />
+      <meta property="og:image:alt" content={seoTitle} />
       <meta property="og:site_name" content="Binder" />
       <meta property="og:locale" content="es_ES" />
+      {seoPublishedTime && <meta property="article:published_time" content={seoPublishedTime} />}
+      {seoModifiedTime && <meta property="article:modified_time" content={seoModifiedTime} />}
       
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:url" content={fullUrl} />
-      <meta name="twitter:title" content={title} />
-      <meta name="twitter:description" content={description} />
+      <meta name="twitter:title" content={seoTitle} />
+      <meta name="twitter:description" content={seoDescription} />
       <meta name="twitter:image" content={ogImageUrl} />
-      <meta name="twitter:image:alt" content={title} />
+      <meta name="twitter:image:alt" content={seoTitle} />
     </Helmet>
   );
 };

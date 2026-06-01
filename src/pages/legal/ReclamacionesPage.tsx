@@ -1,44 +1,24 @@
 import { FormEvent, useState } from 'react';
 import { InternalPage } from '../../components/layout/InternalPage';
 import { PageHead } from '../../components/seo/PageHead';
-import {
-  type BubbleFormPayload,
-  getBubbleWebhookUrl,
-} from '../../shared/integrations/bubble/bubbleWebhooks';
+import { SchemaMarkup } from '../../components/seo/SchemaMarkup';
+import { getBubbleWebhookUrl } from '../../shared/integrations/bubble/bubbleWebhooks';
 import { postBubbleWorkflow } from '../../shared/integrations/bubble/postBubbleWorkflow';
 import {
-  PRIVACY_CONSENT_TEXT,
+  buildComplaintPayload,
+  initialComplaintFormData,
+  type ComplaintDocumentType,
+  type ComplaintErrors,
+  type ComplaintFormData,
+  type ComplaintProductType,
+  validateComplaintForm,
+} from '../../shared/forms/complaintForm';
+import {
   PrivacyConsentLabel,
 } from '../../shared/forms/privacyConsent';
 import './ReclamacionesPage.css';
 
-type DocumentType = '' | 'DNI' | 'Pasaporte' | 'RUC' | 'Carnet de extranjería';
-type ProductType = 'Producto' | 'Servicio';
-type ComplaintReason = 'Reclamo' | 'Queja';
-
-interface ComplaintFormData {
-  documentType: DocumentType;
-  documentNumber: string;
-  firstName: string;
-  lastName: string;
-  phone: string;
-  email: string;
-  addressDepartment: string;
-  province: string;
-  district: string;
-  address: string;
-  claimDepartment: string;
-  productType: ProductType;
-  reason: ComplaintReason;
-  detail: string;
-  request: string;
-  privacyConsent: boolean;
-  acceptsConditions: boolean;
-}
-
-type ComplaintErrors = Partial<Record<keyof ComplaintFormData | 'submit', string>>;
-
-const documentTypes: Exclude<DocumentType, ''>[] = [
+const documentTypes: Exclude<ComplaintDocumentType, ''>[] = [
   'DNI',
   'Pasaporte',
   'RUC',
@@ -73,35 +53,15 @@ const departments = [
   'Callao',
 ];
 
-const initialFormData: ComplaintFormData = {
-  documentType: '',
-  documentNumber: '',
-  firstName: '',
-  lastName: '',
-  phone: '',
-  email: '',
-  addressDepartment: '',
-  province: '',
-  district: '',
-  address: '',
-  claimDepartment: '',
-  productType: 'Producto',
-  reason: 'Reclamo',
-  detail: '',
-  request: '',
-  privacyConsent: false,
-  acceptsConditions: false,
-};
-
-function isValidEmail(email: string): boolean {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
-
 export const ReclamacionesPage = () => {
-  const [formData, setFormData] = useState<ComplaintFormData>(initialFormData);
+  const [formData, setFormData] = useState<ComplaintFormData>(initialComplaintFormData);
   const [errors, setErrors] = useState<ComplaintErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
+  const breadcrumbs = [
+    { label: 'Inicio', path: '/' },
+    { label: 'Libro de Reclamaciones', path: '/legal/reclamaciones' },
+  ];
 
   const updateField = (
     field: keyof ComplaintFormData,
@@ -122,67 +82,7 @@ export const ReclamacionesPage = () => {
   };
 
   const validateForm = (): boolean => {
-    const nextErrors: ComplaintErrors = {};
-
-    if (!formData.documentType) {
-      nextErrors.documentType = 'Selecciona un tipo de documento.';
-    }
-
-    if (!formData.documentNumber.trim()) {
-      nextErrors.documentNumber = 'Ingresa tu número de documento.';
-    }
-
-    if (!formData.firstName.trim()) {
-      nextErrors.firstName = 'Ingresa tus nombres.';
-    }
-
-    if (!formData.lastName.trim()) {
-      nextErrors.lastName = 'Ingresa tus apellidos.';
-    }
-
-    if (!formData.phone.trim()) {
-      nextErrors.phone = 'Ingresa tu teléfono.';
-    }
-
-    const email = formData.email.trim();
-    if (!email) {
-      nextErrors.email = 'Ingresa tu correo electrónico.';
-    } else if (!isValidEmail(email)) {
-      nextErrors.email = 'Ingresa un correo electrónico válido.';
-    }
-
-    if (!formData.addressDepartment) {
-      nextErrors.addressDepartment = 'Selecciona un departamento.';
-    }
-
-    if (!formData.province.trim()) {
-      nextErrors.province = 'Ingresa tu provincia.';
-    }
-
-    if (!formData.district.trim()) {
-      nextErrors.district = 'Ingresa tu distrito.';
-    }
-
-    if (!formData.address.trim()) {
-      nextErrors.address = 'Ingresa tu dirección.';
-    }
-
-    if (!formData.detail.trim()) {
-      nextErrors.detail = 'Describe el detalle de tu reclamo o queja.';
-    }
-
-    if (!formData.request.trim()) {
-      nextErrors.request = 'Indica el pedido o solución esperada.';
-    }
-
-    if (!formData.acceptsConditions) {
-      nextErrors.acceptsConditions = 'Debes aceptar las condiciones de atención.';
-    }
-
-    if (!formData.privacyConsent) {
-      nextErrors.privacyConsent = 'Debes aceptar la Política de Privacidad para continuar.';
-    }
-
+    const nextErrors = validateComplaintForm(formData);
     setErrors(nextErrors);
     return Object.keys(nextErrors).length === 0;
   };
@@ -198,36 +98,9 @@ export const ReclamacionesPage = () => {
     setIsSubmitting(true);
 
     try {
-      const fechaEnvio = new Date().toISOString();
-      const payload: BubbleFormPayload = {
-        origen: 'libro-reclamaciones',
-        fechaEnvio,
-        textoExtra01: `${formData.firstName.trim()} ${formData.lastName.trim()}`,
-        textoExtra02: formData.firstName.trim(),
-        textoExtra03: formData.lastName.trim(),
-        textoExtra04: formData.email.trim(),
-        textoExtra05: formData.phone.trim(),
-        textoExtra11: '/legal/reclamaciones',
-        textoExtra13: formData.documentType,
-        textoExtra14: formData.documentNumber.trim(),
-        textoExtra15: formData.addressDepartment,
-        textoExtra16: formData.province.trim(),
-        textoExtra17: formData.district.trim(),
-        textoExtra18: formData.address.trim(),
-        textoExtra19: formData.claimDepartment.trim(),
-        textoExtra20: formData.productType,
-        textoExtra21: formData.reason,
-        textoExtra22: formData.detail.trim(),
-        textoExtra23: formData.request.trim(),
-        textoExtra24: PRIVACY_CONSENT_TEXT,
-        booleanoExtra01: formData.privacyConsent,
-        booleanoExtra02: formData.acceptsConditions,
-        fechaExtra01: fechaEnvio,
-      };
+      await postBubbleWorkflow(getBubbleWebhookUrl(), buildComplaintPayload(formData));
 
-      await postBubbleWorkflow(getBubbleWebhookUrl(), payload);
-
-      setFormData(initialFormData);
+      setFormData(initialComplaintFormData);
       setSuccessMessage(
         'Tu reclamación fue enviada correctamente. Nos comunicaremos contigo en un plazo máximo de 15 días calendarios.'
       );
@@ -250,8 +123,10 @@ export const ReclamacionesPage = () => {
         description="Presenta un reclamo o queja a través del Libro de Reclamaciones digital de Binder."
         canonicalUrl="/legal/reclamaciones"
       />
+      <SchemaMarkup type="breadcrumbList" data={{ breadcrumbs }} />
       <InternalPage
         title="Libro de Reclamaciones"
+        breadcrumbs={breadcrumbs}
         contentClassName="reclamaciones-content-card"
       >
         <div className="reclamaciones-form-shell">
@@ -279,7 +154,7 @@ export const ReclamacionesPage = () => {
                   id="documentType"
                   value={formData.documentType}
                   onChange={(event) =>
-                    updateField('documentType', event.target.value as DocumentType)
+                    updateField('documentType', event.target.value as ComplaintDocumentType)
                   }
                   aria-invalid={Boolean(errors.documentType)}
                 >
@@ -482,7 +357,7 @@ export const ReclamacionesPage = () => {
               <div className="reclamaciones-field">
                 <span className="reclamaciones-control-label">Tipo</span>
                 <div className="reclamaciones-type-group" aria-label="Tipo de bien reclamado">
-                  {(['Producto', 'Servicio'] as ProductType[]).map((productType) => (
+                  {(['Producto', 'Servicio'] as ComplaintProductType[]).map((productType) => (
                     <button
                       key={productType}
                       type="button"

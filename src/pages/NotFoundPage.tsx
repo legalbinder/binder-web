@@ -1,4 +1,3 @@
-import { Helmet } from 'react-helmet-async';
 import { Link, useLocation } from 'react-router-dom';
 import { InternalPage } from '../components/layout/InternalPage';
 import { PageHead } from '../components/seo/PageHead';
@@ -15,10 +14,8 @@ export const NotFoundPage = () => {
       <PageHead
         title="Página no disponible | Binder"
         description="La página que buscas no existe o ya no está disponible en Binder."
+        robots="noindex, nofollow"
       />
-      <Helmet>
-        <meta name="robots" content="noindex, nofollow" />
-      </Helmet>
       <InternalPage title="Página no disponible" breadcrumbs={breadcrumbs}>
         <p>
           La ruta que intentas abrir no existe, fue retirada o ya no está disponible.

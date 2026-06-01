@@ -1,0 +1,362 @@
+{
+  "siteUrl": "https://binder.la",
+  "defaultOgImage": "/metatag.jpeg",
+  "lastModified": "2026-06-01",
+  "routes": [
+    {
+      "path": "/",
+      "title": "Binder - Plataforma Legal con IA | CLM y Legal Ops",
+      "description": "Binder centraliza, automatiza y analiza la gestión legal con IA. CLM, gestión de procesos y expediente digital para áreas legales corporativas.",
+      "h1": "Plataforma legal con IA para equipos legales",
+      "priority": "1.0",
+      "changefreq": "weekly",
+      "paragraphs": [
+        "Binder centraliza contratos, expedientes, procesos y métricas en una sola plataforma legal con IA.",
+        "La plataforma ayuda a áreas legales corporativas a ganar trazabilidad, automatizar tareas operativas y tomar decisiones con datos."
+      ],
+      "links": [
+        { "href": "/casos-uso/clm", "text": "CLM con IA" },
+        { "href": "/casos-uso/gestion-procesos", "text": "Gestión de procesos" },
+        { "href": "/diagnostico-legal-ops-formulario-inicio", "text": "Diagnóstico Legal Ops" },
+        { "href": "/prensa", "text": "Prensa" }
+      ]
+    },
+    {
+      "path": "/porquebinder",
+      "title": "Por qué Binder - Solución para Equipos Legales",
+      "description": "Descubre por qué Binder es la mejor solución para equipos legales. Centraliza, automatiza y da visibilidad a toda tu gestión legal con IA.",
+      "h1": "Por qué Binder",
+      "priority": "0.8",
+      "changefreq": "monthly",
+      "paragraphs": [
+        "Binder ayuda a transformar la operación legal con orden, visibilidad, automatización e inteligencia aplicada al trabajo jurídico."
+      ]
+    },
+    {
+      "path": "/sobrebinder",
+      "title": "Sobre Binder - Quiénes Somos",
+      "description": "Conoce más sobre Binder, la plataforma legal con IA diseñada para transformar la gestión legal de empresas y estudios jurídicos.",
+      "h1": "Sobre Binder",
+      "priority": "0.8",
+      "changefreq": "monthly",
+      "paragraphs": [
+        "Binder desarrolla tecnología para que los equipos legales trabajen con más claridad, eficiencia y control operativo."
+      ]
+    },
+    {
+      "path": "/funcionalidades",
+      "title": "Funcionalidades - Plataforma Legal Binder",
+      "description": "Funcionalidades de Binder: gestión de contratos con IA, gestión de casos, mesa de partes digital y cumplimiento normativo para equipos legales.",
+      "h1": "Funcionalidades de Binder",
+      "priority": "0.8",
+      "changefreq": "monthly",
+      "paragraphs": [
+        "Gestión de contratos, expedientes digitales, automatización de procesos, alertas, firmas y analítica legal en una sola plataforma."
+      ]
+    },
+    {
+      "path": "/soluciones",
+      "title": "Soluciones - Plataforma Legal Binder | CLM, Gestión de Procesos, Expediente Digital",
+      "description": "Binder ofrece soluciones especializadas: CLM con IA, gestión de procesos legales, expediente digital y mesa de partes para áreas legales corporativas.",
+      "h1": "Soluciones legales con IA",
+      "priority": "0.8",
+      "changefreq": "monthly",
+      "paragraphs": [
+        "Soluciones para CLM, gestión de procesos, expediente digital y operación legal corporativa con trazabilidad completa."
+      ]
+    },
+    {
+      "path": "/testimonios",
+      "title": "Testimonios - Clientes Binder | Casos de Éxito",
+      "description": "Descubre cómo Binder ha transformado la gestión legal de empresas como Laive, Grupo EFE y Rodman & Asociados. Testimonios reales de clientes.",
+      "h1": "Testimonios de clientes",
+      "priority": "0.7",
+      "changefreq": "monthly",
+      "paragraphs": [
+        "Casos y testimonios de equipos legales que modernizan su operación con Binder."
+      ]
+    },
+    {
+      "path": "/diagnostico-legal-ops-formulario-inicio",
+      "title": "Diagnóstico Legal Ops (Formulario al inicio) | Evalúa tu madurez legal",
+      "description": "Evalúa en minutos el nivel de madurez Legal Ops de tu operación legal y recibe recomendaciones accionables para crecer con trazabilidad, control y velocidad.",
+      "h1": "Diagnóstico Legal Ops",
+      "priority": "0.9",
+      "changefreq": "monthly",
+      "paragraphs": [
+        "Evalúa tu operación legal, identifica tu nivel de madurez y prioriza acciones para mejorar trazabilidad, control y velocidad."
+      ]
+    },
+    {
+      "path": "/casos-uso/clm",
+      "title": "CLM con IA - Gestión de Contratos | Binder",
+      "description": "Solución CLM con IA para centralizar y automatizar el ciclo de vida de contratos. Redacción inteligente, firma electrónica y trazabilidad total.",
+      "h1": "CLM con IA para gestión de contratos",
+      "priority": "0.9",
+      "changefreq": "monthly",
+      "paragraphs": [
+        "Centraliza contratos, automatiza flujos, controla versiones, firma y vencimientos con trazabilidad completa."
+      ]
+    },
+    {
+      "path": "/casos-uso/gestion-procesos",
+      "title": "Gestión de Procesos Legales - Digitalización Legal | Binder",
+      "description": "Digitaliza y controla tus procesos judiciales y administrativos. Centraliza expedientes, oficios y presentaciones con trazabilidad total.",
+      "h1": "Gestión de procesos legales",
+      "priority": "0.9",
+      "changefreq": "monthly",
+      "paragraphs": [
+        "Gestiona procesos legales con seguimiento, responsables, alertas, trazabilidad y reportes para equipos corporativos."
+      ]
+    },
+    {
+      "path": "/casos-uso/expediente-digital",
+      "title": "Expediente Digital y Mesa de Partes Online | Binder",
+      "description": "Mesa de partes online que automatiza, controla y mide tu operación jurídica. Convierte trabajo operativo en procesos claros y trazables.",
+      "h1": "Expediente digital legal",
+      "priority": "0.9",
+      "changefreq": "monthly",
+      "paragraphs": [
+        "Centraliza documentos, plazos, movimientos y trazabilidad de expedientes legales en una plataforma digital."
+      ]
+    },
+    {
+      "path": "/prensa",
+      "title": "Binder en los medios | Prensa y cobertura legal tech",
+      "description": "Cobertura de prensa sobre Binder, inteligencia artificial, Legal Ops y transformación del trabajo legal en Latinoamérica.",
+      "h1": "Binder en los medios",
+      "image": "/prensa/images/story-ia-gestion-legal.png",
+      "priority": "0.8",
+      "changefreq": "monthly",
+      "paragraphs": [
+        "Historias y cobertura de medios sobre Binder, inteligencia artificial, legal operations y transformación del trabajo legal."
+      ],
+      "links": [
+        { "href": "/prensa/75-menos-tiempo-operativo", "text": "Hasta 75% menos tiempo en tareas operativas legales" },
+        { "href": "/prensa/horas-coordinacion-contractual", "text": "Equipos legales pierden hasta 300 horas mensuales en coordinación contractual" },
+        { "href": "/prensa/95-sin-base-de-datos", "text": "El 95% de equipos legales en el Perú opera sin base de datos estructurada" },
+        { "href": "/prensa/ia-gestion-legal", "text": "Menos carga operativa, más estrategia: cómo la IA está cambiando el trabajo legal en el Perú" }
+      ]
+    },
+    {
+      "path": "/prensa/75-menos-tiempo-operativo",
+      "title": "Hasta 75% menos tiempo en tareas operativas legales | Binder",
+      "description": "La tecnología especializada permite reducir el tiempo operativo en documentos legales y liberar capacidad estratégica para el equipo jurídico.",
+      "h1": "Hasta 75% menos tiempo en tareas operativas legales",
+      "image": "/prensa/images/story-75-menos-tiempo.png",
+      "type": "article",
+      "publishedAt": "2026-04-01",
+      "priority": "0.7",
+      "changefreq": "monthly",
+      "keywords": ["Automatización legal", "Documentos", "Productividad legal"],
+      "sources": ["Gestión", "El Peruano"],
+      "paragraphs": [
+        "La tecnología especializada puede reducir hasta 75% el tiempo de producción de documentos de baja complejidad y liberar capacidad para trabajo estratégico.",
+        "Binder ayuda a estructurar flujos, plantillas, trazabilidad y automatización para que el equipo legal gane eficiencia operativa."
+      ]
+    },
+    {
+      "path": "/prensa/horas-coordinacion-contractual",
+      "title": "Equipos legales pierden hasta 300 horas mensuales en coordinación contractual | Binder",
+      "description": "La coordinación contractual consume horas en seguimiento, firmas, validaciones y notificaciones que no agregan valor jurídico al equipo legal.",
+      "h1": "Equipos legales pierden hasta 300 horas mensuales en coordinación contractual",
+      "image": "/prensa/images/story-horas-coordinacion.png",
+      "type": "article",
+      "publishedAt": "2026-03-01",
+      "priority": "0.7",
+      "changefreq": "monthly",
+      "keywords": ["Contratos", "CLM", "Coordinación legal"],
+      "sources": ["El Comercio"],
+      "paragraphs": [
+        "La coordinación contractual puede consumir entre 50 y 300 horas mensuales en equipos que gestionan altos volúmenes de contratos.",
+        "Digitalizar documentos no basta si el proceso sigue dependiendo de correos, recordatorios manuales y flujos sin trazabilidad."
+      ]
+    },
+    {
+      "path": "/prensa/95-sin-base-de-datos",
+      "title": "El 95% de equipos legales opera sin base de datos estructurada | Binder",
+      "description": "La falta de bases de datos estructuradas en equipos legales genera horas de reportería manual, poca visibilidad y costos operativos acumulados.",
+      "h1": "El 95% de equipos legales en el Perú opera sin base de datos estructurada",
+      "image": "/prensa/images/story-95-sin-base-de-datos.png",
+      "type": "article",
+      "publishedAt": "2026-02-26",
+      "priority": "0.7",
+      "changefreq": "monthly",
+      "keywords": ["Datos legales", "Reportería", "Legal Ops"],
+      "sources": ["Infobae", "Caretas", "Revista Economía", "El Peruano"],
+      "paragraphs": [
+        "La mayoría de equipos legales opera sin una base de datos estructurada, lo que limita la visibilidad y obliga a construir reportes manuales.",
+        "Con datos integrados, el área legal puede medir carga, tiempos, riesgos recurrentes y responder con mayor peso estratégico."
+      ]
+    },
+    {
+      "path": "/prensa/ia-gestion-legal",
+      "title": "Menos carga operativa, más estrategia: cómo la IA está cambiando el trabajo legal | Binder",
+      "description": "Cuatro medios peruanos documentaron por qué la inteligencia artificial ya está cambiando la gestión legal y qué oportunidades abre para los equipos legales.",
+      "h1": "Menos carga operativa, más estrategia: cómo la IA está cambiando el trabajo legal en el Perú",
+      "image": "/prensa/images/story-ia-gestion-legal.png",
+      "type": "article",
+      "publishedAt": "2026-01-26",
+      "priority": "0.7",
+      "changefreq": "monthly",
+      "keywords": ["Legal Tech", "IA", "Legal Ops", "Perú"],
+      "sources": ["El Peruano", "Infobae", "Exitosa", "Expreso"],
+      "paragraphs": [
+        "La inteligencia artificial ya está cambiando la gestión legal al reducir carga operativa, ordenar información y habilitar trabajo jurídico más estratégico.",
+        "Binder centraliza procesos, documentos y métricas para que los equipos legales ganen trazabilidad, control y eficiencia."
+      ]
+    },
+    {
+      "path": "/legal/privacidad",
+      "title": "Política de Privacidad | Binder",
+      "description": "Conoce cómo Binder recopila, usa y protege los datos personales enviados desde sus formularios y servicios digitales.",
+      "h1": "Política de Privacidad",
+      "priority": "0.4",
+      "changefreq": "yearly",
+      "paragraphs": ["Información sobre tratamiento de datos personales, formularios, uso de información y derechos de los usuarios."]
+    },
+    {
+      "path": "/legal/cookies",
+      "title": "Política de Cookies | Binder",
+      "description": "Información sobre cookies esenciales, analíticas y preferencias de privacidad en el sitio web de Binder.",
+      "h1": "Política de Cookies",
+      "priority": "0.4",
+      "changefreq": "yearly",
+      "paragraphs": ["Información sobre cookies esenciales, cookies analíticas, gestión de preferencias y proveedores de medición."]
+    },
+    {
+      "path": "/legal/terminos",
+      "title": "Términos y Condiciones | Binder",
+      "description": "Consulta las condiciones de uso aplicables al sitio web, plataforma y servicios digitales de Binder.",
+      "h1": "Términos y Condiciones",
+      "priority": "0.4",
+      "changefreq": "yearly",
+      "paragraphs": ["Condiciones generales para el uso del sitio web, plataforma y servicios digitales de Binder."]
+    },
+    {
+      "path": "/legal/aviso",
+      "title": "Aviso Legal | Binder",
+      "description": "Información legal, condiciones de acceso, propiedad intelectual y uso del sitio web de Binder.",
+      "h1": "Aviso Legal",
+      "priority": "0.4",
+      "changefreq": "yearly",
+      "paragraphs": ["Información legal sobre acceso, uso, propiedad intelectual y condiciones generales del sitio web."]
+    },
+    {
+      "path": "/legal/seguridad",
+      "title": "Seguridad y Cumplimiento | Binder",
+      "description": "Conoce las medidas de seguridad, protección de datos y cumplimiento que Binder aplica para equipos legales.",
+      "h1": "Seguridad y Cumplimiento",
+      "priority": "0.4",
+      "changefreq": "yearly",
+      "paragraphs": ["Medidas de seguridad, protección de datos y cumplimiento aplicadas en la plataforma legal de Binder."]
+    },
+    {
+      "path": "/legal/reclamaciones",
+      "title": "Libro de Reclamaciones | Binder",
+      "description": "Presenta un reclamo o queja a través del Libro de Reclamaciones digital de Binder.",
+      "h1": "Libro de Reclamaciones",
+      "priority": "0.4",
+      "changefreq": "yearly",
+      "paragraphs": ["Formulario digital para presentar reclamos o quejas y recibir atención dentro del plazo correspondiente."]
+    },
+    {
+      "path": "/gracias",
+      "title": "Gracias por contactarnos | Binder",
+      "description": "Confirmación de recepción de formulario de Binder.",
+      "h1": "Gracias por contactarnos",
+      "robots": "noindex, nofollow",
+      "paragraphs": ["Esta página confirma la recepción de formularios y no debe indexarse."]
+    },
+    {
+      "path": "/eventos/webinar-legalops-binder-niubox",
+      "title": "De lo reactivo al control - Binder x Niubox | Webinar",
+      "description": "Webinar gratuito: cómo preparar tu área legal para un negocio que ya no espera. Binder y Niubox. 15 de abril de 2026.",
+      "h1": "De lo reactivo al control",
+      "robots": "noindex, follow",
+      "paragraphs": ["Webinar pasado de Binder y Niubox sobre madurez operativa, trazabilidad y eficiencia legal."],
+      "event": {
+        "name": "De lo reactivo al control - Binder x Niubox",
+        "startDate": "2026-04-15T11:00:00-05:00",
+        "status": "https://schema.org/EventCompleted"
+      }
+    },
+    {
+      "path": "/gentle-waves",
+      "title": "Página interna no indexable | Binder",
+      "description": "Ruta visual interna de Binder.",
+      "h1": "Ruta interna",
+      "robots": "noindex, nofollow"
+    },
+    {
+      "path": "/canyon-flows",
+      "title": "Página interna no indexable | Binder",
+      "description": "Ruta visual interna de Binder.",
+      "h1": "Ruta interna",
+      "robots": "noindex, nofollow"
+    },
+    {
+      "path": "/flow-pattern",
+      "title": "Página interna no indexable | Binder",
+      "description": "Ruta visual interna de Binder.",
+      "h1": "Ruta interna",
+      "robots": "noindex, nofollow"
+    },
+    {
+      "path": "/test/antigravity",
+      "title": "Página de prueba no indexable | Binder",
+      "description": "Ruta de prueba interna de Binder.",
+      "h1": "Ruta de prueba",
+      "robots": "noindex, nofollow"
+    },
+    {
+      "path": "/docs/prep-reunion-oka-ciberseguridad",
+      "title": "Documento interno no indexable | Binder",
+      "description": "Documento interno de Binder.",
+      "h1": "Documento interno",
+      "robots": "noindex, nofollow"
+    },
+    {
+      "path": "/hito2/anexos",
+      "title": "Anexos internos no indexables | Binder",
+      "description": "Anexos internos de Binder.",
+      "h1": "Anexos internos",
+      "robots": "noindex, nofollow"
+    },
+    {
+      "path": "/hito2/anexos/onboarding/anexo-1",
+      "title": "Anexo 1 no indexable | Binder",
+      "description": "Anexo interno 1 de Binder.",
+      "h1": "Anexo 1",
+      "robots": "noindex, nofollow"
+    },
+    {
+      "path": "/hito2/anexos/onboarding/anexo-2",
+      "title": "Anexo 2 no indexable | Binder",
+      "description": "Anexo interno 2 de Binder.",
+      "h1": "Anexo 2",
+      "robots": "noindex, nofollow"
+    },
+    {
+      "path": "/hito2/anexos/onboarding/anexo-3",
+      "title": "Anexo 3 no indexable | Binder",
+      "description": "Anexo interno 3 de Binder.",
+      "h1": "Anexo 3",
+      "robots": "noindex, nofollow"
+    },
+    {
+      "path": "/hito2/anexos/onboarding/anexo-4",
+      "title": "Anexo 4 no indexable | Binder",
+      "description": "Anexo interno 4 de Binder.",
+      "h1": "Anexo 4",
+      "robots": "noindex, nofollow"
+    },
+    {
+      "path": "/hito2/anexos/onboarding/anexo-5",
+      "title": "Anexo 5 no indexable | Binder",
+      "description": "Anexo interno 5 de Binder.",
+      "h1": "Anexo 5",
+      "robots": "noindex, nofollow"
+    }
+  ]
+}
