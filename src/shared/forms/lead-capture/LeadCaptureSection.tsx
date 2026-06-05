@@ -11,6 +11,7 @@ import {
 import { PrivacyConsentLabel } from '../privacyConsent';
 import { useLeadCaptureForm } from './useLeadCaptureForm';
 import type { Country } from './leadCapture';
+import './LeadCaptureSection.css';
 
 interface LeadCaptureSectionClasses {
   section: string;
@@ -33,12 +34,14 @@ interface LeadCaptureSectionClasses {
 interface LeadCaptureSectionProps {
   id: string;
   classes: LeadCaptureSectionClasses;
+  content?: typeof contactoContent;
   origen: Extract<
     BubbleFormOrigin,
     | 'formulario-contacto'
     | 'formulario-caso-procesos'
     | 'formulario-caso-clm'
     | 'formulario-caso-expediente'
+    | 'formulario-caso-tally'
   >;
   emptyChallengeValue: string | null;
   sectionStyle?: CSSProperties;
@@ -47,6 +50,7 @@ interface LeadCaptureSectionProps {
 export const LeadCaptureSection = ({
   id,
   classes,
+  content = contactoContent,
   origen,
   emptyChallengeValue,
   sectionStyle,
@@ -78,9 +82,9 @@ export const LeadCaptureSection = ({
       <div className="container-wide">
         <div className={classes.grid}>
           <div className={classes.text}>
-            <h2 className={classes.title}>{contactoContent.title}</h2>
-            <p className={classes.description}>{contactoContent.description}</p>
-            <p className={classes.cta}>{contactoContent.callToAction}</p>
+            <h2 className={classes.title}>{content.title}</h2>
+            <p className={classes.description}>{content.description}</p>
+            <p className={classes.cta}>{content.callToAction}</p>
           </div>
 
           <div className={classes.formContainer}>
@@ -92,13 +96,13 @@ export const LeadCaptureSection = ({
                 role="presentation"
               />
             </div>
-            <form onSubmit={handleSubmit} className={classes.form}>
-              <h3 className={classes.formTitle}>{contactoContent.form.title}</h3>
+            <form onSubmit={handleSubmit} className={`${classes.form} lead-capture-form`}>
+              <h3 className={classes.formTitle}>{content.form.title}</h3>
 
               <div className={classes.formGroup}>
                 <input
                   type="text"
-                  placeholder={contactoContent.form.fields.name.placeholder}
+                  placeholder={content.form.fields.name.placeholder}
                   value={formData.name}
                   onChange={(event) => handleChange('name', event.target.value)}
                   className={errors.name ? 'error' : ''}
@@ -109,7 +113,7 @@ export const LeadCaptureSection = ({
               <div className={classes.formGroup}>
                 <input
                   type="text"
-                  placeholder={contactoContent.form.fields.company.placeholder}
+                  placeholder={content.form.fields.company.placeholder}
                   value={formData.company}
                   onChange={(event) => handleChange('company', event.target.value)}
                   className={errors.company ? 'error' : ''}
@@ -122,7 +126,7 @@ export const LeadCaptureSection = ({
               <div className={classes.formGroup}>
                 <input
                   type="email"
-                  placeholder={contactoContent.form.fields.email.placeholder}
+                  placeholder={content.form.fields.email.placeholder}
                   value={formData.email}
                   onChange={(event) => handleChange('email', event.target.value)}
                   className={errors.email ? 'error' : ''}
@@ -145,7 +149,7 @@ export const LeadCaptureSection = ({
                   </select>
                   <input
                     type="tel"
-                    placeholder={contactoContent.form.fields.phone.placeholder}
+                    placeholder={content.form.fields.phone.placeholder}
                     value={formData.phone}
                     onChange={(event) => handleChange('phone', event.target.value)}
                     className="phone-number-input"
@@ -160,9 +164,9 @@ export const LeadCaptureSection = ({
                   className={formData.message ? '' : 'placeholder-selected'}
                 >
                   <option value="" disabled>
-                    {contactoContent.form.fields.message.placeholder}
+                    {content.form.fields.message.placeholder}
                   </option>
-                  {contactoContent.form.fields.message.options?.map((option, index) => (
+                  {content.form.fields.message.options?.map((option, index) => (
                     <option key={index} value={option}>
                       {option}
                     </option>
@@ -170,14 +174,17 @@ export const LeadCaptureSection = ({
                 </select>
               </div>
 
-              <div className={`${classes.formGroup} ${classes.checkboxGroup}`}>
-                <label>
+              <div
+                className={`${classes.formGroup} ${classes.checkboxGroup} lead-capture-checkbox-group`}
+              >
+                <label className="lead-capture-checkbox-label">
                   <input
                     type="checkbox"
                     checked={formData.consent}
                     onChange={(event) => handleChange('consent', event.target.checked)}
+                    className="lead-capture-checkbox-input"
                   />
-                  <span>
+                  <span className="lead-capture-checkbox-text">
                     <PrivacyConsentLabel />
                   </span>
                 </label>
@@ -193,7 +200,7 @@ export const LeadCaptureSection = ({
               )}
 
               <button type="submit" className={classes.submitButton} disabled={isSubmitting}>
-                {isSubmitting ? 'Enviando...' : contactoContent.form.submitText}
+                {isSubmitting ? 'Enviando...' : content.form.submitText}
               </button>
             </form>
           </div>

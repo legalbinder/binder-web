@@ -11,7 +11,7 @@ interface App {
 
 export const appsContent = {
   mainTitle: "Descubre cómo Binder se adapta a cada equipo legal",
-  subtitle: "Tres soluciones diseñadas para diferentes desafíos: desde la gestión de contratos hasta el control total de procesos y expedientes.",
+  subtitle: "Soluciones diseñadas para diferentes desafíos: desde la gestión de contratos hasta el control de procesos, expedientes, tiempo y facturación.",
   apps: [
     {
       id: "cases",
@@ -43,6 +43,16 @@ export const appsContent = {
       link: "/casos-uso/expediente-digital",
       status: 'available',
     },
+    {
+      id: "tally",
+      name: "Tally",
+      subtitle: "Gestión de tiempo y facturación para estudios legales",
+      description: "Transforma horas trabajadas en información para decidir mejor. Visualiza rentabilidad, ingresos y desempeño por cliente o caso.",
+      color: "var(--accent-teal)",
+      imagePlaceholder: "Icono de Tally",
+      link: "/casos-uso/gestion-tiempo-facturacion",
+      status: 'available',
+    },
     // Comentadas temporalmente - se mostrarán más adelante
     // {
     //   id: "comply",
@@ -52,16 +62,6 @@ export const appsContent = {
     //   color: "var(--medium-blue)",
     //   imagePlaceholder: "Icono de Comply",
     //   link: "#comply",
-    //   status: 'development',
-    // },
-    // {
-    //   id: "tally",
-    //   name: "Tally",
-    //   subtitle: "Control financiero y reportes",
-    //   description: "Controla presupuestos, gastos legales y genera reportes financieros detallados. Visibilidad total del área legal.",
-    //   color: "var(--accent-teal)",
-    //   imagePlaceholder: "Icono de Tally",
-    //   link: "#tally",
     //   status: 'development',
     // },
     // {

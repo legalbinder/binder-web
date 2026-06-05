@@ -10,6 +10,7 @@ import { WhyBinder } from '../components/sections/WhyBinder';
 import { CLMPage } from '../pages/casos-uso/CLMPage';
 import { CasesPage } from '../pages/casos-uso/CasesPage';
 import { ExpedienteDigitalPage } from '../pages/casos-uso/ExpedienteDigitalPage';
+import { TallyPage } from '../pages/casos-uso/TallyPage';
 import { DiagnosticoLegalOpsPageGateStart } from '../pages/DiagnosticoLegalOpsPageGateStart';
 import { Hito2AnexosPage } from '../pages/docs/Hito2AnexosPage';
 import { OnboardingAnexo1Page } from '../pages/docs/onboarding/OnboardingAnexo1Page';
@@ -75,6 +76,7 @@ export const AppRoutes = () => (
     <Route path="/casos-uso/clm" element={<CLMPage />} />
     <Route path="/casos-uso/gestion-procesos" element={<CasesPage />} />
     <Route path="/casos-uso/expediente-digital" element={<ExpedienteDigitalPage />} />
+    <Route path="/casos-uso/gestion-tiempo-facturacion" element={<TallyPage />} />
     <Route path="/cases" element={<Navigate to="/casos-uso/gestion-procesos" replace />} />
     <Route path="/test/antigravity" element={<TestAnimationPage />} />
     <Route path="/docs/prep-reunion-oka-ciberseguridad" element={<PrepReunionOkaPage />} />

@@ -69,6 +69,7 @@ VITE_LINKEDIN_PARTNER_ID=
 | `/casos-uso/clm` | CLM con IA | Landing de gestion de contratos: ciclo de vida contractual, automatizacion, trazabilidad e IA. |
 | `/casos-uso/gestion-procesos` | Gestion de procesos legales | Landing para procesos judiciales/administrativos, expedientes, oficios y control operativo. |
 | `/casos-uso/expediente-digital` | Expediente digital | Landing para mesa de partes online, expediente digital y trazabilidad documental. |
+| `/casos-uso/gestion-tiempo-facturacion` | Gestion de tiempo y facturacion | Landing Tally para estudios legales: registro de horas, tarifas, facturacion, cobranza, gastos y visibilidad de rentabilidad. |
 | `/cases` | Redirect | Redirige a `/casos-uso/gestion-procesos`. |
 | `/eventos/:slug` | Landing de evento | Landing independiente para eventos/webinars. El contenido sale de `src/content/eventos.ts`. |
 | `/legal/privacidad` | Politica de privacidad | Pagina legal de privacidad. |
@@ -100,6 +101,7 @@ Todos los formularios usan `VITE_BUBBLE_WEBHOOK_URL`. Bubble distingue cada orig
 | Caso de uso Gestion de Procesos | `CasesContact` + `LeadCaptureSection` | `origen: "formulario-caso-procesos"` |
 | Caso de uso CLM | `DealsContact` + `LeadCaptureSection` | `origen: "formulario-caso-clm"` |
 | Caso de uso Expediente Digital | `ExpedienteContact` + `LeadCaptureSection` | `origen: "formulario-caso-expediente"` |
+| Caso de uso Gestion de Tiempo y Facturacion | `LeadCaptureSection` | `origen: "formulario-caso-tally"` |
 | Diagnostico Legal Ops - inicio | `src/pages/DiagnosticoLegalOpsPageGateStart.tsx` | `origen: "Diagnóstico-inicio"` |
 | Diagnostico Legal Ops - resultado final | `src/pages/DiagnosticoLegalOpsPageGateStart.tsx` | `origen: "diagnostico-legal-ops"` |
 | Registro de eventos | `src/pages/eventos/EventPage.tsx` | `origen: "registro-evento"` |
@@ -126,7 +128,7 @@ src/
   context/                        # Theme, background y consentimiento de cookies
   data/                           # Paises y dominios bloqueados
   features/
-    casos-uso/                    # Landings CLM, gestion de procesos y expediente digital
+    casos-uso/                    # Landings CLM, gestion de procesos, expediente digital y Tally
       components/                 # Componentes especificos de casos de uso
       content/                    # Contenido editable de casos de uso
       index.ts                    # API publica del feature
@@ -157,7 +159,7 @@ scripts/
 - Eventos: `src/content/eventos.ts`.
 - Prensa: `src/features/prensa/content/prensa.ts`.
 - Home y secciones comerciales: `src/content/home.ts`, `src/content/porquebinder.ts`, `src/content/soluciones.ts`, `src/content/apps.ts`, `src/content/contacto.ts`.
-- Casos de uso: `src/features/casos-uso/content/cases.ts`, `src/features/casos-uso/content/deals.ts`, `src/features/casos-uso/content/expedienteDigital.ts`.
+- Casos de uso: `src/features/casos-uso/content/cases.ts`, `src/features/casos-uso/content/deals.ts`, `src/features/casos-uso/content/expedienteDigital.ts`, `src/features/casos-uso/content/tally.ts`.
 - Footer: `src/content/footer.ts`.
 - SEO y sitemap: `src/config/seo-routes.json`.
 

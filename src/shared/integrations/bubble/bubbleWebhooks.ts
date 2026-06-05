@@ -21,6 +21,7 @@ export type BubbleFormOrigin =
   | 'formulario-caso-procesos'
   | 'formulario-caso-clm'
   | 'formulario-caso-expediente'
+  | 'formulario-caso-tally'
   | 'Diagnóstico-inicio'
   | 'diagnostico-legal-ops'
   | 'registro-evento'

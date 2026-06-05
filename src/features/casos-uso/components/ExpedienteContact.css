@@ -124,7 +124,7 @@ body.has-animated-background .expediente-contact-section {
   gap: 0.5rem;
 }
 
-.expediente-form-group input,
+.expediente-form-group input:not([type="checkbox"]),
 .expediente-form-group textarea,
 .expediente-form-group select {
   width: 100%;
@@ -138,14 +138,14 @@ body.has-animated-background .expediente-contact-section {
   transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-[data-theme="dark"] .expediente-form-group input,
+[data-theme="dark"] .expediente-form-group input:not([type="checkbox"]),
 [data-theme="dark"] .expediente-form-group textarea,
 [data-theme="dark"] .expediente-form-group select {
   background-color: rgba(255, 255, 255, 0.1);
   color: var(--white);
 }
 
-.expediente-form-group input:focus,
+.expediente-form-group input:not([type="checkbox"]):focus,
 .expediente-form-group textarea:focus,
 .expediente-form-group select:focus {
   outline: none;
@@ -153,7 +153,7 @@ body.has-animated-background .expediente-contact-section {
   box-shadow: 0 0 0 3px rgba(95, 189, 255, 0.1);
 }
 
-.expediente-form-group input.error,
+.expediente-form-group input:not([type="checkbox"]).error,
 .expediente-form-group textarea.error,
 .expediente-form-group select.error {
   border-color: var(--orange);
@@ -237,9 +237,6 @@ body.has-animated-background .expediente-contact-section {
 }
 
 .expediente-checkbox-group input[type="checkbox"] {
-  width: auto;
-  margin-top: 0.25rem;
-  cursor: pointer;
   accent-color: var(--light-blue);
 }
 
@@ -300,7 +297,7 @@ body.has-animated-background .expediente-contact-section {
     padding: var(--spacing-md);
   }
 
-  .expediente-form-group input,
+  .expediente-form-group input:not([type="checkbox"]),
   .expediente-form-group textarea,
   .expediente-form-group select {
     padding: 0.75rem;

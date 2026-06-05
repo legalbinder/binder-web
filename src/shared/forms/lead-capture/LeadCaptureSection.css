@@ -1,0 +1,27 @@
+.lead-capture-form .lead-capture-checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  cursor: pointer;
+}
+
+.lead-capture-form .lead-capture-checkbox-group .lead-capture-checkbox-input {
+  box-sizing: border-box;
+  inline-size: 1rem;
+  block-size: 1rem;
+  min-inline-size: 1rem;
+  flex: 0 0 1rem;
+  padding: 0;
+  margin: 0.25rem 0 0;
+  cursor: pointer;
+  appearance: auto;
+  -webkit-appearance: checkbox;
+  transition: none;
+  transform: none;
+  box-shadow: none;
+}
+
+.lead-capture-checkbox-text {
+  min-width: 0;
+  line-height: 1.5;
+}

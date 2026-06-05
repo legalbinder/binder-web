@@ -395,7 +395,7 @@ Este payload inicializa un contrato generico y reutilizable. La web usa las mism
 
 ## Formularios activos
 
-Hay 7 formularios funcionales en la web. El diagnostico envia 2 llamados al webhook: uno al completar los datos iniciales y otro al finalizar el cuestionario.
+Hay 8 formularios funcionales en la web. El diagnostico envia 2 llamados al webhook: uno al completar los datos iniciales y otro al finalizar el cuestionario.
 
 | Formulario | Ruta | Valor de `origen` |
 | --- | --- | --- |
@@ -403,6 +403,7 @@ Hay 7 formularios funcionales en la web. El diagnostico envia 2 llamados al webh
 | Caso de uso Gestion de Procesos | `/casos-uso/gestion-procesos` | `formulario-caso-procesos` |
 | Caso de uso CLM | `/casos-uso/clm` | `formulario-caso-clm` |
 | Caso de uso Expediente Digital | `/casos-uso/expediente-digital` | `formulario-caso-expediente` |
+| Caso de uso Gestion de Tiempo y Facturacion | `/casos-uso/gestion-tiempo-facturacion` | `formulario-caso-tally` |
 | Diagnostico Legal Ops - inicio | `/diagnostico-legal-ops-formulario-inicio` | `Diagnóstico-inicio` |
 | Diagnostico Legal Ops - resultado final | `/diagnostico-legal-ops-formulario-inicio` | `diagnostico-legal-ops` |
 | Registro de evento | `/eventos/:slug` | `registro-evento` |
@@ -452,11 +453,11 @@ Estas claves mantienen el mismo significado cuando aplican al formulario:
 | `booleanoExtra01` | Política de Privacidad aceptada |
 | `fechaExtra01` | Fecha de envio |
 
-### `formulario-caso-procesos`, `formulario-caso-clm`, `formulario-caso-expediente`
+### `formulario-caso-procesos`, `formulario-caso-clm`, `formulario-caso-expediente`, `formulario-caso-tally`
 
 | Clave | Significado |
 | --- | --- |
-| `origen` | Valor fijo segun el caso: `formulario-caso-procesos`, `formulario-caso-clm` o `formulario-caso-expediente` |
+| `origen` | Valor fijo segun el caso: `formulario-caso-procesos`, `formulario-caso-clm`, `formulario-caso-expediente` o `formulario-caso-tally` |
 | `fechaEnvio` | Fecha/hora del envio en formato ISO |
 | `textoExtra01` | Nombre completo |
 | `textoExtra04` | Correo |
@@ -705,6 +706,7 @@ Cada item de `listaObjetoExtra01` usa:
     "formulario-caso-procesos",
     "formulario-caso-clm",
     "formulario-caso-expediente",
+    "formulario-caso-tally",
     "Diagnóstico-inicio",
     "diagnostico-legal-ops",
     "registro-evento",

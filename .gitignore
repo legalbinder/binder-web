@@ -29,3 +29,6 @@ dist-ssr
 *.sw?
 
 .vercel
+
+# Local task materials
+info_task/

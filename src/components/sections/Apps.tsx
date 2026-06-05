@@ -10,7 +10,7 @@ const getAppIcon = (appId: string): string => {
     deals: '/DEALS_Transp_BG.svg',
     archive: '/ARCHIVE_Transp_BG.svg',
     comply: '/COMPLY_Transp_BG.svg',
-    tally: '/TALLY_SkyBlu_Transp_BG.svg',
+    tally: '/images/tally/tally-logo.svg',
     quorum: '/QUORUM_Transp_BG.svg',
   };
   return iconMap[appId] || '';

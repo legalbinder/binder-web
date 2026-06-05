@@ -124,7 +124,7 @@ body.has-animated-background .deals-contact-section {
   gap: 0.5rem;
 }
 
-.deals-form-group input,
+.deals-form-group input:not([type="checkbox"]),
 .deals-form-group textarea,
 .deals-form-group select {
   width: 100%;
@@ -138,14 +138,14 @@ body.has-animated-background .deals-contact-section {
   transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-[data-theme="dark"] .deals-form-group input,
+[data-theme="dark"] .deals-form-group input:not([type="checkbox"]),
 [data-theme="dark"] .deals-form-group textarea,
 [data-theme="dark"] .deals-form-group select {
   background-color: rgba(255, 255, 255, 0.1);
   color: var(--white);
 }
 
-.deals-form-group input:focus,
+.deals-form-group input:not([type="checkbox"]):focus,
 .deals-form-group textarea:focus,
 .deals-form-group select:focus {
   outline: none;
@@ -153,7 +153,7 @@ body.has-animated-background .deals-contact-section {
   box-shadow: 0 0 0 3px rgba(109, 60, 255, 0.1);
 }
 
-.deals-form-group input.error,
+.deals-form-group input:not([type="checkbox"]).error,
 .deals-form-group textarea.error,
 .deals-form-group select.error {
   border-color: var(--orange);
@@ -237,9 +237,6 @@ body.has-animated-background .deals-contact-section {
 }
 
 .deals-checkbox-group input[type="checkbox"] {
-  width: auto;
-  margin-top: 0.25rem;
-  cursor: pointer;
   accent-color: var(--bright-purple);
 }
 
@@ -300,7 +297,7 @@ body.has-animated-background .deals-contact-section {
     padding: var(--spacing-md);
   }
 
-  .deals-form-group input,
+  .deals-form-group input:not([type="checkbox"]),
   .deals-form-group textarea,
   .deals-form-group select {
     padding: 0.75rem;

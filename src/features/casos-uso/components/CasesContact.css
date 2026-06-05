@@ -124,7 +124,7 @@ body.has-animated-background .cases-contact-section {
   gap: 0.5rem;
 }
 
-.cases-form-group input,
+.cases-form-group input:not([type="checkbox"]),
 .cases-form-group textarea,
 .cases-form-group select {
   width: 100%;
@@ -138,14 +138,14 @@ body.has-animated-background .cases-contact-section {
   transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-[data-theme="dark"] .cases-form-group input,
+[data-theme="dark"] .cases-form-group input:not([type="checkbox"]),
 [data-theme="dark"] .cases-form-group textarea,
 [data-theme="dark"] .cases-form-group select {
   background-color: rgba(255, 255, 255, 0.1);
   color: var(--white);
 }
 
-.cases-form-group input:focus,
+.cases-form-group input:not([type="checkbox"]):focus,
 .cases-form-group textarea:focus,
 .cases-form-group select:focus {
   outline: none;
@@ -153,7 +153,7 @@ body.has-animated-background .cases-contact-section {
   box-shadow: 0 0 0 3px rgba(48, 51, 156, 0.1);
 }
 
-.cases-form-group input.error,
+.cases-form-group input:not([type="checkbox"]).error,
 .cases-form-group textarea.error,
 .cases-form-group select.error {
   border-color: var(--orange);
@@ -237,9 +237,6 @@ body.has-animated-background .cases-contact-section {
 }
 
 .cases-checkbox-group input[type="checkbox"] {
-  width: auto;
-  margin-top: 0.25rem;
-  cursor: pointer;
   accent-color: #30339C;
 }
 
@@ -300,7 +297,7 @@ body.has-animated-background .cases-contact-section {
     padding: var(--spacing-md);
   }
 
-  .cases-form-group input,
+  .cases-form-group input:not([type="checkbox"]),
   .cases-form-group textarea,
   .cases-form-group select {
     padding: 0.75rem;

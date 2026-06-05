@@ -33,6 +33,7 @@ export const footerContent = {
         { label: "CLM con IA", href: "/casos-uso/clm" },
         { label: "Gestión de procesos legales", href: "/casos-uso/gestion-procesos" },
         { label: "Expediente digital y mesa de partes", href: "/casos-uso/expediente-digital" },
+        { label: "Gestión de tiempo y facturación", href: "/casos-uso/gestion-tiempo-facturacion" },
       ],
     },
     {

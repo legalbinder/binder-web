@@ -100,7 +100,7 @@
   color: #0f2338;
 }
 
-.diagnostico-form-grid input,
+.diagnostico-form-grid input:not([type="checkbox"]),
 .diagnostico-form-grid select {
   width: 100%;
   min-width: 0; /* Safari: permite que respete el ancho del grid en lugar del contenido */
@@ -114,14 +114,14 @@
   background: #ffffff;
 }
 
-.diagnostico-form-grid input:focus,
+.diagnostico-form-grid input:not([type="checkbox"]):focus,
 .diagnostico-form-grid select:focus {
   border-color: var(--accent);
   outline: none;
   box-shadow: 0 0 0 3px rgba(0, 152, 177, 0.16);
 }
 
-.diagnostico-form-grid input.error,
+.diagnostico-form-grid input:not([type="checkbox"]).error,
 .diagnostico-form-grid select.error {
   border-color: #d53b54;
 }
@@ -149,8 +149,19 @@
   color: #243e5b;
 }
 
-.diagnostico-checkbox-label input {
-  margin-top: 0.2rem;
+.diagnostico-checkbox-label input[type="checkbox"] {
+  box-sizing: border-box;
+  inline-size: 1rem;
+  block-size: 1rem;
+  min-inline-size: 1rem;
+  flex: 0 0 1rem;
+  padding: 0;
+  margin: 0.2rem 0 0;
+  cursor: pointer;
+  appearance: auto;
+  -webkit-appearance: checkbox;
+  accent-color: var(--accent);
+  transition: none;
 }
 
 .diagnostico-primary-button,

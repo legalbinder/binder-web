@@ -16,6 +16,8 @@ export { ExpedienteFAQ } from './components/ExpedienteFAQ';
 export { ExpedienteHero } from './components/ExpedienteHero';
 export { ExpedienteStats } from './components/ExpedienteStats';
 export { ExpedienteTabs } from './components/ExpedienteTabs';
+export { TallyLanding } from './components/TallyLanding';
 export { casesContent } from './content/cases';
 export { dealsContent } from './content/deals';
 export { expedienteDigitalContent } from './content/expedienteDigital';
+export { tallyContent } from './content/tally';

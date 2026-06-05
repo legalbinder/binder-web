@@ -9,7 +9,6 @@ import {
 } from '../../features/casos-uso';
 import { PageHead } from '../../components/seo/PageHead';
 import { SchemaMarkup } from '../../components/seo/SchemaMarkup';
-import { Breadcrumbs } from '../../components/layout/Breadcrumbs';
 
 export const CLMPage = () => {
   const faqItems = dealsContent.faq.items.map(item => ({
@@ -39,7 +38,6 @@ export const CLMPage = () => {
         data={{ breadcrumbs }}
       />
       <main>
-        <Breadcrumbs items={breadcrumbs} />
         <DealsHero />
         <DealsStats />
         <DealsTabs />

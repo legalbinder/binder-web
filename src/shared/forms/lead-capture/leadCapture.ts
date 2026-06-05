@@ -38,6 +38,7 @@ interface BuildLeadCapturePayloadOptions {
     | 'formulario-caso-procesos'
     | 'formulario-caso-clm'
     | 'formulario-caso-expediente'
+    | 'formulario-caso-tally'
   >;
   emptyChallengeValue: string | null;
 }

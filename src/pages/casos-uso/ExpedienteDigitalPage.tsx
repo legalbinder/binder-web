@@ -9,7 +9,6 @@ import {
 } from '../../features/casos-uso';
 import { PageHead } from '../../components/seo/PageHead';
 import { SchemaMarkup } from '../../components/seo/SchemaMarkup';
-import { Breadcrumbs } from '../../components/layout/Breadcrumbs';
 
 export const ExpedienteDigitalPage = () => {
   const faqItems = expedienteDigitalContent.faq.items.map(item => ({
@@ -39,7 +38,6 @@ export const ExpedienteDigitalPage = () => {
         data={{ breadcrumbs }}
       />
       <main>
-        <Breadcrumbs items={breadcrumbs} />
         <ExpedienteHero />
         <ExpedienteStats />
         <ExpedienteTabs />

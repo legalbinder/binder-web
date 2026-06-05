@@ -17,6 +17,7 @@
       "links": [
         { "href": "/casos-uso/clm", "text": "CLM con IA" },
         { "href": "/casos-uso/gestion-procesos", "text": "Gestión de procesos" },
+        { "href": "/casos-uso/gestion-tiempo-facturacion", "text": "Tally: gestión de tiempo y facturación" },
         { "href": "/diagnostico-legal-ops-formulario-inicio", "text": "Diagnóstico Legal Ops" },
         { "href": "/prensa", "text": "Prensa" }
       ]
@@ -118,6 +119,24 @@
       "changefreq": "monthly",
       "paragraphs": [
         "Centraliza documentos, plazos, movimientos y trazabilidad de expedientes legales en una plataforma digital."
+      ]
+    },
+    {
+      "path": "/casos-uso/gestion-tiempo-facturacion",
+      "title": "Tally | Gestión de tiempo, facturación y rentabilidad para estudios de abogados",
+      "description": "Gestiona horas, gastos, facturación y cobranza desde una sola plataforma. Obtén visibilidad en tiempo real sobre la rentabilidad de cada cliente o caso.",
+      "h1": "Controla el tiempo, los ingresos y la rentabilidad de tu estudio",
+      "image": "/images/tally/tally-hero.jpg",
+      "priority": "0.9",
+      "changefreq": "monthly",
+      "paragraphs": [
+        "Tally conecta horas, tarifas, gastos, facturación y cobranza en un mismo flujo operativo para estudios de abogados.",
+        "La solución permite registrar tiempo por cliente, caso, tarea y abogado, controlar gastos y obtener visibilidad sobre productividad, ingresos y rentabilidad."
+      ],
+      "links": [
+        { "href": "/diagnostico-legal-ops-formulario-inicio", "text": "Mide tu madurez Legal Ops" },
+        { "href": "/casos-uso/clm", "text": "CLM con IA" },
+        { "href": "/casos-uso/gestion-procesos", "text": "Gestión de procesos legales" }
       ]
     },
     {
