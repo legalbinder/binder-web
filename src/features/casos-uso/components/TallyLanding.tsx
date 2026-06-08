@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { Button } from '../../../components/ui/Button';
+import { useIsMobile } from '../../../hooks/useIsMobile';
 import { useScrollAnimation } from '../../../hooks/useScrollAnimation';
 import { LeadCaptureSection } from '../../../shared/forms/lead-capture/LeadCaptureSection';
 import { tallyContent } from '../content/tally';
@@ -95,7 +96,7 @@ const TallyStats = () => {
 
 const TallyTabs = () => {
   const [activeTab, setActiveTab] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
+  const isMobile = useIsMobile();
   const [openAccordions, setOpenAccordions] = useState<Set<number>>(new Set([0]));
   const tabNavigationRef = useRef<HTMLDivElement>(null);
   const { title, description, items } = tallyContent.solution;
@@ -104,14 +105,6 @@ const TallyTabs = () => {
     rootMargin: '0px',
     triggerOnce: true,
   });
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
 
   const toggleAccordion = (index: number) => {
     setOpenAccordions((previous) => {

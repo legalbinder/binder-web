@@ -1,11 +1,12 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { dealsContent } from '../content/deals';
+import { useIsMobile } from '../../../hooks/useIsMobile';
 import { useScrollAnimation } from '../../../hooks/useScrollAnimation';
 import './DealsTabs.css';
 
 export const DealsTabs = () => {
   const [activeTab, setActiveTab] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
+  const isMobile = useIsMobile();
   const [openAccordions, setOpenAccordions] = useState<Set<number>>(new Set());
   const tabNavigationRef = useRef<HTMLDivElement>(null);
   const { mainTitle, tabs } = dealsContent.tabs;
@@ -14,16 +15,6 @@ export const DealsTabs = () => {
     rootMargin: '0px',
     triggerOnce: true,
   });
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
 
   const toggleAccordion = (index: number) => {
     setOpenAccordions(prev => {
