@@ -164,7 +164,7 @@ export const ExpedienteTabs = () => {
             {tabs.map((tab, index) => {
               const isOpen = openAccordions.has(index);
               return (
-                <div key={tab.id} className="expediente-accordion-item">
+                <div key={tab.id} className="expediente-accordion-item" data-tab-id={tab.id}>
                   <button
                     className={`expediente-accordion-button ${isOpen ? 'active' : ''}`}
                     onClick={() => toggleAccordion(index)}

@@ -9,9 +9,7 @@ const getAppIcon = (appId: string): string => {
     cases: '/CASES_Transp_BG.svg',
     deals: '/DEALS_Transp_BG.svg',
     archive: '/ARCHIVE_Transp_BG.svg',
-    comply: '/COMPLY_Transp_BG.svg',
     tally: '/images/tally/tally-logo.svg',
-    quorum: '/QUORUM_Transp_BG.svg',
   };
   return iconMap[appId] || '';
 };
@@ -47,7 +45,7 @@ export const Apps = () => {
                 <div className={`app-icon app-icon-${app.id}`}>
                   <img 
                     src={getAppIcon(app.id)} 
-                    alt={`${app.name} icon`}
+                    alt={app.imagePlaceholder}
                     className="app-icon-img"
                   />
                 </div>
@@ -62,12 +60,6 @@ export const Apps = () => {
               <p className="app-subtitle">{app.subtitle}</p>
               
               <p className="app-description">{app.description}</p>
-
-              {/* <div className="app-image-preview">
-                <div className="preview-placeholder">
-                  <span>Vista previa</span>
-                </div>
-              </div> */}
 
               <Link to={app.link} className="app-link">
                 Ver más

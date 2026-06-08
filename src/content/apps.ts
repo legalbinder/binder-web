@@ -53,27 +53,6 @@ export const appsContent = {
       link: "/casos-uso/gestion-tiempo-facturacion",
       status: 'available',
     },
-    // Comentadas temporalmente - se mostrarán más adelante
-    // {
-    //   id: "comply",
-    //   name: "Comply",
-    //   subtitle: "Cumplimiento normativo",
-    //   description: "Gestiona y monitorea el cumplimiento regulatorio. Alertas automáticas y reportes de cumplimiento en tiempo real.",
-    //   color: "var(--medium-blue)",
-    //   imagePlaceholder: "Icono de Comply",
-    //   link: "#comply",
-    //   status: 'development',
-    // },
-    // {
-    //   id: "quorum",
-    //   name: "Quorum",
-    //   subtitle: "Gestión de directorios y reuniones",
-    //   description: "Organiza juntas de accionistas y directorios. Votaciones digitales y gestión documental completa.",
-    //   color: "var(--very-light-blue)",
-    //   imagePlaceholder: "Icono de Quorum",
-    //   link: "#quorum",
-    //   status: 'development',
-    // },
   ] as App[],
 };
 

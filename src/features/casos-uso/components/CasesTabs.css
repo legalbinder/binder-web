@@ -213,6 +213,18 @@ body.has-animated-background .cases-tabs-section {
   opacity: 0;
 }
 
+.cases-tab-content[data-tab-id="centralizacion-total"] .cases-tab-demo-image,
+.cases-accordion-item[data-tab-id="centralizacion-total"] .cases-tab-demo-image,
+.cases-tab-content[data-tab-id="redaccion-inteligente"] .cases-tab-demo-image,
+.cases-accordion-item[data-tab-id="redaccion-inteligente"] .cases-tab-demo-image {
+  top: auto;
+  bottom: 10%;
+  left: var(--spacing-md);
+  right: auto;
+  max-width: 44%;
+  max-height: 44%;
+}
+
 @keyframes fadeInScaleUpTopLeft {
   0% {
     opacity: 0;
@@ -270,6 +282,10 @@ body.has-animated-background .cases-tabs-section {
   color: var(--white);
   margin-bottom: var(--spacing-md);
   line-height: 1.6;
+}
+
+.cases-tab-description::before {
+  content: '· ';
 }
 
 [data-theme="dark"] .cases-tab-description {

@@ -217,6 +217,16 @@ body.has-animated-background .solutions-section {
   opacity: 0;
 }
 
+.tab-content[data-tab-id="automatizacion"] .tab-demo-image,
+.accordion-item[data-tab-id="automatizacion"] .tab-demo-image {
+  top: auto;
+  bottom: 8%;
+  left: auto;
+  right: var(--spacing-md);
+  max-width: 44%;
+  max-height: 44%;
+}
+
 
 .image-placeholder {
   width: 100%;

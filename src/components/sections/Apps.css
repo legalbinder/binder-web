@@ -1,5 +1,5 @@
 .apps-section {
-  padding: var(--spacing-3xl) 0;
+  padding: clamp(4rem, 8vw, 7rem) 0;
   background-color: var(--white);
 }
 
@@ -14,7 +14,9 @@ body.has-animated-background .apps-section {
 
 .apps-header {
   text-align: center;
-  margin-bottom: var(--spacing-2xl);
+  max-width: 880px;
+  margin: 0 auto clamp(2rem, 5vw, 3.5rem);
+  padding: 0 var(--spacing-md);
 }
 
 .apps-title {
@@ -22,7 +24,7 @@ body.has-animated-background .apps-section {
   font-size: clamp(1.5rem, 1.25rem + 1.5vw, 2rem);
   font-weight: var(--font-weight-bold);
   color: var(--pink);
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
   line-height: 1.2;
 }
 
@@ -33,7 +35,7 @@ body.has-animated-background .apps-section {
   color: var(--navy);
   max-width: 800px;
   margin: 0 auto;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 [data-theme="dark"] .apps-subtitle {
@@ -43,8 +45,9 @@ body.has-animated-background .apps-section {
 /* Apps Grid */
 .apps-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--spacing-xl);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(1rem, 2vw, 1.5rem);
+  align-items: stretch;
 }
 
 /* App Card */
@@ -52,19 +55,19 @@ body.has-animated-background .apps-section {
   background: linear-gradient(135deg, var(--app-color, var(--accent)) 0%, 
               color-mix(in srgb, var(--app-color, var(--accent)) 70%, black) 100%);
   border-radius: var(--radius-xl);
-  padding: var(--spacing-xl);
+  padding: clamp(1.25rem, 2vw, 1.75rem);
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-md);
+  gap: var(--spacing-sm);
   box-shadow: var(--shadow-lg);
-  transition: all 0.3s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   position: relative;
   overflow: hidden;
-  min-height: 450px;
+  min-height: clamp(24rem, 27vw, 26rem);
 }
 
 .app-card:hover {
-  transform: translateY(-8px);
+  transform: translateY(-4px);
   box-shadow: var(--shadow-xl);
 }
 
@@ -77,11 +80,12 @@ body.has-animated-background .apps-section {
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
+  min-width: 0;
 }
 
 .app-icon {
-  width: 50px;
-  height: 50px;
+  width: clamp(2.75rem, 5vw, 3.125rem);
+  height: clamp(2.75rem, 5vw, 3.125rem);
   background-color: rgba(255, 255, 255, 1);
   border-radius: var(--radius-md);
   display: flex;
@@ -117,6 +121,7 @@ body.has-animated-background .apps-section {
 
 .app-name-group {
   flex: 1;
+  min-width: 0;
 }
 
 .app-name {
@@ -125,6 +130,7 @@ body.has-animated-background .apps-section {
   font-weight: var(--font-weight-bold);
   color: var(--white);
   margin-bottom: 0.25rem;
+  overflow-wrap: anywhere;
 }
 
 .app-badge {
@@ -141,7 +147,8 @@ body.has-animated-background .apps-section {
   font-size: var(--fs-14);
   font-weight: var(--font-weight-bold);
   color: rgba(255, 255, 255, 0.9);
-  line-height: 1.4;
+  line-height: 1.45;
+  min-height: 2.9em;
 }
 
 .app-description {
@@ -152,39 +159,20 @@ body.has-animated-background .apps-section {
   flex-grow: 1;
 }
 
-/* App Preview */
-.app-image-preview {
-  margin-top: auto;
-}
-
-.preview-placeholder {
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  background-color: rgba(255, 255, 255, 0.15);
-  border-radius: var(--radius-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  backdrop-filter: blur(10px);
-}
-
-.preview-placeholder span {
-  color: rgba(255, 255, 255, 0.7);
-  font-size: var(--fs-14);
-  font-weight: var(--font-weight-medium);
-}
-
 /* App Link */
 .app-link {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   color: var(--white);
   font-size: var(--fs-14);
   font-weight: var(--font-weight-medium);
   text-decoration: none;
-  padding: 0.5rem 0;
+  padding: 0.35rem 0;
   border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-  transition: all 0.2s ease;
+  transition: border-color 0.2s ease, transform 0.2s ease;
   align-self: flex-start;
+  margin-top: var(--spacing-sm);
 }
 
 .app-link:hover {
@@ -193,22 +181,48 @@ body.has-animated-background .apps-section {
 }
 
 /* Responsive - Layout adjustments only, typography handled by clamp() */
+@media (max-width: 1200px) {
+  .apps-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 968px) {
   .apps-grid {
-    grid-template-columns: repeat(2, 1fr);
     gap: var(--spacing-lg);
   }
 }
 
 @media (max-width: 640px) {
+  .apps-section {
+    padding: var(--spacing-2xl) 0;
+  }
+
+  .apps-header {
+    text-align: left;
+    padding: 0;
+    margin-bottom: var(--spacing-xl);
+  }
+
   .apps-grid {
     grid-template-columns: 1fr;
     gap: var(--spacing-md);
   }
 
   .app-card {
-    min-height: 380px;
-    padding: var(--spacing-md);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    min-height: 0;
+  }
+
+  .app-subtitle {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .app-card-header {
+    align-items: flex-start;
   }
 }
 

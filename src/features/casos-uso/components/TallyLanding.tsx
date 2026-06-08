@@ -46,7 +46,6 @@ const TallyHero = () => {
             <img src={hero.logo} alt="" className="tally-hero-icon" />
             <span className="tally-hero-name">{hero.product}</span>
           </div>
-          <p className="tally-hero-kicker">{hero.kicker}</p>
           <h1 className="tally-hero-title">{hero.title}</h1>
           <p className="tally-hero-subtitle">{hero.subtitle}</p>
           <div className="tally-hero-cta">
@@ -157,6 +156,7 @@ const TallyTabs = () => {
               <div
                 key={item.id}
                 className={`tally-tab-content ${index === activeTab ? 'active' : ''}`}
+                data-tab-id={item.id}
               >
                 <div className="tally-tab-grid">
                   <div className="tally-tab-image">
@@ -185,7 +185,7 @@ const TallyTabs = () => {
               const isOpen = openAccordions.has(index);
 
               return (
-                <div key={item.id} className="tally-accordion-item">
+                <div key={item.id} className="tally-accordion-item" data-tab-id={item.id}>
                   <button
                     className={`tally-accordion-button ${isOpen ? 'active' : ''}`}
                     onClick={() => toggleAccordion(index)}
@@ -311,6 +311,9 @@ const TallyAudienceUseCases = () => {
 
 const TallyReminder = () => {
   const { reminder } = tallyContent;
+  const [beforeHighlight, afterHighlight] = reminder.description.split(
+    reminder.descriptionHighlight
+  );
   const { elementRef, isVisible } = useScrollAnimation({
     threshold: 0.1,
     rootMargin: '0px',
@@ -324,10 +327,15 @@ const TallyReminder = () => {
     >
       <div className="container-wide">
         <div className="tally-reminder-card">
-          <span>{reminder.label}</span>
           <h2>{reminder.title}</h2>
-          <p>{reminder.description}</p>
-          <strong>{reminder.outcome}</strong>
+          <p>
+            {beforeHighlight}
+            <strong className="tally-reminder-highlight">
+              {reminder.descriptionHighlight}
+            </strong>
+            {afterHighlight}
+          </p>
+          <strong className="tally-reminder-outcome">{reminder.outcome}</strong>
         </div>
       </div>
     </section>
@@ -391,32 +399,6 @@ const TallyFAQ = () => {
   );
 };
 
-const TallyFinalCta = () => {
-  const { finalCta } = tallyContent;
-  const { elementRef, isVisible } = useScrollAnimation({
-    threshold: 0.1,
-    rootMargin: '0px',
-    triggerOnce: true,
-  });
-
-  return (
-    <section
-      ref={elementRef as React.RefObject<HTMLElement>}
-      className={`tally-final-cta-section scroll-animate ${isVisible ? 'visible' : ''}`}
-    >
-      <div className="container-wide">
-        <div className="tally-final-cta-card">
-          <h2>{finalCta.title}</h2>
-          <p>{finalCta.description}</p>
-          <Button variant="primary" onClick={scrollToContact}>
-            {finalCta.ctaText}
-          </Button>
-        </div>
-      </div>
-    </section>
-  );
-};
-
 const TallyContact = () => (
   <LeadCaptureSection
     id="tally-contact"
@@ -436,7 +418,6 @@ export const TallyLanding = () => (
     <TallyAudienceUseCases />
     <TallyReminder />
     <TallyFAQ />
-    <TallyFinalCta />
     <TallyContact />
   </>
 );

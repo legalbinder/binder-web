@@ -216,6 +216,28 @@ body.has-animated-background .deals-tabs-section {
   opacity: 0;
 }
 
+.deals-tab-content[data-tab-id="centralizacion-total"] .deals-tab-demo-image,
+.deals-accordion-item[data-tab-id="centralizacion-total"] .deals-tab-demo-image {
+  top: auto;
+  right: var(--spacing-md);
+  bottom: 10%;
+  left: auto;
+  max-width: 44%;
+  max-height: 44%;
+}
+
+.deals-tab-content[data-tab-id="redaccion-inteligente"] .deals-tab-demo-image,
+.deals-accordion-item[data-tab-id="redaccion-inteligente"] .deals-tab-demo-image,
+.deals-tab-content[data-tab-id="firma-electronica"] .deals-tab-demo-image,
+.deals-accordion-item[data-tab-id="firma-electronica"] .deals-tab-demo-image {
+  top: auto;
+  right: auto;
+  bottom: 10%;
+  left: var(--spacing-md);
+  max-width: 44%;
+  max-height: 44%;
+}
+
 @keyframes fadeInScaleUpTopLeft {
   0% {
     opacity: 0;

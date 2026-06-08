@@ -24,7 +24,7 @@ export const TallyPage = () => {
       />
       <SchemaMarkup type="faqPage" data={{ faqItems }} />
       <SchemaMarkup type="breadcrumbList" data={{ breadcrumbs }} />
-      <main className="tally-page section-has-local-background">
+      <main className="tally-page">
         <TallyLanding />
       </main>
     </>

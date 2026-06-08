@@ -50,8 +50,8 @@ export const tallyContent = {
   },
   hero: {
     product: 'Tally',
-    kicker: 'Gestión de tiempo y facturación',
-    title: 'Controla el tiempo, los ingresos y la rentabilidad de tu estudio',
+    title:
+      'Gestión de tiempo y facturación - Controla los ingresos y la rentabilidad de tu estudio',
     subtitle:
       'Transforma la gestión diaria en información precisa para facturar mejor, optimizar rentabilidad y tomar decisiones con mayor claridad.',
     ctaText: 'Agenda tu demo',
@@ -76,7 +76,7 @@ export const tallyContent = {
       },
     ] as TallyStat[],
     description:
-      'La consecuencia es simple: menos control sobre la rentabilidad real de clientes y casos. Binder organiza la operación del estudio para que cada hora trabajada pueda convertirse en facturación, cobranza y análisis.',
+      'Binder organiza la operación del estudio para que cada hora trabajada pueda convertirse en facturación, cobranza y análisis.',
   },
   solution: {
     title: 'Del tiempo trabajado a la rentabilidad real',
@@ -108,7 +108,7 @@ export const tallyContent = {
       {
         id: 'facturacion',
         eyebrow: '03',
-        title: 'Facturación, gastos y reembolsos bajo control',
+        title: 'Facturación, gastos y reembolsos',
         description:
           'Convierte horas y actividades validadas en información lista para facturar. Registra gastos judiciales, desembolsos y costos asociados a cada cliente o caso para facilitar reembolsos y liquidaciones.',
         outcome: 'Facturación y gastos conectados en un mismo flujo.',
@@ -119,7 +119,7 @@ export const tallyContent = {
       {
         id: 'cobranza',
         eyebrow: '04',
-        title: 'Gestión de cobranza integrada',
+        title: 'Gestión de cobranza',
         description:
           'Haz seguimiento al estado de cada factura, controla saldos pendientes y mantén visibilidad sobre cuentas por cobrar desde una sola plataforma.',
         outcome: 'Más control sobre el flujo de ingresos del estudio.',
@@ -130,7 +130,7 @@ export const tallyContent = {
       {
         id: 'rentabilidad',
         eyebrow: '05',
-        title: 'Visibilidad y rentabilidad en tiempo real',
+        title: 'Visibilidad y rentabilidad',
         description:
           'Centraliza indicadores de productividad, rentabilidad, cobranza y gastos en dashboards y reportes actualizados para gestionar el estudio con mayor precisión.',
         outcome: 'Información clara para tomar mejores decisiones.',
@@ -229,10 +229,10 @@ export const tallyContent = {
     ] as TallyUseCase[],
   },
   reminder: {
-    label: 'Recordatorios y automatización',
     title: 'Nada se queda pendiente',
     description:
       'Tally envía recordatorios automáticos para ayudar a mantener al día registros de horas, facturación, cobranza, gastos y otras actividades clave de la operación.',
+    descriptionHighlight: 'recordatorios automáticos',
     outcome: 'Más visibilidad. Menos fugas operativas.',
   },
   faq: {
@@ -282,18 +282,12 @@ export const tallyContent = {
       },
     ] as TallyFaqItem[],
   },
-  finalCta: {
+  contact: {
     title: 'Convierte cada hora en una mejor decisión para tu estudio',
     description:
-      'Tally te ayuda a registrar tiempo, controlar gastos, gestionar cobranza y entender la rentabilidad real de cada cliente o caso. Agenda una demo y descubre cómo Binder puede ayudarte a operar con más control, visibilidad y eficiencia.',
-    ctaText: 'Agenda una demo de Tally',
-  },
-  contact: {
-    title: 'Agenda una demo de Tally',
-    description:
-      'Cuéntanos cómo gestiona hoy tu estudio las horas, tarifas, facturación y cobranza.',
+      'Tally te ayuda a registrar tiempo, controlar gastos, gestionar cobranza y entender la rentabilidad real de cada cliente o caso.',
     callToAction:
-      'Te mostraremos cómo Tally puede ayudarte a ganar control operativo y visibilidad de rentabilidad.',
+      'Agenda una demo y descubre cómo Binder puede ayudarte a operar con más control, visibilidad y eficiencia.',
     form: {
       title: 'Conversemos sobre Tally',
       fields: {

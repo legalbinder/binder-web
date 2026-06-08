@@ -1,5 +1,5 @@
 .tally-page {
-  background: var(--bg);
+  background: transparent;
 }
 
 .tally-hero-section,
@@ -9,10 +9,10 @@
 .tally-use-section,
 .tally-reminder-section,
 .tally-faq-section,
-.tally-final-cta-section,
 .tally-contact-section {
   --tally: #8ad0dc;
-  --tally-dark: #5dbdcc;
+  --tally-readable: #0098b1;
+  --tally-dark: #0098b1;
   --tally-blue: #30339c;
   --tally-on-primary: #30339c;
   --tally-soft: rgba(138, 208, 220, 0.2);
@@ -39,7 +39,6 @@ body.has-animated-background .tally-comparison-section,
 body.has-animated-background .tally-use-section,
 body.has-animated-background .tally-reminder-section,
 body.has-animated-background .tally-faq-section,
-body.has-animated-background .tally-final-cta-section,
 body.has-animated-background .tally-contact-section {
   background-color: transparent !important;
 }
@@ -81,24 +80,15 @@ body.has-animated-background .tally-contact-section {
   font-family: 'Montserrat', ui-sans-serif, system-ui, -apple-system, sans-serif;
   font-size: 3rem;
   font-weight: bold;
-  color: var(--tally);
+  color: var(--tally-readable);
   line-height: 1;
-}
-
-.tally-hero-kicker {
-  font-size: var(--fs-14);
-  font-weight: var(--font-weight-bold);
-  color: var(--tally-blue);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  margin: 0 0 var(--spacing-md);
 }
 
 .tally-hero-title {
   font-family: 'Montserrat', ui-sans-serif, system-ui, -apple-system, sans-serif;
   font-size: clamp(1.75rem, 1rem + 4vw, 2.5rem);
   font-weight: bold;
-  color: var(--tally);
+  color: var(--tally-readable);
   margin-bottom: var(--spacing-md);
   line-height: 1.2;
   letter-spacing: -0.01em;
@@ -126,12 +116,37 @@ body.has-animated-background .tally-contact-section {
   min-height: 100vh;
 }
 
+.tally-hero-right::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 34%;
+  background: linear-gradient(
+    90deg,
+    #ffffff 0%,
+    rgba(255, 255, 255, 0.86) 26%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
 .tally-hero-right::after {
   content: '';
   position: absolute;
   inset: 0;
   background: linear-gradient(135deg, rgba(48, 51, 156, 0.2), rgba(138, 208, 220, 0.08));
   pointer-events: none;
+  z-index: 1;
+}
+
+[data-theme="dark"] .tally-hero-right::before {
+  background: linear-gradient(
+    90deg,
+    #1b1b1b 0%,
+    rgba(27, 27, 27, 0.86) 26%,
+    rgba(27, 27, 27, 0) 100%
+  );
 }
 
 .tally-hero-image {
@@ -176,27 +191,12 @@ body.has-animated-background .tally-contact-section {
   box-shadow: var(--shadow-lg);
 }
 
-.tally-final-cta-card .btn--primary {
-  background-color: var(--tally-blue);
-  color: var(--white);
-  font-size: clamp(1rem, 0.875rem + 0.5vw, 1.125rem);
-  padding: 1rem 2rem;
-}
-
-.tally-final-cta-card .btn--primary:hover:not(:disabled) {
-  background-color: var(--white);
-  color: var(--tally-blue);
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: var(--shadow-lg);
-}
-
 .tally-stats-section,
 .tally-tabs-section,
 .tally-comparison-section,
 .tally-use-section,
 .tally-reminder-section,
 .tally-faq-section,
-.tally-final-cta-section,
 .tally-contact-section {
   position: relative;
   padding: var(--spacing-2xl) 0;
@@ -210,7 +210,6 @@ body.has-animated-background .tally-contact-section {
 [data-theme="dark"] .tally-use-section,
 [data-theme="dark"] .tally-reminder-section,
 [data-theme="dark"] .tally-faq-section,
-[data-theme="dark"] .tally-final-cta-section,
 [data-theme="dark"] .tally-contact-section {
   background-color: var(--gray-dark);
 }
@@ -222,7 +221,7 @@ body.has-animated-background .tally-contact-section {
   text-align: center;
   font-size: clamp(1.5rem, 1.25rem + 1.5vw, 2rem);
   font-weight: var(--font-weight-bold);
-  color: var(--tally);
+  color: var(--tally-readable);
   margin-bottom: var(--spacing-lg);
   line-height: 1.3;
 }
@@ -242,7 +241,7 @@ body.has-animated-background .tally-contact-section {
 }
 
 .tally-stat-block {
-  background-color: var(--tally-soft);
+  background-color: rgba(0, 152, 177, 0.1);
   border-radius: var(--radius-xl);
   padding: var(--spacing-xl);
   text-align: center;
@@ -266,7 +265,7 @@ body.has-animated-background .tally-contact-section {
   font-family: 'Montserrat', ui-sans-serif, system-ui, -apple-system, sans-serif;
   font-size: clamp(2.25rem, 1.5rem + 5vw, 4.25rem);
   font-weight: var(--font-weight-bold);
-  color: var(--tally);
+  color: var(--tally-readable);
   line-height: 1;
   display: block;
 }
@@ -455,6 +454,29 @@ body.has-animated-background .tally-contact-section {
   bottom: var(--spacing-md);
 }
 
+.tally-tab-content[data-tab-id="tarifas"] .tally-tab-demo-image,
+.tally-accordion-item[data-tab-id="tarifas"] .tally-tab-demo-image {
+  top: auto;
+  bottom: 4%;
+  left: var(--spacing-md);
+  max-width: 44%;
+  max-height: 44%;
+}
+
+.tally-tab-content[data-tab-id="facturacion"] .tally-tab-demo-image,
+.tally-accordion-item[data-tab-id="facturacion"] .tally-tab-demo-image {
+  top: 14%;
+  bottom: auto;
+  left: var(--spacing-md);
+}
+
+.tally-tab-content[data-tab-id="cobranza"] .tally-tab-demo-image,
+.tally-accordion-item[data-tab-id="cobranza"] .tally-tab-demo-image {
+  top: auto;
+  right: var(--spacing-md);
+  bottom: 2%;
+}
+
 .tally-tab-content:not(.active) .tally-tab-demo-image {
   animation: none;
   opacity: 0;
@@ -493,6 +515,10 @@ body.has-animated-background .tally-contact-section {
   color: var(--tally-on-primary);
   margin-bottom: 0;
   line-height: 1.6;
+}
+
+.tally-tab-description::before {
+  content: '· ';
 }
 
 .tally-accordion-container {
@@ -539,7 +565,7 @@ body.has-animated-background .tally-contact-section {
 .tally-accordion-icon {
   font-size: var(--fs-24);
   font-weight: var(--font-weight-bold);
-  color: var(--tally);
+  color: var(--tally-readable);
   width: 24px;
   height: 24px;
   display: flex;
@@ -649,9 +675,10 @@ body.has-animated-background .tally-contact-section {
 
 .tally-use-grid {
   display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
+  grid-template-columns: minmax(0, 920px);
   gap: var(--spacing-lg);
   align-items: start;
+  justify-content: center;
 }
 
 .tally-use-panel {
@@ -668,16 +695,19 @@ body.has-animated-background .tally-contact-section {
 .tally-use-panel h2 {
   font-size: clamp(1.5rem, 1.25rem + 1.5vw, 2rem);
   font-weight: var(--font-weight-bold);
-  color: var(--tally);
+  color: var(--tally-readable);
   margin-bottom: var(--spacing-md);
   line-height: 1.3;
 }
 
 .tally-use-panel--primary h2,
 .tally-use-panel--primary > p,
-.tally-use-panel--primary article h3,
 .tally-use-panel--primary article p {
   color: var(--tally-on-primary);
+}
+
+.tally-use-panel--primary .tally-audience-list h3 {
+  color: var(--tally-readable);
 }
 
 .tally-use-panel > p {
@@ -694,7 +724,7 @@ body.has-animated-background .tally-contact-section {
 }
 
 .tally-use-case-list {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
 }
 
 .tally-audience-list article,
@@ -724,8 +754,7 @@ body.has-animated-background .tally-contact-section {
   margin: 0;
 }
 
-.tally-reminder-card,
-.tally-final-cta-card {
+.tally-reminder-card {
   background-color: var(--tally);
   border-radius: var(--radius-xl);
   padding: var(--spacing-xl);
@@ -733,26 +762,14 @@ body.has-animated-background .tally-contact-section {
   box-shadow: var(--shadow-lg);
 }
 
-.tally-reminder-card span {
-  display: inline-block;
-  color: var(--tally-blue);
-  font-size: var(--fs-12);
-  font-weight: var(--font-weight-bold);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  margin-bottom: var(--spacing-sm);
-}
-
-.tally-reminder-card h2,
-.tally-final-cta-card h2 {
+.tally-reminder-card h2 {
   font-size: clamp(1.5rem, 1.25rem + 1.5vw, 2rem);
   font-weight: var(--font-weight-bold);
   color: var(--tally-on-primary);
   margin-bottom: var(--spacing-md);
 }
 
-.tally-reminder-card p,
-.tally-final-cta-card p {
+.tally-reminder-card p {
   font-size: clamp(1rem, 0.875rem + 0.75vw, 1.25rem);
   color: var(--tally-on-primary);
   line-height: 1.6;
@@ -760,9 +777,13 @@ body.has-animated-background .tally-contact-section {
   max-width: 760px;
 }
 
-.tally-reminder-card strong {
+.tally-reminder-highlight {
+  font-weight: var(--font-weight-bold);
+}
+
+.tally-reminder-outcome {
   display: block;
-  color: var(--tally-on-primary);
+  color: #f251ff;
   font-size: var(--fs-16);
   font-weight: var(--font-weight-bold);
 }
@@ -869,7 +890,7 @@ body.has-animated-background .tally-contact-section {
 .tally-contact-title {
   font-size: clamp(1.5rem, 1.25rem + 1.5vw, 2rem);
   font-weight: var(--font-weight-bold);
-  color: var(--tally);
+  color: var(--tally-readable);
   margin-bottom: 0;
   line-height: 1.2;
   text-align: left;
@@ -1095,6 +1116,27 @@ body.has-animated-background .tally-contact-section {
     min-height: 60vh;
   }
 
+  .tally-hero-right::before {
+    inset: 0 0 auto;
+    width: 100%;
+    height: 30%;
+    background: linear-gradient(
+      180deg,
+      #ffffff 0%,
+      rgba(255, 255, 255, 0.78) 36%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  }
+
+  [data-theme="dark"] .tally-hero-right::before {
+    background: linear-gradient(
+      180deg,
+      #1b1b1b 0%,
+      rgba(27, 27, 27, 0.78) 36%,
+      rgba(27, 27, 27, 0) 100%
+    );
+  }
+
   .tally-hero-image {
     min-height: 60vh;
   }
@@ -1146,7 +1188,6 @@ body.has-animated-background .tally-contact-section {
   .tally-use-section,
   .tally-reminder-section,
   .tally-faq-section,
-  .tally-final-cta-section,
   .tally-contact-section {
     padding: var(--spacing-xl) 0;
   }

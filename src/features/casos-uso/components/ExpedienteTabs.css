@@ -216,6 +216,38 @@ body.has-animated-background .expediente-tabs-section {
   opacity: 0;
 }
 
+.expediente-tab-content[data-tab-id="automatizacion"] .expediente-tab-demo-image,
+.expediente-accordion-item[data-tab-id="automatizacion"] .expediente-tab-demo-image,
+.expediente-tab-content[data-tab-id="colaboracion"] .expediente-tab-demo-image,
+.expediente-accordion-item[data-tab-id="colaboracion"] .expediente-tab-demo-image {
+  top: auto;
+  bottom: 10%;
+  left: var(--spacing-md);
+  right: auto;
+  max-width: 44%;
+  max-height: 44%;
+}
+
+.expediente-tab-content[data-tab-id="analitica"] .expediente-tab-demo-image,
+.expediente-accordion-item[data-tab-id="analitica"] .expediente-tab-demo-image {
+  top: auto;
+  left: 10%;
+  right: auto;
+  bottom: 8%;
+  max-width: 44%;
+  max-height: 44%;
+}
+
+.expediente-tab-content[data-tab-id="predictibilidad"] .expediente-tab-demo-image,
+.expediente-accordion-item[data-tab-id="predictibilidad"] .expediente-tab-demo-image {
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  bottom: auto;
+  left: auto;
+  max-width: 44%;
+  max-height: 44%;
+}
+
 @keyframes fadeInScaleUpTopLeft {
   0% {
     opacity: 0;
