@@ -221,8 +221,10 @@ function buildHead(page, baseHead) {
     <meta name="twitter:description" content="${escapeHtml(page.description)}" />
     <meta name="twitter:image" content="${image}" />
     <meta name="twitter:image:alt" content="${escapeHtml(page.h1)}" />
+    <script>document.documentElement.classList.add('js-enabled');</script>
     <style id="seo-fallback-styles">
       .seo-fallback{max-width:980px;margin:0 auto;padding:72px 24px;font-family:Montserrat,Arial,sans-serif;color:#1b1b1b}
+      .js-enabled .seo-fallback{display:none}
       .seo-fallback h1{font-size:clamp(2rem,5vw,4rem);line-height:1.05;margin:0 0 20px;color:#0098b1}
       .seo-fallback p{font-size:1.05rem;line-height:1.75;color:#30339c;margin:0 0 14px}
       .seo-fallback nav{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
