@@ -88,7 +88,7 @@ body.has-animated-background .tally-contact-section {
   font-family: 'Montserrat', ui-sans-serif, system-ui, -apple-system, sans-serif;
   font-size: clamp(1.75rem, 1rem + 4vw, 2.5rem);
   font-weight: bold;
-  color: var(--tally-readable);
+  color: var(--tally);
   margin-bottom: var(--spacing-md);
   line-height: 1.2;
   letter-spacing: -0.01em;
