@@ -49,7 +49,7 @@ body.has-animated-background .tally-contact-section {
   align-items: center;
   justify-content: flex-start;
   background: #ffffff;
-  padding: var(--spacing-3xl) var(--spacing-3xl);
+  padding: calc(80px + var(--spacing-xl)) var(--spacing-3xl);
   position: relative;
   z-index: 2;
 }
@@ -80,7 +80,7 @@ body.has-animated-background .tally-contact-section {
   font-family: 'Montserrat', ui-sans-serif, system-ui, -apple-system, sans-serif;
   font-size: 3rem;
   font-weight: bold;
-  color: var(--tally-readable);
+  color: var(--tally);
   line-height: 1;
 }
 
@@ -1106,7 +1106,7 @@ body.has-animated-background .tally-contact-section {
 
   .tally-hero-left {
     flex: 1;
-    padding: var(--spacing-2xl) var(--spacing-md) var(--spacing-2xl);
+    padding: calc(80px + var(--spacing-xl)) var(--spacing-md) var(--spacing-2xl);
     min-height: auto;
     justify-content: center;
   }
