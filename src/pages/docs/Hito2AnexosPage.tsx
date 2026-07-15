@@ -187,48 +187,114 @@ const SECCIONES: AnexoSection[] = [
       {
         anexo: 'Anexo 2',
         tipo: 'Video',
-        descripcion: 'Bonos y metas',
+        descripcion: 'Configuración de proyecto (Bolsa / Pacto)',
         links: [
           {
             emoji: '🎥',
-            label: 'Binder - Tally - 2 Bonos y Metas',
-            href: 'https://app.clickup.com/90132749493/hubs/clips/319743e3-36e6-4cd4-8eb8-c54b21bee042.webm',
+            label: 'Abrir',
+            href: 'https://youtu.be/s88K0RlSQyw',
           },
         ],
       },
       {
         anexo: 'Anexo 3',
         tipo: 'Video',
-        descripcion: 'Clientes',
+        descripcion: 'Registro de horas con diferenciación de tipos',
         links: [
           {
             emoji: '🎥',
-            label: 'Binder - Tally - 3 Clientes',
-            href: 'https://app.clickup.com/90132749493/hubs/clips/72166d36-d20b-4500-9b71-811b2684419a.webm',
+            label: 'Abrir',
+            href: 'https://youtu.be/lNMaWd2FafA',
           },
         ],
       },
       {
         anexo: 'Anexo 4',
         tipo: 'Video',
-        descripcion: 'Proyectos',
+        descripcion: 'Flujo de aprobación y pantalla de arqueo',
         links: [
           {
             emoji: '🎥',
-            label: 'Binder - Tally - 4 Proyectos',
-            href: 'https://app.clickup.com/90132749493/hubs/clips/ee9fe9ee-dfbd-472b-8221-84c9e7a011d4.webm',
+            label: 'Abrir',
+            href: 'https://youtu.be/XDkpRJ3yJJI',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'ia-integrada',
+    titulo: '🤖 IA Integrada a toda la plataforma – Anexos',
+    items: [
+      {
+        anexo: 'Anexo 1',
+        tipo: 'Screenshot',
+        descripcion: 'Imágenes del asistente de IA en todas las aplicaciones y en distintas ventanas de la plataforma',
+        links: [
+          {
+            emoji: '🖼️',
+            label: 'Abrir',
+            href: 'https://1drv.ms/b/c/9c2c0a8af654ed04/IQB1we4b5iifQ4WB6YwXdr1oATRz1uADqJgo6FIOZmkwl-E?e=JW18Rb',
+          },
+        ],
+      },
+      {
+        anexo: 'Anexo 2',
+        tipo: 'Screenshot',
+        descripcion: 'Base de datos - almacenamiento del texto obtenido mediante OCR',
+        links: [
+          {
+            emoji: '🖼️',
+            label: 'Abrir',
+            href: 'https://1drv.ms/b/c/9c2c0a8af654ed04/IQCyefzCnAg5RowdmRlFz8osAY5Z_VeOR88POtH0n7mgcvo?e=eSGWeN',
+          },
+        ],
+      },
+      {
+        anexo: 'Anexo 3',
+        tipo: 'Screenshot',
+        descripcion: 'Base de datos - almacenamiento del resumen y las palabras clave',
+        links: [
+          {
+            emoji: '🖼️',
+            label: 'Abrir',
+            href: 'https://1drv.ms/b/c/9c2c0a8af654ed04/IQAqWPkiohCWRq5m02Ya8tm3AROeQ-RmsfKsPeLqKdnwHh4?e=iYgTNW',
+          },
+        ],
+      },
+      {
+        anexo: 'Anexo 4',
+        tipo: 'Video',
+        descripcion: 'Video que contiene un ejemplo de uso en la redacción de correos electrónicos',
+        links: [
+          {
+            emoji: '🎥',
+            label: 'Abrir',
+            href: 'https://youtu.be/-q3RjZ2Ax5E',
           },
         ],
       },
       {
         anexo: 'Anexo 5',
         tipo: 'Video',
-        descripcion: 'Timetracking, gastos y actividad',
+        descripcion: 'Video que contiene un ejemplo de uso en la redacción de documentos electrónicos',
         links: [
           {
             emoji: '🎥',
-            label: 'Binder - Tally - 5 Timetracking, Gastos y Actividad',
-            href: 'https://app.clickup.com/90132749493/hubs/clips/17ec9014-a03b-4b4e-a92e-7afd9146b7f9.webm',
+            label: 'Abrir',
+            href: 'https://youtu.be/9S9GRYS0nC4',
+          },
+        ],
+      },
+      {
+        anexo: 'Anexo 6',
+        tipo: 'Video',
+        descripcion: 'Video que contiene un ejemplo de uso del asistente en la revisión de documentos',
+        links: [
+          {
+            emoji: '🎥',
+            label: 'Abrir',
+            href: 'https://youtu.be/VOWx8V939Hw',
           },
         ],
       },
